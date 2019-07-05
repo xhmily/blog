@@ -37,4 +37,4 @@ $ hexo deploy
 
 More info: [Deployment](https://hexo.io/docs/deployment.html)
 
-![](https://img-blog.csdn.net/20180420154609543)
+![测试](http://pic37.nipic.com/20140113/8800276_184927469000_2.png)

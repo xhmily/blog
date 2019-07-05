@@ -1,6 +1,6 @@
 (() => {
   function handleImgClick(event) {
-    window.open(event.target.getAttribute('src'), '_blank');
+    //window.open(event.target.getAttribute('src'), '_blank');
   }
 
   const { is_post, page_type } = window.AD_CONFIG;
