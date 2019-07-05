@@ -22,7 +22,7 @@ rss:
 
 # 自定义样式文件
 custom_styles: 
-
+  - /css/myStyle.css
 # 自定义脚本文件
 custom_scripts: 
   - /js/fancybox.js

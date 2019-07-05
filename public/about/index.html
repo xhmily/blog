@@ -68,6 +68,8 @@
 <link rel="stylesheet" href="/styles/components/highlight/highlight.css">
 
   
+    <link rel="stylesheet" href="/css/myStyle.css">
+  
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
@@ -267,10 +269,12 @@
     </div>
     <div class="site-layer-body" id="site-layer-container">
       <div class="site-layer-input" id="site-layer-search" style="display: none;">
+       <!-- 
         <div class="site-layer-input-choose">
           <a href="javascript:void(0);" title="Change Search Engine">Google</a>
         </div>
-        <input type="text" class="st-default-search-input">
+        -->
+        <input type="text" class="st-default-search-input" id="local-search-input" results="0">
         <i class="fa fa-search"></i>
       </div>
       
@@ -294,6 +298,13 @@
       
       <div id="site-layer-welcome" style="display:none;"></div>
     </div>
+<!--搜索列表-->
+    <div data-v-357a65ed="" class="fav_list_box site-layer-body">
+        <div  class="my_fav_con" id="site_search">
+            <div id="local-search-result"></div>
+        </div>
+    </div>
+<!--搜索列表-->
   </div>
 </div>
 
