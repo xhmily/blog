@@ -4,16 +4,16 @@
 
 # Site
 title: Lucent's blog
-subtitle:
-description:
-keywords:
+subtitle: 呆呆木的博客
+description: 后端技术博客
+keywords: 呆呆木,lucent
 author: Lucent
 language:
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://localhost:4000
+url: https://lucent.blog
 root: /
 permalink: passages/:title/
 permalink_defaults:
@@ -35,7 +35,7 @@ titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
 filename_case: 0
 render_drafts: false
-post_asset_folder: true
+post_asset_folder: false
 relative_link: false
 future: true
 highlight:

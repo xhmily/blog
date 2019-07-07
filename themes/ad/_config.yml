@@ -40,7 +40,7 @@ copyright:
   more: '版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!'
 
 # 建站时间. 格式：YYYY-MM-DD
-start_time: "2018-02-10"
+start_time: "2018-09-11"
 
 # 如何开启 评论&统计 插件：https://godbmw.com/passages/2018-11-15-theme-bmw-docs-zh/
 # 请申请自己的 appid 和 appkey，并且替换下面的 appid 和 appkey
@@ -77,7 +77,7 @@ share:
 
 analytics:
   baidu:
-    enable: false
+    enable: true
   google:
     enable: false
     id: 
@@ -131,37 +131,43 @@ footer:
     title: "博客推荐"
     children:
       - 
-        name: "GodBMW"
-        path: "https://godbmw.com/"
+        name: "前端小峰哥"
+        path: "http://www.xuefeng666.com/"
       - 
-        name: "阮一峰的个人网站"
-        path: "http://ruanyifeng.com/"
+        name: "心谭博客"
+        path: "https://xin-tan.com/"
   -
     title: "系列教程"
     children:
       -
-        name: "webpack4系列教程"
-        path: "https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/"
+        name: "PicUploader"
+        path: "https://www.xiebruce.top/17.html"
       -
-        name: "设计模式手册"
-        path: "https://godbmw.com/design-patterns/"
+        name: "wordpress-to-markdown"
+        path: "https://github.com/xhmily/wordpress-to-markdown"
   -
     title: "社交链接"
     children: 
       -
         name: "Twitter"
-        path: "https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5"
+        path: "https://twitter.com/975023381"
       -
         name: "Facebook"
-        path: "https://segmentfault.com/"
+        path: "https://www.facebook.com/profile.php?id=100006181546908"
 
 footer_contact: "Email: 975023381@qq.com"
 
 friends_avatar_cdn: 
 friends:
   -
-    nickname: 呆呆木
-    avatar: /images/friends/godbmw.jpeg
-    site: https://godbmw.com/
-    meta: 主题作者
+    nickname: 前端小峰哥
+    avatar: /images/Automata.jpg
+    site: http://www.xuefeng666.com/
+    meta: 友情链接
+    show: true
+  -
+    nickname: 心谭博客
+    avatar: /images/Automata.jpg
+    site: https://xin-tan.com/
+    meta: 友情链接
     show: true

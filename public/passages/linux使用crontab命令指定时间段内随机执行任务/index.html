@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta name="author" content="Lucent">
+  
+  
+  <title>linux使用crontab命令指定时间段内随机执行任务 | Lucent&#39;s blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Linux,Linux,Crontab,">
+  
+
+  
+  <meta name="description" content="呆呆木的小站">
+
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+    <script src="//unpkg.com/valine/dist/Valine.min.js" async></script>
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Ji9JVwHmBx9N7OIxwjQkVvmc-gzGzoHsz","appkey":"8O4IkYG99hQzhB20EDr7XyLx","comment":true,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-09-11",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Lucent",
+    share: {"twitter":true,"facebook":true,"weibo":false,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+    <link rel="stylesheet" href="/css/myStyle.css">
+  
+<script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Lucent</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 安静写些东西</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/xhmily/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-07-07
+    </span>
+    
+      <span>
+        | <a href="/categories/Linux/"><i class="fa fa-bookmark"></i>Linux</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    linux使用crontab命令指定时间段内随机执行任务
+  </h1>
+  
+  <article class="passage-article">
+    <p>crontab命令常见于<a href="https://baike.baidu.com/item/Unix" target="_blank" rel="noopener">Unix</a>和<a href="https://baike.baidu.com/item/%E7%B1%BBUnix" target="_blank" rel="noopener">类Unix</a>的操作系统之中，用于设置周期性被执行的指令。该命令从标准输入设备读取指令，并将其存放于”crontab”文件中，以供之后读取和执行。</p>
+<p>cron是一个linux下 的定时执行工具，可以在无需人工干预的情况下运行作业。<br><code>service crond start    //启动服务</code><br><code>service crond stop     //关闭服务</code><br><code>service crond restart  //重启服务</code><br><code>service crond reload   //重新载入配置</code><br><code>service crond status   //查看服务状态</code></p>
+<p>在crontab文件中如何输入需要执行的命令和时间。该文件中每行都包括六个域，其中前五个域是指定命令被执行的时间，最后一个域是要被执行的命令。<br>每个域之间使用空格或者制表符分隔。格式如下：<br><code>minute hour day-of-month month-of-year day-of-week commands</code><br>合法值 00-59 00-23 01-31 01-12 0-6 (0代表周日)</p>
+<p><span style="color: #ff0000;">除了数字还有几个个特殊的符号就是”*”、”/“和”-“、”,”，*代表所有的取值范围内的数字，”/“代表每的意思,”/5”表示每5个单位，”-“代表从某个数字到某个数字,”,”分开几个离散的数字。</span></p>
+<p>crontab -l 在标准输出上显示当前的crontab。<br>-r 删除当前的crontab文件。<br>-e 使用VISUAL或者EDITOR环境变量所指的编辑器编辑当前的crontab文件。当结束编辑离开时，编辑后的文件将自动安装。</p>
+<p><span style="color: #ff0000;">需要注意的是同同一用户默认只有一个crontab任务，例如root用户每次新建一个crontab任务都会覆盖之前的任务。</span></p>
+<p>例子：</p>
+<p><code>vi test.cron ###创建一个cron文件</code></p>
+<p>并向该文件中写入如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">0 8 * * * echo "good morning "&gt;&gt;test.txt ###表示每天早晨8点向test.txt中插入一条"good morning"</span><br><span class="line"></span><br><span class="line">0 8 1,3,5 * 1-5 echo"good morning" &gt;&gt; test.txt</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##表示每年的1月3月5月中每周一到周五的早晨8点向test.txt中插入一条"good morning"</span></span></span><br></pre></td></tr></table></figure>
+
+<p>使用<code>crontab test.cron</code>  即可启动该命令文件，到达指定时间系统将会自动执行文件中的命令。</p>
+<p>问题：</p>
+<p>综上所述，crontab 命令固然好用，但是执行任务的时间是死的，每天都是同一个时间执行任务，在做某些需要随机时间的特殊任务时，就显得没那么好用了。</p>
+<p>所以，如果需要随机时间，就要用的shell脚本了。</p>
+<p>首先创建一个shell脚本，test.sh</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">echo "good morning" &gt;&gt; test.txt ###向test.txt中插入一条"good morning"</span><br><span class="line"></span><br><span class="line">r=$(($RANDOM%10)) ###随机生成一个10以内的随机数</span><br><span class="line">rm -f test.cron                ###删除以前的命令文件</span><br><span class="line">echo $[r]" 8 * * * ./test.sh" &gt;&gt; test.cron #创建并将任务写入cron文件</span><br><span class="line">chmod 777 test.sh  ###给予shell脚本最高执行权限</span><br><span class="line">crontab test.cron    ###启动cron任务文件，用于定时自动执行</span><br></pre></td></tr></table></figure>
+
+<p><span style="color: #ff0000;">当然，该脚本必须在写完后手动执行一次，以后才会按时自动执行</span></p>
+<p>命令:</p>
+<p><code>[code]chmod 777 test.sh</code></p>
+<p><code>./test.sh[/code]</code></p>
+<p><span style="color: #ff0000;">原理：</span></p>
+<p>将随机生成的数字作为时间（在这里是作为分钟）写入cron文件，并通过按时执行shell脚本来将”good morning”插入到test.txt中，</p>
+<p>由于该任务的时间即分钟是10以内的随机数，所以每次执行任务的时间是每天早晨8：00-8：09之间的随机时间，</p>
+<p>通过这种方式就可以设置随机时间执行任务了。</p>
+<p>&nbsp;</p>
+<p>如有错误，还请大佬多多包涵，谢谢！</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: 呆呆木</div>
+      
+        <div>
+          原文链接: 
+          <a href="" target="_blank">https://lucent.blog/passages/linux使用crontab命令指定时间段内随机执行任务/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/Linux/"><i class="fa fa-tags"></i>Linux</a>
+     
+      <a href="/tags/Crontab/"><i class="fa fa-tags"></i>Crontab</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="leancloud">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-spinner fa-spin"></i> 评论加载中
+    </p>
+    <div id="site-comment"></div>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      
+        <div class="site-footer-col">
+          <h5 class="site-footer-title">博客推荐</h5>
+          
+            <span class="site-footer-item">
+              <a href="http://www.xuefeng666.com/" target="_blank">前端小峰哥</a>
+            </span>
+          
+            <span class="site-footer-item">
+              <a href="https://xin-tan.com/" target="_blank">心谭博客</a>
+            </span>
+          
+        </div>
+      
+        <div class="site-footer-col">
+          <h5 class="site-footer-title">系列教程</h5>
+          
+            <span class="site-footer-item">
+              <a href="https://www.xiebruce.top/17.html" target="_blank">PicUploader</a>
+            </span>
+          
+            <span class="site-footer-item">
+              <a href="https://github.com/xhmily/wordpress-to-markdown" target="_blank">wordpress-to-markdown</a>
+            </span>
+          
+        </div>
+      
+        <div class="site-footer-col">
+          <h5 class="site-footer-title">社交链接</h5>
+          
+            <span class="site-footer-item">
+              <a href="https://twitter.com/975023381" target="_blank">Twitter</a>
+            </span>
+          
+            <span class="site-footer-item">
+              <a href="https://www.facebook.com/profile.php?id=100006181546908" target="_blank">Facebook</a>
+            </span>
+          
+        </div>
+      
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 975023381@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+       <!-- 
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        -->
+        <input type="text" class="st-default-search-input" id="local-search-input" results="0">
+        <i class="fa fa-search"></i>
+      </div>
+      
+        <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+          
+            <div>
+              <img src="/images/wechat.png" alt="WeChat">
+              
+                <p>WeChat</p>
+              
+            </div>
+          
+            <div>
+              <img src="/images/alipay.png" alt="AliPay">
+              
+                <p>AliPay</p>
+              
+            </div>
+          
+        </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+<!--搜索列表-->
+    <div data-v-357a65ed="" class="fav_list_box site-layer-body">
+        <div  class="my_fav_con" id="site_search">
+            <div id="local-search-result"></div>
+        </div>
+    </div>
+<!--搜索列表-->
+  </div>
+</div>
+
+
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/passages/shell命令-crontab-php实现每天特定时间段内随机时间执行任务/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/Linux安装screen命令/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#site-comment" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+      <a href="javascript:void(0);" id="site-reward">
+        <i class="fa fa-thumbs-up"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+
+
+  <script async>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+
+
+
+
+    
+      <script src="/js/fancybox.js"></script>
+    
+  </body>
+</html>

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta name="author" content="Lucent">
+  
+  
+  <title>Docker学习笔记（二）Docker(V18.03)安装配置 | Lucent&#39;s blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Docker,Docker,">
+  
+
+  
+  <meta name="description" content="呆呆木的小站">
+
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+    <script src="//unpkg.com/valine/dist/Valine.min.js" async></script>
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Ji9JVwHmBx9N7OIxwjQkVvmc-gzGzoHsz","appkey":"8O4IkYG99hQzhB20EDr7XyLx","comment":true,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-09-11",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Lucent",
+    share: {"twitter":true,"facebook":true,"weibo":false,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+    <link rel="stylesheet" href="/css/myStyle.css">
+  
+<script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Lucent</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 安静写些东西</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/xhmily/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-07-06
+    </span>
+    
+      <span>
+        | <a href="/categories/Docker/"><i class="fa fa-bookmark"></i>Docker</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    Docker学习笔记（二）Docker(V18.03)安装配置
+  </h1>
+  
+  <article class="passage-article">
+    <h3 id="OS要求"><a href="#OS要求" class="headerlink" title="OS要求"></a>OS要求</h3><p>要安装Docker CE，您需要CentOS 7及以上版本。</p>
+<h3 id="卸载旧版本"><a href="#卸载旧版本" class="headerlink" title="卸载旧版本"></a>卸载旧版本</h3><p>较旧版本的Docker被称为<code>docker</code>或<code>docker-engine</code>。如果已安装这些，请卸载它们以及相关的依赖项。代码如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo yum remove docker \</span><br><span class="line">          docker-client \</span><br><span class="line">          docker-client-latest \</span><br><span class="line">          docker-common \</span><br><span class="line">          docker-latest \</span><br><span class="line">          docker-latest-logrotate \</span><br><span class="line">          docker-logrotate \</span><br><span class="line">          docker-selinux \</span><br><span class="line">          docker-engine-selinux \</span><br><span class="line">          docker-engine`</span><br><span class="line">注意 "\"为shell脚本的连接符，同java的"+"</span><br></pre></td></tr></table></figure>
+
+<p><span style="color: #ff6600;">如果系统未安装过docker，则提示如下</span>：</p>
+<p><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/07/a55ec63c0fc0581d66a717ca235d3cbf.jpg" alt="1.jpg"></p>
+<h2 id="安装Docker-CE（社区版，免费）"><a href="#安装Docker-CE（社区版，免费）" class="headerlink" title="安装Docker CE（社区版，免费）"></a>安装Docker CE（社区版，免费）</h2><h3 id="使用存储库安装"><a href="#使用存储库安装" class="headerlink" title="使用存储库安装"></a>使用存储库安装</h3><p>在新主机上首次安装Docker CE之前，需要设置Docker存储库。之后，您可以从存储库安装和更新Docker。</p>
+<h4 id="设置存储库"><a href="#设置存储库" class="headerlink" title="设置存储库"></a>设置存储库</h4><h4 id="1-安装所需的包。yum-utils提供了yum-config-manager-，并且devicemapper存储驱动程序依赖device-mapper-persistent-data和lvm2。"><a href="#1-安装所需的包。yum-utils提供了yum-config-manager-，并且devicemapper存储驱动程序依赖device-mapper-persistent-data和lvm2。" class="headerlink" title="1.安装所需的包。yum-utils提供了yum-config-manager ，并且devicemapper存储驱动程序依赖device-mapper-persistent-data和lvm2。"></a>1.安装所需的包。<code>yum-utils</code>提供了<code>yum-config-manager</code> ，并且<code>devicemapper</code>存储驱动程序依赖<code>device-mapper-persistent-data</code>和<code>lvm2</code>。</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo yum install -y yum-utils \</span><br><span class="line">  device-mapper-persistent-data \</span><br><span class="line">  lvm2</span><br></pre></td></tr></table></figure>
+
+<p><span style="color: #ff6600;">执行结果</span>：</p>
+<p><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/07/19cb985de4bdb509cfbfe52b1159ff3c.jpg" alt="2.jpg"></p>
+<h4 id="2-使用以下命令设置稳定存储库。即使你还想从edge或test存储库安装构建，你仍然需要稳定的存储库。"><a href="#2-使用以下命令设置稳定存储库。即使你还想从edge或test存储库安装构建，你仍然需要稳定的存储库。" class="headerlink" title="2.使用以下命令设置稳定存储库。即使你还想从edge或test存储库安装构建，你仍然需要稳定的存储库。"></a>2.使用以下命令设置<strong>稳定</strong>存储库。即使你还想从<strong>edge</strong>或<strong>test</strong>存储库安装构建，你仍然需要<strong>稳定的</strong>存储库。</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo yum-config-manager --add -repo https://download.docker.com/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
+
+<p><span style="color: #ff6600;">执行结果</span>：</p>
+<p><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/07/6f0f4402511cb1b51db93496510c2783.jpg" alt="3.jpg"></p>
+<h4 id="3-（可选）启用edge和test存储库。这些存储库包含在docker-repo上面的文件中，但默认情况下处于禁用状态。您可以将它们与稳定存储库一起启用。"><a href="#3-（可选）启用edge和test存储库。这些存储库包含在docker-repo上面的文件中，但默认情况下处于禁用状态。您可以将它们与稳定存储库一起启用。" class="headerlink" title="3.（可选）启用edge和test存储库。这些存储库包含在docker.repo上面的文件中，但默认情况下处于禁用状态。您可以将它们与稳定存储库一起启用。"></a>3.（可选）启用<strong>edge</strong>和<strong>test</strong>存储库。这些存储库包含在<code>docker.repo</code>上面的文件中，但默认情况下处于禁用状态。您可以将它们与稳定存储库一起启用。</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo yum-config-manager --enable docker-ce-edge</span><br><span class="line"><span class="meta">$</span> sudo yum-config-manager --enable docker-ce-test</span><br></pre></td></tr></table></figure>
+
+<h4 id="您可以通过运行带有标志的命令来禁用edge或test存储库-。要重新启用它，请使用该标志。以下命令禁用edge存储库。yum-config-manager-disable-enable"><a href="#您可以通过运行带有标志的命令来禁用edge或test存储库-。要重新启用它，请使用该标志。以下命令禁用edge存储库。yum-config-manager-disable-enable" class="headerlink" title="您可以通过运行带有标志的命令来禁用edge或test存储库 。要重新启用它，请使用该标志。以下命令禁用edge存储库。yum-config-manager``--disable``--enable"></a>您可以通过运行带有标志的命令来禁用<strong>edge</strong>或<strong>test</strong>存储库 。要重新启用它，请使用该标志。以下命令禁用<strong>edge</strong>存储库。<code>yum-config-manager``--disable``--enable</code></h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo yum-config-manager --disable docker-ce-edge</span><br></pre></td></tr></table></figure>
+
+<h4 id="注意：从Docker-17-06开始，稳定版本也会被推送到边缘并测试存储库。-安装DOCKER-CE"><a href="#注意：从Docker-17-06开始，稳定版本也会被推送到边缘并测试存储库。-安装DOCKER-CE" class="headerlink" title="注意：从Docker 17.06开始，稳定版本也会被推送到边缘并测试存储库。 安装DOCKER CE"></a><span style="color: #ff6600;"><strong>注意</strong></span>：从Docker 17.06开始，稳定版本也会被推送到<strong>边缘</strong>并<strong>测试</strong>存储库。 安装DOCKER CE</h4><ol>
+<li><p>安装_最新版本_的Docker CE，或转到下一步安装特定版本：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo yum install docker-ce</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h5 id="如果提示接受GPG密钥，请验证指纹是否匹配"><a href="#如果提示接受GPG密钥，请验证指纹是否匹配" class="headerlink" title="如果提示接受GPG密钥，请验证指纹是否匹配"></a><span style="color: #ff6600;">如果提示接受GPG密钥，请验证指纹是否匹配</span></h5><h5 id="060A-61C5-1B55-8A7F-742B-77AA-C52F-EB6B-621E-9F35，"><a href="#060A-61C5-1B55-8A7F-742B-77AA-C52F-EB6B-621E-9F35，" class="headerlink" title="060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35，"></a><span style="color: #ff6600;"><code>060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35</code>，</span></h5><h5 id="如果匹配-，则接受它。"><a href="#如果匹配-，则接受它。" class="headerlink" title="如果匹配 ，则接受它。"></a><span style="color: #ff6600;">如果匹配 ，则接受它。</span></h5><p><span style="color: #ff6600;">此处确认无误，选择y确定</span>：</p>
+<p><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/07/e9e728e4a309c8d9e6e67638a51636ac.jpg" alt="4.jpg">     </p>
+<p><span style="color: #ff6600;">指纹比对正确，选择y继续</span>：</p>
+<p><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/07/e3dca310a88f200ed072a9e50f764edc.jpg" alt="5.jpg"></p>
+<p><span style="color: #ff6600;">最终结果</span>：</p>
+<p><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/07/24cd06e2ed9927862d4231b155107d99.jpg" alt="6.jpg"></p>
+<p><span style="color: #333333;"> 2.您还可以使用</span><code>$ sudo yum install docker-ce-&lt;版本号&gt;</code>来安装指定版本的docker，例如安装17.06版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo yum install docker-ce-&lt;17.06&gt;</span><br></pre></td></tr></table></figure>
+
+<p>3.启动Docker。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo systemctl start docker</span><br></pre></td></tr></table></figure>
+
+<p><span style="color: #ff6600;">注意：<span style="color: #333333;">docker启动后不会有任何输出</span></span></p>
+<p>4.<code>docker</code>通过运行<code>hello-world</code> 映像验证是否已正确安装。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo docker run hello-world</span><br></pre></td></tr></table></figure>
+
+<p><span style="color: #ff6600;">执行命令后如果你看到如下图所示，那么恭喜，docker安装成功！</span></p>
+<p><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/07/9e818831fbf2e690c7d5728a5d5c8431.jpg" alt="7.jpg"></p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#OS要求"><span class="toc-text">OS要求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#卸载旧版本"><span class="toc-text">卸载旧版本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Docker-CE（社区版，免费）"><span class="toc-text">安装Docker CE（社区版，免费）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用存储库安装"><span class="toc-text">使用存储库安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#设置存储库"><span class="toc-text">设置存储库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-安装所需的包。yum-utils提供了yum-config-manager-，并且devicemapper存储驱动程序依赖device-mapper-persistent-data和lvm2。"><span class="toc-text">1.安装所需的包。yum-utils提供了yum-config-manager ，并且devicemapper存储驱动程序依赖device-mapper-persistent-data和lvm2。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-使用以下命令设置稳定存储库。即使你还想从edge或test存储库安装构建，你仍然需要稳定的存储库。"><span class="toc-text">2.使用以下命令设置稳定存储库。即使你还想从edge或test存储库安装构建，你仍然需要稳定的存储库。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-（可选）启用edge和test存储库。这些存储库包含在docker-repo上面的文件中，但默认情况下处于禁用状态。您可以将它们与稳定存储库一起启用。"><span class="toc-text">3.（可选）启用edge和test存储库。这些存储库包含在docker.repo上面的文件中，但默认情况下处于禁用状态。您可以将它们与稳定存储库一起启用。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#您可以通过运行带有标志的命令来禁用edge或test存储库-。要重新启用它，请使用该标志。以下命令禁用edge存储库。yum-config-manager-disable-enable"><span class="toc-text">您可以通过运行带有标志的命令来禁用edge或test存储库 。要重新启用它，请使用该标志。以下命令禁用edge存储库。yum-config-manager``--disable``--enable</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#注意：从Docker-17-06开始，稳定版本也会被推送到边缘并测试存储库。-安装DOCKER-CE"><span class="toc-text">注意：从Docker 17.06开始，稳定版本也会被推送到边缘并测试存储库。 安装DOCKER CE</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#如果提示接受GPG密钥，请验证指纹是否匹配"><span class="toc-text">如果提示接受GPG密钥，请验证指纹是否匹配</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#060A-61C5-1B55-8A7F-742B-77AA-C52F-EB6B-621E-9F35，"><span class="toc-text">060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35，</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#如果匹配-，则接受它。"><span class="toc-text">如果匹配 ，则接受它。</span></a></li></ol></li></ol></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: 呆呆木</div>
+      
+        <div>
+          原文链接: 
+          <a href="" target="_blank">https://lucent.blog/passages/Docker学习笔记（二）Docker-V18-03-安装配置/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/Docker/"><i class="fa fa-tags"></i>Docker</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="leancloud">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-spinner fa-spin"></i> 评论加载中
+    </p>
+    <div id="site-comment"></div>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      
+        <div class="site-footer-col">
+          <h5 class="site-footer-title">博客推荐</h5>
+          
+            <span class="site-footer-item">
+              <a href="http://www.xuefeng666.com/" target="_blank">前端小峰哥</a>
+            </span>
+          
+            <span class="site-footer-item">
+              <a href="https://xin-tan.com/" target="_blank">心谭博客</a>
+            </span>
+          
+        </div>
+      
+        <div class="site-footer-col">
+          <h5 class="site-footer-title">系列教程</h5>
+          
+            <span class="site-footer-item">
+              <a href="https://www.xiebruce.top/17.html" target="_blank">PicUploader</a>
+            </span>
+          
+            <span class="site-footer-item">
+              <a href="https://github.com/xhmily/wordpress-to-markdown" target="_blank">wordpress-to-markdown</a>
+            </span>
+          
+        </div>
+      
+        <div class="site-footer-col">
+          <h5 class="site-footer-title">社交链接</h5>
+          
+            <span class="site-footer-item">
+              <a href="https://twitter.com/975023381" target="_blank">Twitter</a>
+            </span>
+          
+            <span class="site-footer-item">
+              <a href="https://www.facebook.com/profile.php?id=100006181546908" target="_blank">Facebook</a>
+            </span>
+          
+        </div>
+      
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 975023381@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+       <!-- 
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        -->
+        <input type="text" class="st-default-search-input" id="local-search-input" results="0">
+        <i class="fa fa-search"></i>
+      </div>
+      
+        <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+          
+            <div>
+              <img src="/images/wechat.png" alt="WeChat">
+              
+                <p>WeChat</p>
+              
+            </div>
+          
+            <div>
+              <img src="/images/alipay.png" alt="AliPay">
+              
+                <p>AliPay</p>
+              
+            </div>
+          
+        </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+<!--搜索列表-->
+    <div data-v-357a65ed="" class="fav_list_box site-layer-body">
+        <div  class="my_fav_con" id="site_search">
+            <div id="local-search-result"></div>
+        </div>
+    </div>
+<!--搜索列表-->
+  </div>
+</div>
+
+
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/passages/Docker学习笔记（三）Docker常用命令/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/Docker学习笔记（一）Docker入门简介/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#site-comment" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+      <a href="javascript:void(0);" id="site-reward">
+        <i class="fa fa-thumbs-up"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+
+
+  <script async>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+
+
+
+
+    
+      <script src="/js/fancybox.js"></script>
+    
+  </body>
+</html>
