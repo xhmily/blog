@@ -14,8 +14,8 @@ github: "https://github.com/xhmily/"
 
 # 站点图标和APP图标
 favicon: 
-  icon: /images/favicon.ico
-  touch_icon: /images/touch-icon.png
+  icon: /images/favicon.jpg
+  touch_icon: /images/touch-icon.jpg
 
 # RSS文件位置
 rss: 

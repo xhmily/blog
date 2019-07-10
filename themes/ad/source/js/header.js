@@ -138,7 +138,7 @@
                     // 返回搜索结果
                     if (isMatch) {
                     //结果标签
-                        str += "<li class=\"my_fav_list_li\"><a href='"+ data_url +"' class='my_fav_list_a search-result-title'>" + data_title +"</a>";
+                        str += "<li class=\"my_fav_list_li\"><a href='"+ data_url +"' class='my_fav_list_a search-result-title' style='color:#FF8000'>" + data_title +"</a>";
                         var content = data.content.trim().replace(/<[^>]+>/g,"");
                         if (first_occur >= 0) {
                             // 拿出含有搜索字的部分
@@ -149,6 +149,9 @@
                             }
                             if(start == 0){
                                 end = 10;
+                            }
+                            if (start > 0) {
+                                end = 40;
                             }
                             if(end > content.length){
                                 end = content.length;

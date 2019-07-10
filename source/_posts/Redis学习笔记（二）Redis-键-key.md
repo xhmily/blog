@@ -1,7 +1,7 @@
 ---
 title: Redis学习笔记（二）Redis 键(key)
 date: 2019-07-08 00:23:58
-categories: Reids
+categories: Redis
 tags: Redis
 top:
 password:
