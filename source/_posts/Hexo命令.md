@@ -1,10 +1,11 @@
 ---
 title: Hexo 命令
-date: 2019-07-05 15:37:32
+date: 2019-07-08 15:37:32
 categories: Hexo
 tags: 
 top:
-password:
+password: 
+  - 8b238eb385aa1afb575b7ebb9e403ea3029d70f3fe7c777c42c90de5f2bc97dd
 ---
 ## 快速开始
 
@@ -16,13 +17,13 @@ $ hexo new "My New Post"
 
 更多: [Writing](https://hexo.io/docs/writing.html)
 
-### 启动服务
+### 清理静态文件
 
-``` bash
-$ hexo server ## hexo s
+```bash
+$ hexo clean
 ```
 
-更多: [Server](https://hexo.io/docs/server.html)
+
 
 ### 生成静态文件
 
@@ -40,4 +41,29 @@ $ hexo deploy ## hexo d
 
 更多: [Deployment](https://hexo.io/docs/deployment.html)
 
-### 
+### 启动服务
+
+```bash
+$ hexo server ## hexo s
+```
+
+更多: [Server](https://hexo.io/docs/server.html)
+
+### 从远程服务器下载Hexo环境及文章原始文件(更换电脑时)
+
+```bash
+$ git clone -b hexo git@ip:/home/git/repos/blog.git
+```
+
+### 将本地Hexo环境及文章同步到远程服务器
+
+```bash
+$ git push
+```
+
+### 更新本地文件
+
+```bash
+$ git pull
+```
+
