@@ -6,12 +6,12 @@
   <meta name="author" content="Lucent">
   
   
-  <title>归档 | 第2页 | Lucent&#39;s blog</title>
+  <title>可能会用到的cmd命令 | Lucent&#39;s blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Hexo">
+    <meta name="keywords" content="CMD,cmd,">
   
 
   
@@ -42,7 +42,7 @@
     welcome: {"enable":false,"interval":30},
     start_time: "2018-09-11",
     passwords: ["8b238eb385aa1afb575b7ebb9e403ea3029d70f3fe7c777c42c90de5f2bc97dd", ],
-    is_post: false,
+    is_post: true,
     lock: false,
     author: "Lucent",
     share: {"twitter":true,"facebook":true,"weibo":false,"qq":true,"wechat":true},
@@ -165,61 +165,85 @@
 </nav>
 <div id="site-process"></div>
     <main>
-      <div class="timeline">
-  <h2 class="timeline-title">归档: 18篇</h2>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-08-07
+    </span>
+    
+      <span>
+        | <a href="/categories/CMD/"><i class="fa fa-bookmark"></i>CMD</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    可能会用到的cmd命令
+  </h1>
   
-    
-      <h3 class="timeline-subtitle">2019</h3>
-    
-    <div class="timeline-item">
-      <time>2019-07-08</time>
-      <a target="_self" href="/passages/CentOS安装Supervisor守护进程并开机启动/">CentOS安装Supervisor守护进程并开机启动</a>
-    </div>
+  <article class="passage-article">
+    <h4 id="查找对应的端口占用的进程，找到占用端口对应的程序的PID号："><a href="#查找对应的端口占用的进程，找到占用端口对应的程序的PID号：" class="headerlink" title="查找对应的端口占用的进程，找到占用端口对应的程序的PID号："></a>查找对应的端口占用的进程，找到占用端口对应的程序的PID号：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat  -aon|findstr  <span class="string">"8080"</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="根据PID号找到对应的程序-，找到对应的程序名："><a href="#根据PID号找到对应的程序-，找到对应的程序名：" class="headerlink" title="根据PID号找到对应的程序 ，找到对应的程序名："></a>根据PID号找到对应的程序 ，找到对应的程序名：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasklist|findstr <span class="string">"6676"</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="结束进程："><a href="#结束进程：" class="headerlink" title="结束进程："></a>结束进程：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">taskkill /f /t /im java.exe</span><br></pre></td></tr></table></figure>
+
+<h4 id="BAT脚本通过端口号获取pid并结束进程："><a href="#BAT脚本通过端口号获取pid并结束进程：" class="headerlink" title="BAT脚本通过端口号获取pid并结束进程："></a>BAT脚本通过端口号获取pid并结束进程：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line">setlocal enabledelayedexpansion</span><br><span class="line"><span class="keyword">for</span> /f <span class="string">"tokens=1-5"</span> %%a <span class="keyword">in</span> (<span class="string">'netstat -ano ^| find ":%1"'</span>) <span class="keyword">do</span> (</span><br><span class="line">    <span class="keyword">if</span> <span class="string">"%%e%"</span> == <span class="string">""</span> (</span><br><span class="line">        <span class="built_in">set</span> pid=%%d</span><br><span class="line">    ) <span class="keyword">else</span> (</span><br><span class="line">        <span class="built_in">set</span> pid=%%e</span><br><span class="line">    )</span><br><span class="line">    <span class="built_in">echo</span> !pid!</span><br><span class="line">    taskkill /f /pid !pid!</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h4 id="BAT脚本调用steamcmd安装服务器"><a href="#BAT脚本调用steamcmd安装服务器" class="headerlink" title="BAT脚本调用steamcmd安装服务器"></a>BAT脚本调用steamcmd安装服务器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c:\steamcmd +login 账号 密码 +force_install_dir C:\dayz\ +app_update 223350</span><br></pre></td></tr></table></figure>
+
+<h4 id="BAT调用steamcmd下载mod"><a href="#BAT调用steamcmd下载mod" class="headerlink" title="BAT调用steamcmd下载mod"></a>BAT调用steamcmd下载mod</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">steamcmd +login 账号 密码 +force_install_dir c:\mod +workshop_download_item 游戏id Modid</span><br><span class="line">::下载mod需要登录的账号拥有该游戏才可下载</span><br></pre></td></tr></table></figure>
+
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#查找对应的端口占用的进程，找到占用端口对应的程序的PID号："><span class="toc-text">查找对应的端口占用的进程，找到占用端口对应的程序的PID号：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#根据PID号找到对应的程序-，找到对应的程序名："><span class="toc-text">根据PID号找到对应的程序 ，找到对应的程序名：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#结束进程："><span class="toc-text">结束进程：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BAT脚本通过端口号获取pid并结束进程："><span class="toc-text">BAT脚本通过端口号获取pid并结束进程：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BAT脚本调用steamcmd安装服务器"><span class="toc-text">BAT脚本调用steamcmd安装服务器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BAT调用steamcmd下载mod"><span class="toc-text">BAT调用steamcmd下载mod</span></a></li></ol>
+  </div>
+</aside>
   
-    
-    <div class="timeline-item">
-      <time>2019-07-08</time>
-      <a target="_self" href="/passages/shell命令-crontab-php实现每天特定时间段内随机时间执行任务/">shell命令+crontab+php实现每天特定时间段内随机时间执行任务</a>
-    </div>
+    <aside class="passage-copyright">
+      <div>本文作者: 呆呆木</div>
+      
+        <div>
+          原文链接: 
+          <a href="" target="_blank">https://lucent.blog/passages/可能会用到的cmd命令/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
   
-    
-    <div class="timeline-item">
-      <time>2019-07-07</time>
-      <a target="_self" href="/passages/linux使用crontab命令指定时间段内随机执行任务/">linux使用crontab命令指定时间段内随机执行任务</a>
-    </div>
   
+    <div class="passage-tags">
+     
+      <a href="/tags/cmd/"><i class="fa fa-tags"></i>cmd</a>
     
-    <div class="timeline-item">
-      <time>2019-07-07</time>
-      <a target="_self" href="/passages/Linux安装screen命令/">Linux安装screen命令</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2019-07-07</time>
-      <a target="_self" href="/passages/javascript实现图片上传预览/">javascript实现图片上传预览</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2019-07-06</time>
-      <a target="_self" href="/passages/Docker学习笔记（三）Docker常用命令/">Docker学习笔记（三）Docker常用命令</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2019-07-06</time>
-      <a target="_self" href="/passages/Docker学习笔记（二）Docker-V18-03-安装配置/">Docker学习笔记（二）Docker(V18.03)安装配置</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2019-07-06</time>
-      <a target="_self" href="/passages/Docker学习笔记（一）Docker入门简介/">Docker学习笔记（一）Docker入门简介</a>
     </div>
   
 </div>
+
     </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="leancloud">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-spinner fa-spin"></i> 评论加载中
+    </p>
+    <div id="site-comment"></div>
+  
+</div>
     
     <div class="site-footer-wrapper">
   <footer class="site-footer">
@@ -336,19 +360,19 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/archives/" data-enable="true">
+    <a href="/passages/解决Flash被禁用的问题/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/passages/java执行cmd命令工具类-windows/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>
   <div class="bottom-bar-right">
-    <a href="javascript:void(0);" data-enable="false" id="site-toc-show-btn">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
       <i class="fa fa-bars"></i>
     </a>
     
-      <a href="javascript:void(0);" data-enable="false">
+      <a href="#site-comment" data-enable="true">
         <i class="fa fa-commenting"></i>
       </a>
     

@@ -98,3 +98,23 @@ public class CmdTools {
 
 ```
 
+#### 查找某进程pid(java)：
+
+```java
+String result = test.excuteBatFile("findPid.bat",true);
+String[] str=result.split("\n");
+ String[] str=result.split("\n");
+        String Pid="";
+        for (int i = 0;i<str.length;i++){
+            if (str[i].indexOf("cmd.exe")!=-1){
+                Pid=str[i].split(",")[1].replace("\"","");
+            }
+        }
+```
+
+##### findPid.bat:
+
+```bash
+tasklist /v /fo csv | findstr /i "myprocess"
+```
+
