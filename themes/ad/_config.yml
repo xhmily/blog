@@ -45,8 +45,8 @@ start_time: "2018-09-11"
 # 如何开启 评论&统计 插件：https://godbmw.com/passages/2018-11-15-theme-bmw-docs-zh/
 # 请申请自己的 appid 和 appkey，并且替换下面的 appid 和 appkey
 leancloud:
-  appid: Ji9JVwHmBx9N7OIxwjQkVvmc-gzGzoHsz # 填写您的appid
-  appkey: 8O4IkYG99hQzhB20EDr7XyLx # 填写您的appkey
+  appid: iQWmg8JiBFvD7MzgWKzI4oTd-MdYXbMMI # 填写您的appid
+  appkey: RhRbHAFcwJhYGNLxVgdtw8lj # 填写您的appkey
   comment: true # 是否开启评论系统
   count: true # 是否开启文章统计
 
@@ -79,8 +79,8 @@ analytics:
   baidu:
     enable: true
   google:
-    enable: false
-    id: 
+    enable: true
+    id: UA-145467362-1
   "360":
     enable: false
     id: 
