@@ -6,12 +6,12 @@
   <meta name="author" content="Lucent">
   
   
-  <title>javascript实现图片上传预览 | Lucent&#39;s blog</title>
+  <title>微信小程序头像样式 | Lucent&#39;s blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="javascript,js,">
+    <meta name="keywords" content="微信小程序,小程序,">
   
 
   
@@ -169,11 +169,11 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2019-07-07
+      <i class="fa fa-calendar"></i>2019-08-20
     </span>
     
       <span>
-        | <a href="/categories/javascript/"><i class="fa fa-bookmark"></i>javascript</a>
+        | <a href="/categories/微信小程序/"><i class="fa fa-bookmark"></i>微信小程序</a>
       </span>
     
     
@@ -183,11 +183,14 @@
     
   </div>
   <h1 class="passage-title">
-    javascript实现图片上传预览
+    微信小程序头像样式
   </h1>
   
   <article class="passage-article">
-    <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!doctype html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- Required meta tags --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1, shrink-to-fit=no"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello, world!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">function viewimg(file)&#123;</span><br><span class="line">if(file.files&amp;&amp;file.files[0])//当文件存在</span><br><span class="line">&#123;</span><br><span class="line">var img=document.getElementById("image1");</span><br><span class="line">var reader=new FileReader();//新建文件读写器</span><br><span class="line">//成功读取文件后，把结果赋予img</span><br><span class="line">reader.onload=function(evt)&#123;</span><br><span class="line">img.src=evt.target.result;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">reader.readAsDataURL(file.files[0]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, world!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"advimg"</span>&gt;</span>广告图片<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span>=<span class="string">"image1"</span> <span class="attr">src</span>=<span class="string">"#"</span> <span class="attr">width</span>=<span class="string">"360"</span> <span class="attr">height</span>=<span class="string">"150"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 当选中文件，将文件传给viewimg方法--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">id</span>=<span class="string">"advimg"</span> <span class="attr">name</span>=<span class="string">"advimg"</span> <span class="attr">onchange</span>=<span class="string">"viewimg(this)"</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+    <h4 id="效果："><a href="#效果：" class="headerlink" title="效果："></a>效果：</h4><p><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/20190820115102.png" alt></p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"userinfo"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"userinfo-avatar"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">open-data</span>  <span class="attr">type</span>=<span class="string">"userAvatarUrl"</span>&gt;</span><span class="tag">&lt;/<span class="name">open-data</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">open-data</span> <span class="attr">type</span>=<span class="string">"userNickName"</span>&gt;</span><span class="tag">&lt;/<span class="name">open-data</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.userinfo</span> &#123;  </span><br><span class="line">  <span class="attribute">position</span>: relative;  </span><br><span class="line">  <span class="attribute">width</span>: <span class="number">750</span>rpx;  </span><br><span class="line">  <span class="attribute">height</span>: <span class="number">320</span>rpx;  </span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;  </span><br><span class="line">  <span class="attribute">display</span>: flex;  </span><br><span class="line">  <span class="attribute">flex-direction</span>: column;  </span><br><span class="line">  <span class="attribute">align-items</span>: center;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="selector-class">.userinfo-avatar</span> &#123;  </span><br><span class="line">  <span class="attribute">overflow</span>:hidden;  </span><br><span class="line">  <span class="attribute">display</span>: block;  </span><br><span class="line">  <span class="attribute">width</span>: <span class="number">160</span>rpx;  </span><br><span class="line">  <span class="attribute">height</span>: <span class="number">160</span>rpx;  </span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">20</span>rpx;  </span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="number">50</span>rpx;  </span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">50%</span>;  </span><br><span class="line">  <span class="attribute">border</span>: <span class="number">2px</span> solid <span class="number">#fff</span>;  </span><br><span class="line">  <span class="attribute">box-shadow</span>: <span class="number">3px</span> <span class="number">3px</span> <span class="number">10px</span> <span class="built_in">rgba</span>(0, 0, 0, 0.2);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="selector-class">.userinfo</span>&#123;  </span><br><span class="line">  <span class="comment">/* color: #fff; */</span>  </span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">14px</span>;  </span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#c0c0c0</span>;  </span><br><span class="line">  <span class="attribute">border-radius</span>:<span class="number">40%</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
   </article>
@@ -197,7 +200,7 @@
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#效果："><span class="toc-text">效果：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码"><span class="toc-text">代码:</span></a></li></ol>
   </div>
 </aside>
   
@@ -206,7 +209,7 @@
       
         <div>
           原文链接: 
-          <a href="" target="_blank">https://lucent.blog/passages/javascript实现图片上传预览/</a>
+          <a href="" target="_blank">https://lucent.blog/passages/微信小程序头像样式/</a>
         </div>
       
       <div>
@@ -217,7 +220,7 @@
   
     <div class="passage-tags">
      
-      <a href="/tags/js/"><i class="fa fa-tags"></i>js</a>
+      <a href="/tags/小程序/"><i class="fa fa-tags"></i>小程序</a>
     
     </div>
   
@@ -350,10 +353,10 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/passages/Linux安装screen命令/" data-enable="true">
+    <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/passages/Docker学习笔记（三）Docker常用命令/" data-enable="true">
+    <a href="/passages/解决Flash被禁用的问题/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>
