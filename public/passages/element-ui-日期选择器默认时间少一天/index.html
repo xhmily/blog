@@ -6,12 +6,12 @@
   <meta name="author" content="Lucent">
   
   
-  <title>javascript实现图片上传预览 | Lucent&#39;s blog</title>
+  <title>解决element ui 日期选择器默认时间少一天的问题 | Lucent&#39;s blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="javascript,js,">
+    <meta name="keywords" content="vue,element-ui,">
   
 
   
@@ -169,11 +169,11 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2019-07-07
+      <i class="fa fa-calendar"></i>2019-09-05
     </span>
     
       <span>
-        | <a href="/categories/javascript/"><i class="fa fa-bookmark"></i>javascript</a>
+        | <a href="/categories/vue/"><i class="fa fa-bookmark"></i>vue</a>
       </span>
     
     
@@ -183,12 +183,21 @@
     
   </div>
   <h1 class="passage-title">
-    javascript实现图片上传预览
+    解决element ui 日期选择器默认时间少一天的问题
   </h1>
   
   <article class="passage-article">
-    <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!doctype html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- Required meta tags --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1, shrink-to-fit=no"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello, world!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">viewimg</span>(<span class="params">file</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript"><span class="keyword">if</span>(file.files&amp;&amp;file.files[<span class="number">0</span>])<span class="comment">//当文件存在</span></span></span><br><span class="line">&#123;</span><br><span class="line"><span class="javascript"><span class="keyword">var</span> img=<span class="built_in">document</span>.getElementById(<span class="string">"image1"</span>);</span></span><br><span class="line"><span class="javascript"><span class="keyword">var</span> reader=<span class="keyword">new</span> FileReader();<span class="comment">//新建文件读写器</span></span></span><br><span class="line"><span class="javascript"><span class="comment">//成功读取文件后，把结果赋予img</span></span></span><br><span class="line"><span class="javascript">reader.onload=<span class="function"><span class="keyword">function</span>(<span class="params">evt</span>)</span>&#123;</span></span><br><span class="line">img.src=evt.target.result;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">reader.readAsDataURL(file.files[0]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, world!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"advimg"</span>&gt;</span>广告图片<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span>=<span class="string">"image1"</span> <span class="attr">src</span>=<span class="string">"#"</span> <span class="attr">width</span>=<span class="string">"360"</span> <span class="attr">height</span>=<span class="string">"150"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 当选中文件，将文件传给viewimg方法--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">id</span>=<span class="string">"advimg"</span> <span class="attr">name</span>=<span class="string">"advimg"</span> <span class="attr">onchange</span>=<span class="string">"viewimg(this)"</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+    <p>今天在使用element-ui 的日期选择器的时候出现一个奇怪的问题，选中的日期在获取值之后会比选中的日期少一天：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-date-picker</span></span></span><br><span class="line"><span class="tag">        <span class="attr">class</span>=<span class="string">"mr10"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">v-model</span>=<span class="string">"selectedDate"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">type</span>=<span class="string">"daterange"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">unlink-panels</span></span></span><br><span class="line"><span class="tag">        <span class="attr">range-separator</span>=<span class="string">"至"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">start-placeholder</span>=<span class="string">"开始日期"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">end-placeholder</span>=<span class="string">"结束日期"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">el-date-picker</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
+<p>结果：</p>
+<p><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/20190905180454.png" alt></p>
+<p>在网上搜索之后发现很多人遇到这个，最终找到一个最简单好用的解决方法：</p>
+<p>就是加上这一段代码 <strong>value-format=”yyyy-MM-dd”</strong>如下</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-date-picker</span></span></span><br><span class="line"><span class="tag">        <span class="attr">class</span>=<span class="string">"mr10"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">v-model</span>=<span class="string">"selectedDate"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">type</span>=<span class="string">"daterange"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">unlink-panels</span></span></span><br><span class="line"><span class="tag">        <span class="attr">range-separator</span>=<span class="string">"至"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">start-placeholder</span>=<span class="string">"开始日期"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">end-placeholder</span>=<span class="string">"结束日期"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">value-format</span>=<span class="string">"yyyy-MM-dd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">el-date-picker</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>结果如下图：</p>
+<p><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/20190905180920.png" alt></p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -206,7 +215,7 @@
       
         <div>
           原文链接: 
-          <a href="" target="_blank">https://lucent.blog/passages/javascript实现图片上传预览/</a>
+          <a href="" target="_blank">https://lucent.blog/passages/element-ui-日期选择器默认时间少一天/</a>
         </div>
       
       <div>
@@ -217,7 +226,7 @@
   
     <div class="passage-tags">
      
-      <a href="/tags/js/"><i class="fa fa-tags"></i>js</a>
+      <a href="/tags/element-ui/"><i class="fa fa-tags"></i>element-ui</a>
     
     </div>
   
@@ -350,10 +359,10 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/passages/Linux安装screen命令/" data-enable="true">
+    <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/passages/Docker学习笔记（三）Docker常用命令/" data-enable="true">
+    <a href="/passages/微信小程序头像样式/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

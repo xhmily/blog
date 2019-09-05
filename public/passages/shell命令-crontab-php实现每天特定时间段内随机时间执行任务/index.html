@@ -11,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Linux,Liunx,Crontab,">
+    <meta name="keywords" content="Linux,Crontab,Liunx,">
   
 
   
@@ -191,7 +191,7 @@
 <p>比如：第一天执行是生成的随机时间要留给下次使用，如果第一次生成时间为8：01，那么第二天就会8：01执行任务，第二天8：01执行任务时生成的随机时间是8：05，那么8：05也会执行一次任务，就会导致同一天执行两次甚至多次任务。</p>
 <p>那么下面加入php重写,实现每天早晨8：00-8：09之间随机时间访问<a href="http://www.baidu.com：" target="_blank" rel="noopener">www.baidu.com：</a></p>
 <p><strong>shell代码sign.sh：</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line">r=$(($RANDOM%10)) ##生成10以内的随机数字</span><br><span class="line">rm -f /www/wwwroot/time.txt ##删除以前的time.txt</span><br><span class="line">echo “08:0″$[r] &gt;&gt; /www/wwwroot/time.txt ##创建并将随机数字作为时间的分钟插入time.txt</span><br><span class="line">chmod 777 sign.sh ##设置shell脚本的权限</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">r=$(($RANDOM%10)) ##生成10以内的随机数字</span><br><span class="line">rm -f /www/wwwroot/time.txt ##删除以前的time.txt</span><br><span class="line">echo “08:0″$[r] &gt;&gt; /www/wwwroot/time.txt ##创建并将随机数字作为时间的分钟插入time.txt</span><br><span class="line">chmod 777 sign.sh ##设置shell脚本的权限</span><br></pre></td></tr></table></figure>
 
 <p><strong>crontab命令文件sign.cron:</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">59 07 * * * ./sign.sh   ##定时7：59执行shell脚本生成随机时间</span><br><span class="line">0-9 08 * * * curl http://服务器ip/sign/Sys.php    ##8：00-8：09没分钟执行一次http请求</span><br></pre></td></tr></table></figure>
@@ -233,9 +233,9 @@
   
     <div class="passage-tags">
      
-      <a href="/tags/Liunx/"><i class="fa fa-tags"></i>Liunx</a>
-     
       <a href="/tags/Crontab/"><i class="fa fa-tags"></i>Crontab</a>
+     
+      <a href="/tags/Liunx/"><i class="fa fa-tags"></i>Liunx</a>
     
     </div>
   
