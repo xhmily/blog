@@ -6,12 +6,12 @@
   <meta name="author" content="Lucent">
   
   
-  <title>解决element ui 日期选择器默认时间少一天的问题 | Lucent&#39;s blog</title>
+  <title>微信小程序获取用户UnionId | Lucent&#39;s blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="vue,element-ui,">
+    <meta name="keywords" content="微信小程序,小程序,">
   
 
   
@@ -169,11 +169,11 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2019-09-05
+      <i class="fa fa-calendar"></i>2019-09-19
     </span>
     
       <span>
-        | <a href="/categories/vue/"><i class="fa fa-bookmark"></i>vue</a>
+        | <a href="/categories/微信小程序/"><i class="fa fa-bookmark"></i>微信小程序</a>
       </span>
     
     
@@ -183,21 +183,19 @@
     
   </div>
   <h1 class="passage-title">
-    解决element ui 日期选择器默认时间少一天的问题
+    微信小程序获取用户UnionId
   </h1>
   
   <article class="passage-article">
-    <p>今天在使用element-ui 的日期选择器的时候出现一个奇怪的问题，选中的日期在获取值之后会比选中的日期少一天：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-date-picker</span></span></span><br><span class="line"><span class="tag">        <span class="attr">class</span>=<span class="string">"mr10"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">v-model</span>=<span class="string">"selectedDate"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">type</span>=<span class="string">"daterange"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">unlink-panels</span></span></span><br><span class="line"><span class="tag">        <span class="attr">range-separator</span>=<span class="string">"至"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">start-placeholder</span>=<span class="string">"开始日期"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">end-placeholder</span>=<span class="string">"结束日期"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">el-date-picker</span>&gt;</span></span><br></pre></td></tr></table></figure>
+    <h6 id="如果开发者拥有多个移动应用、网站应用、和公众帐号（包括小程序），可通过-UnionID-来区分用户的唯一性，因为只要是同一个微信开放平台帐号下的移动应用、网站应用和公众帐号（包括小程序），用户的-UnionID-是唯一的。换句话说，同一用户，对同一个微信开放平台下的不同应用，unionid是相同的。"><a href="#如果开发者拥有多个移动应用、网站应用、和公众帐号（包括小程序），可通过-UnionID-来区分用户的唯一性，因为只要是同一个微信开放平台帐号下的移动应用、网站应用和公众帐号（包括小程序），用户的-UnionID-是唯一的。换句话说，同一用户，对同一个微信开放平台下的不同应用，unionid是相同的。" class="headerlink" title="如果开发者拥有多个移动应用、网站应用、和公众帐号（包括小程序），可通过 UnionID 来区分用户的唯一性，因为只要是同一个微信开放平台帐号下的移动应用、网站应用和公众帐号（包括小程序），用户的 UnionID 是唯一的。换句话说，同一用户，对同一个微信开放平台下的不同应用，unionid是相同的。"></a>如果开发者拥有多个移动应用、网站应用、和公众帐号（包括小程序），可通过 UnionID 来区分用户的唯一性，因为只要是同一个微信开放平台帐号下的移动应用、网站应用和公众帐号（包括小程序），用户的 UnionID 是唯一的。换句话说，同一用户，对同一个微信开放平台下的不同应用，unionid是相同的。</h6><p>能够获取UnionID的前提是<strong>小程序已经绑定了开发者账号</strong></p>
+<h5 id="微信开发平台绑定流程："><a href="#微信开发平台绑定流程：" class="headerlink" title="微信开发平台绑定流程："></a>微信开发平台绑定流程：</h5><p>登录<a href="https://open.weixin.qq.com/" target="_blank" rel="noopener">微信开放平台</a>–&gt;管理中心–&gt;小程序–&gt;绑定小程序</p>
+<p><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/%7BK%7D%25%5DQII01DP%7DJZAWJKJ%7E(V.png" alt></p>
+<h4 id="1-需要用到的工具"><a href="#1-需要用到的工具" class="headerlink" title="1.需要用到的工具"></a>1.需要用到的工具</h4><p><a href="https://github.com/xhmily/imgbed/raw/master/images/cryptojs-master.zip" target="_blank" rel="noopener">cryptojs</a></p>
+<p>将文件复制到小程序项目中</p>
+<p><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/20190919173913.png" alt></p>
+<h4 id="2-代码"><a href="#2-代码" class="headerlink" title="2.代码"></a>2.代码</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> util = <span class="built_in">require</span>(<span class="string">'../utils/utils.js'</span>)</span><br><span class="line"><span class="keyword">const</span> WXBizDataCrypt = <span class="built_in">require</span>(<span class="string">'../utils/RdWXBizDataCrypt.js'</span>)</span><br><span class="line"><span class="keyword">const</span> getData = util.getData</span><br><span class="line"></span><br><span class="line">login() &#123;</span><br><span class="line">    <span class="keyword">const</span> that = <span class="keyword">this</span></span><br><span class="line">    <span class="comment">//在发起请求获取unionID之前必须先调用wx.login接口，因为需要用到session_key</span></span><br><span class="line">    wx.login(&#123;</span><br><span class="line">      success(res) &#123;</span><br><span class="line">        <span class="keyword">if</span> (res.code) &#123;</span><br><span class="line">          <span class="comment">//发起网络请求,调用后台的登录接口</span></span><br><span class="line">          getData(<span class="string">"auth/login"</span>,&#123;</span><br><span class="line">            jsCode:res.code</span><br><span class="line">          &#125;,<span class="string">"POST"</span>).then(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">  	 <span class="comment">//后台用临时票据向微信服务器换取了用户openid和session_key，把session_key传回前端用来解密</span></span><br><span class="line">            <span class="keyword">var</span> pc = <span class="keyword">new</span> WXBizDataCrypt(<span class="string">'wxa1acc2c4af07a57b'</span>, res.data.sessionkey)</span><br><span class="line">            wx.getUserInfo(&#123;</span><br><span class="line">              success: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">                <span class="comment">//拿到getUserInfo（）取得的res.encryptedData, res.iv，调用decryptData（）解密</span></span><br><span class="line">                <span class="keyword">var</span> data = pc.decryptData(res.encryptedData, res.iv)</span><br><span class="line">                <span class="comment">// data中就包含了openid和unionID，</span></span><br><span class="line">                wx.setStorageSync(<span class="string">'unionid'</span>, data.unionId)</span><br><span class="line">                wx.setStorageSync(<span class="string">'userInfo'</span>, data)</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">            <span class="keyword">if</span> (res.msg ==<span class="string">'success'</span>)&#123;</span><br><span class="line">              app.globalData.openid = res.res</span><br><span class="line">              app.globalData.hasLogin = <span class="literal">true</span></span><br><span class="line">              wx.redirectTo(&#123;</span><br><span class="line">                url: <span class="string">'/pages/start/start'</span>,</span><br><span class="line">              &#125;)</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(res.msg==<span class="string">'noAuth'</span>)&#123;</span><br><span class="line">              app.globalData.openid = res.res</span><br><span class="line">              wx.redirectTo(&#123;</span><br><span class="line">                url: <span class="string">'/pages/reg/reg'</span>,</span><br><span class="line">              &#125;)</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">              wx.showToast(&#123;</span><br><span class="line">                title: <span class="string">'登录失败！'</span>,</span><br><span class="line">                icon: <span class="string">'none'</span></span><br><span class="line">              &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;)</span><br></pre></td></tr></table></figure>
 
-<p>结果：</p>
-<p><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/20190905180454.png" alt></p>
-<p>在网上搜索之后发现很多人遇到这个，最终找到一个最简单好用的解决方法：</p>
-<p>就是加上这一段代码 <strong>value-format=”yyyy-MM-dd”</strong>如下</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-date-picker</span></span></span><br><span class="line"><span class="tag">        <span class="attr">class</span>=<span class="string">"mr10"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">v-model</span>=<span class="string">"selectedDate"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">type</span>=<span class="string">"daterange"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">unlink-panels</span></span></span><br><span class="line"><span class="tag">        <span class="attr">range-separator</span>=<span class="string">"至"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">start-placeholder</span>=<span class="string">"开始日期"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">end-placeholder</span>=<span class="string">"结束日期"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">value-format</span>=<span class="string">"yyyy-MM-dd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">el-date-picker</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>结果如下图：</p>
-<p><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/20190905180920.png" alt></p>
+<p>这样即可获得用户的unionID,当然，前提是用户在授权时点了允许</p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -206,7 +204,7 @@
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    
+    <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#如果开发者拥有多个移动应用、网站应用、和公众帐号（包括小程序），可通过-UnionID-来区分用户的唯一性，因为只要是同一个微信开放平台帐号下的移动应用、网站应用和公众帐号（包括小程序），用户的-UnionID-是唯一的。换句话说，同一用户，对同一个微信开放平台下的不同应用，unionid是相同的。"><span class="toc-text">如果开发者拥有多个移动应用、网站应用、和公众帐号（包括小程序），可通过 UnionID 来区分用户的唯一性，因为只要是同一个微信开放平台帐号下的移动应用、网站应用和公众帐号（包括小程序），用户的 UnionID 是唯一的。换句话说，同一用户，对同一个微信开放平台下的不同应用，unionid是相同的。</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#微信开发平台绑定流程："><span class="toc-text">微信开发平台绑定流程：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-需要用到的工具"><span class="toc-text">1.需要用到的工具</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-代码"><span class="toc-text">2.代码</span></a>
   </div>
 </aside>
   
@@ -215,7 +213,7 @@
       
         <div>
           原文链接: 
-          <a href="" target="_blank">https://lucent.blog/passages/element-ui-日期选择器默认时间少一天/</a>
+          <a href="" target="_blank">https://lucent.blog/passages/微信小程序获取用户UnionId/</a>
         </div>
       
       <div>
@@ -226,7 +224,7 @@
   
     <div class="passage-tags">
      
-      <a href="/tags/element-ui/"><i class="fa fa-tags"></i>element-ui</a>
+      <a href="/tags/小程序/"><i class="fa fa-tags"></i>小程序</a>
     
     </div>
   
@@ -359,10 +357,10 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/passages/微信小程序获取用户UnionId/" data-enable="true">
+    <a href="/passages/vue实现内嵌二维码微信登录/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/passages/微信小程序头像样式/" data-enable="true">
+    <a href="/passages/element-ui-日期选择器默认时间少一天/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

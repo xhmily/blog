@@ -79,5 +79,5 @@ theme: ad
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@45.32.107.215:/home/git/repos/blog.git
+  repo: git@45.77.73.117:/home/git/repos/blog.git
   branch: master
