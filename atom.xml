@@ -1,20 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://lucent.blog</id>
-    <title>Lucent</title>
-    <updated>2020-05-12T07:55:39.836Z</updated>
+    <id>http://lucent.blog</id>
+    <title>Lucent&apos;s Blog</title>
+    <updated>2020-05-12T09:45:23.124Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://lucent.blog"/>
-    <link rel="self" href="https://lucent.blog/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
-    <logo>https://lucent.blog/images/avatar.png</logo>
-    <icon>https://lucent.blog/favicon.ico</icon>
-    <rights>All rights reserved 2020, Lucent</rights>
+    <link rel="alternate" href="http://lucent.blog"/>
+    <link rel="self" href="http://lucent.blog/atom.xml"/>
+    <subtitle>我是一个Java程序员，Bug开发者，这里是我的个人博客</subtitle>
+    <logo>http://lucent.blog/images/avatar.png</logo>
+    <icon>http://lucent.blog/favicon.ico</icon>
+    <rights>All rights reserved 2020, Lucent&apos;s Blog</rights>
     <entry>
-        <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://lucent.blog/post/hello-gridea/</id>
-        <link href="https://lucent.blog/post/hello-gridea/">
+        <title type="html"><![CDATA[关于奇游加速器需要验证码的解决方案]]></title>
+        <id>http://lucent.blog/关于奇游加速器需要验证码的解决方案/</id>
+        <link href="http://lucent.blog/关于奇游加速器需要验证码的解决方案/">
         </link>
-        <updated>2018-12-11T16:00:00.000Z</updated>
+        <updated>2020-01-07T04:40:58.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[提货系统预览]]></title>
+        <id>http://lucent.blog/提货系统预览/</id>
+        <link href="http://lucent.blog/提货系统预览/">
+        </link>
+        <updated>2019-10-17T03:08:31.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[vue实现内嵌二维码微信登录]]></title>
+        <id>http://lucent.blog/vue实现内嵌二维码微信登录/</id>
+        <link href="http://lucent.blog/vue实现内嵌二维码微信登录/">
+        </link>
+        <updated>2019-09-23T09:13:08.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[微信小程序获取用户UnionId]]></title>
+        <id>http://lucent.blog/微信小程序获取用户UnionId/</id>
+        <link href="http://lucent.blog/微信小程序获取用户UnionId/">
+        </link>
+        <updated>2019-09-19T02:54:56.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[解决element ui 日期选择器默认时间少一天的问题]]></title>
+        <id>http://lucent.blog/element-ui-日期选择器默认时间少一天/</id>
+        <link href="http://lucent.blog/element-ui-日期选择器默认时间少一天/">
+        </link>
+        <updated>2019-09-05T10:00:44.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[微信小程序头像样式]]></title>
+        <id>http://lucent.blog/微信小程序头像样式/</id>
+        <link href="http://lucent.blog/微信小程序头像样式/">
+        </link>
+        <updated>2019-08-20T03:49:54.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[解决Flash被禁用的问题]]></title>
+        <id>http://lucent.blog/解决Flash被禁用的问题/</id>
+        <link href="http://lucent.blog/解决Flash被禁用的问题/">
+        </link>
+        <updated>2019-08-09T07:11:32.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[可能会用到的cmd命令]]></title>
+        <id>http://lucent.blog/可能会用到的cmd命令/</id>
+        <link href="http://lucent.blog/可能会用到的cmd命令/">
+        </link>
+        <updated>2019-08-07T02:39:33.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[java执行cmd命令工具类(windows)]]></title>
+        <id>http://lucent.blog/java执行cmd命令工具类-windows/</id>
+        <link href="http://lucent.blog/java执行cmd命令工具类-windows/">
+        </link>
+        <updated>2019-08-06T06:05:02.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Jquery实现一键全选/反选/不选]]></title>
+        <id>http://lucent.blog/Jquery实现一键全选-反选-不选/</id>
+        <link href="http://lucent.blog/Jquery实现一键全选-反选-不选/">
+        </link>
+        <updated>2019-08-05T07:37:32.000Z</updated>
     </entry>
 </feed>

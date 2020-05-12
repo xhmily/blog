@@ -1,0 +1,319 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Lucent&#39;s Blog</title>
+<link rel="shortcut icon" href="http://lucent.blog/favicon.ico">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
+<link rel="stylesheet" href="http://lucent.blog/media/css/tailwind.css">
+<link rel="stylesheet" href="http://lucent.blog/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Lucent&#39;s Blog - Atom Feed" href="http://lucent.blog/atom.xml">
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145467362-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-145467362-1');
+  </script>
+    
+
+  <meta name="description" content="我是一个Java程序员，Bug开发者，这里是我的个人博客" />
+</head>
+<body>
+  <div class="antialiased flex flex-col min-h-screen" id="app">
+
+    <div class="nav py-3 md:py-8 fixed w-full z-10 bg-gray-50 dark:bg-gray-700 transition-all duration-300" :class="{ 'scroll': scrolled }">
+  <div class="flex justify-end px-4">
+    <div class="w-8 h-8 flex justify-center items-center rounded-full md:hidden" @click="showMenu = !showMenu">
+      <i class="ri-close-line" v-show="showMenu"></i>
+      <i class="ri-menu-3-line" v-show="!showMenu"></i>
+    </div>
+  </div>
+  <nav class="max-w-4xl w-full mx-auto text-center flex flex-col md:flex-row justify-center md:block" :class="`${ showMenu ? 'block' : 'hidden' }`">
+    
+      <a href="/" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+        首页
+      </a>
+    
+      <a href="/archives" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+        归档
+      </a>
+    
+      <a href="/tags" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+        标签
+      </a>
+    
+      <a href="http://lucent.blog/about" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+        关于
+      </a>
+    
+    <a href="http://lucent.blog/atom.xml" target="_blank" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      RSS
+    </a>
+  </nav>
+</div>
+
+    <div class="max-w-4xl w-full mx-auto pt-32">
+      
+
+      <div class="shadow-box bg-white dark:bg-gray-600 border-gray-300 rounded-none md:rounded-lg -mx-1 md:mx-0 md:px-0">
+        
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="http://lucent.blog/Hexo命令/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          Hexo 命令
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-07-08</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        快速开始
+创建新文章
+$ hexo new &quot;My New Post&quot;
+
+更多: Writing
+清理静态文件
+$ hexo clean
+
+生成静态文件
+$ hexo generate ## hexo g
+
+更多: Ge...
+      </div>
+      <a href="http://lucent.blog/Hexo命令/" class="btn">
+        阅读更多
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="http://lucent.blog/Dayz独立版-服务器物资管理系统使用教程/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          Dayz独立版 服务器物资管理系统使用教程
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-07-08</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        打开dayz.lucent.blog
+
+将types.xml文件(文件位于服务器目录/mpmissions/dayzOffline.chernarusplus/db中)拖入到浏览器中
+
+名词解释
+最大数量：服务器同时刷新出该物品的最大数量
+...
+      </div>
+      <a href="http://lucent.blog/Dayz独立版-服务器物资管理系统使用教程/" class="btn">
+        阅读更多
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="http://lucent.blog/Redis学习笔记（四）主从复制及启动哨兵模式/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          Redis学习笔记（四）主从复制及启动哨兵模式
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-07-08</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        Redis主从复制，主机数据更新后根据配置和策略，自动同步到备机的master/slaver机制，Master以写为主，Slave以读为主，优点是读写分离，容灾恢复。
+启动三台redis
+首先准备三个配置文件并分别配置三个不同端口，例如63...
+      </div>
+      <a href="http://lucent.blog/Redis学习笔记（四）主从复制及启动哨兵模式/" class="btn">
+        阅读更多
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="http://lucent.blog/Redis学习笔记（三）Redis字符串-String/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          Redis学习笔记（三）Redis字符串(String)
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-07-08</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        String（字符串）
+string是redis最基本的类型，可以理解成与Memcached一模一样的类型，一个key对应一个value。
+string类型是二进制安全的。意思是redis的string可以包含任何数据。比如jpg图片或者序...
+      </div>
+      <a href="http://lucent.blog/Redis学习笔记（三）Redis字符串-String/" class="btn">
+        阅读更多
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="http://lucent.blog/Redis学习笔记（二）Redis-键-key/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          Redis学习笔记（二）Redis 键(key)
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-07-08</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        常用命令
+select db #选择数据库，redis默认16个库（0-15）
+keys *  #列出当前库中所有key
+exists key的名字 #判断某个key是否存在
+expire key seconds(秒)  #为给定的key设...
+      </div>
+      <a href="http://lucent.blog/Redis学习笔记（二）Redis-键-key/" class="btn">
+        阅读更多
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="http://lucent.blog/Redis学习笔记（一）redis安装（Centos7）和简单存取数据/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          Redis学习笔记（一）redis安装（Centos7）和简单存取数据
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-07-08</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        redis是非关系型数据库（NoSql），NoSQL(NoSQL = Not Only SQL )，意即“不仅仅是SQL”，泛指非关系型的数据库。随着互联网web2.0网站的兴起，传统的关系数据库在应付web2.0网站，特别是超大规模和高并...
+      </div>
+      <a href="http://lucent.blog/Redis学习笔记（一）redis安装（Centos7）和简单存取数据/" class="btn">
+        阅读更多
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="http://lucent.blog/CentOS安装Supervisor守护进程并开机启动/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          CentOS安装Supervisor守护进程并开机启动
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-07-08</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        安装：
+centos6.9安装方法
+easy_install supervisor
+centos7安装方法
+yum install supervisor
+在/etc/目录下建立配置文件
+echo_supervisord_conf &gt; ...
+      </div>
+      <a href="http://lucent.blog/CentOS安装Supervisor守护进程并开机启动/" class="btn">
+        阅读更多
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="http://lucent.blog/shell命令-crontab-php实现每天特定时间段内随机时间执行任务/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          shell命令+crontab+php实现每天特定时间段内随机时间执行任务
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-07-08</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        之前写过使用shell+crontab实现每天随机执行任务（linux使用crontab命令指定时间段内随机执行任务，但是后来想想容易出bug，
+比如：第一天执行是生成的随机时间要留给下次使用，如果第一次生成时间为8：01，那么第二天就会8...
+      </div>
+      <a href="http://lucent.blog/shell命令-crontab-php实现每天特定时间段内随机时间执行任务/" class="btn">
+        阅读更多
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="http://lucent.blog/linux使用crontab命令指定时间段内随机执行任务/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          linux使用crontab命令指定时间段内随机执行任务
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-07-07</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        crontab命令常见于Unix和类Unix的操作系统之中，用于设置周期性被执行的指令。该命令从标准输入设备读取指令，并将其存放于&quot;crontab&quot;文件中，以供之后读取和执行。
+cron是一个linux下 的定时执行工具...
+      </div>
+      <a href="http://lucent.blog/linux使用crontab命令指定时间段内随机执行任务/" class="btn">
+        阅读更多
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="http://lucent.blog/Linux安装screen命令/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          Linux安装screen命令
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-07-07</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        screen对于不支持SSH的虚拟主机没有作用，但是对于vps来说那可是用处大大的。
+不知道朋友们有没有在配置vps环境的时候出现突然中断或者要离开但是还没有配置完成的情况呢？
+我遇到很多回，往往已经快配置完成的时候出现短线等情况，那就要从...
+      </div>
+      <a href="http://lucent.blog/Linux安装screen命令/" class="btn">
+        阅读更多
+      </a>
+    </div>
+    
+  </div>
+  
+      </div>
+
+      
+  <div class="my-4 flex justify-between px-4 md:px-0">
+    
+      <a href="http://lucent.blog/" class="btn btn-white">
+        <i class="ri-arrow-left-line mr-4"></i>
+        上一页
+      </a>
+    
+    
+      <a href="http://lucent.blog/page/3/" class="btn btn-white">
+        下一页
+        <i class="ri-arrow-right-line ml-4"></i>
+      </a>
+    
+  </div>
+
+      <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  <a href="https://github.com/xhmily" target="_blank">呆呆木</a>
+</footer>
+
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="http://lucent.blog/media/scripts/main.js"></script>
+</body>
+
+</html>

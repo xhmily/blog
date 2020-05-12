@@ -1,0 +1,386 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Redis学习笔记（四）主从复制及启动哨兵模式 - Lucent&#39;s Blog</title>
+<link rel="shortcut icon" href="http://lucent.blog/favicon.ico">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
+<link rel="stylesheet" href="http://lucent.blog/media/css/tailwind.css">
+<link rel="stylesheet" href="http://lucent.blog/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Redis学习笔记（四）主从复制及启动哨兵模式 - Lucent&#39;s Blog - Atom Feed" href="http://lucent.blog/atom.xml">
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145467362-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-145467362-1');
+  </script>
+    
+
+  <meta name="description" content="Redis主从复制，主机数据更新后根据配置和策略，自动同步到备机的master/slaver机制，Master以写为主，Slave以读为主，优点是读写分离，容灾恢复。
+启动三台redis
+首先准备三个配置文件并分别配置三个不同端口，例如63..." />
+  <meta property="og:title" content="Redis学习笔记（四）主从复制及启动哨兵模式 - Lucent&#39;s Blog">
+  <meta property="og:description" content="Redis主从复制，主机数据更新后根据配置和策略，自动同步到备机的master/slaver机制，Master以写为主，Slave以读为主，优点是读写分离，容灾恢复。
+启动三台redis
+首先准备三个配置文件并分别配置三个不同端口，例如63..." />
+  <meta property="og:type" content="articles">
+  <meta property="og:url" content="http://lucent.blog/Redis学习笔记（四）主从复制及启动哨兵模式/" />
+  <meta property="og:image" content="http://lucent.blog/images/avatar.png">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:width" content="1200">
+  <meta name="twitter:title" content="Redis学习笔记（四）主从复制及启动哨兵模式 - Lucent&#39;s Blog">
+  <meta name="twitter:description" content="Redis主从复制，主机数据更新后根据配置和策略，自动同步到备机的master/slaver机制，Master以写为主，Slave以读为主，优点是读写分离，容灾恢复。
+启动三台redis
+首先准备三个配置文件并分别配置三个不同端口，例如63...">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="http://lucent.blog/Redis学习笔记（四）主从复制及启动哨兵模式/">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+ 
+  
+    <link rel="stylesheet" href="http://lucent.blog/media/css/prism-atom-dark.css">
+  
+
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+  
+</head>
+
+<body>
+  <div class="antialiased flex flex-col min-h-screen" id="app">
+    <a href="http://lucent.blog" class="fixed top-0 left-0 mt-4 bg-black text-white dark:text-gray-700 dark:bg-yellow-50 dark:hover:bg-black dark:hover:text-white inline-flex p-2 pl-8 hover:text-gray-700 hover:bg-yellow-50 font-bold z-10 transition-fast animated fadeInLeft">
+      Lucent&#39;s Blog
+    </a>
+    <div class="max-w-4xl w-full mx-auto">
+      <div class="shadow-box bg-white dark:bg-gray-600 rounded-lg pt-32 md:pt-64 px-4 md:px-8 pb-8 animated fadeIn mb-8">
+        <h1 class="text-5xl font-semibold leading-normal pb-8 mb-8 border-b-8 border-gray-700">
+          Redis学习笔记（四）主从复制及启动哨兵模式
+        </h1>
+        
+        <div class="mb-8 flex flex-wrap">
+          <div class="text-gray-400 text-sm mr-4">2019-07-08 · 4 min read</div>
+          
+            <a href="http://lucent.blog/redis/" class="text-gray-700 text-sm border-b-2 border-dotted border-gray-200 hover:border-gray-600 transition-all duration-100 inline-flex mr-2">
+              <i class="ri-hashtag"></i>
+              Redis
+            </a>
+          
+        </div>
+        <div class="markdown mb-8" v-pre>
+          <p>Redis主从复制，主机数据更新后根据配置和策略，自动同步到备机的master/slaver机制，Master以写为主，Slave以读为主，优点是读写分离，容灾恢复。</p>
+<h3 id="启动三台redis">启动三台redis</h3>
+<p>首先准备三个配置文件并分别配置三个不同端口，例如6379，6380，6381</p>
+<figure data-type="image" tabindex="1"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/27e80318e2d1c960c9e1b82cc5c31f6c.png" alt="1.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/f40441601ba0bdd9edc725fdd4073d80.png" alt="2.png" loading="lazy"></figure>
+<p>Pid文件名字，Log文件名字，Dump.rdb名字请根据需要自行设置</p>
+<p>然后分别启动三台redis</p>
+<figure data-type="image" tabindex="3"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/46393812ad848d9d6644013557fb7da0.png" alt="3.png" loading="lazy"></figure>
+<p>下图可见三台redis均启动成功</p>
+<figure data-type="image" tabindex="4"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/e497a8c339625bdb2b2be15a178e2a53.png" alt="4.png" loading="lazy"></figure>
+<p>下面分别连接三台redis并查看当前redis的状态</p>
+<figure data-type="image" tabindex="5"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/a4fa56a46d00b1757604a7874ff7bdc4.png" alt="5.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="6"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/3349d3274cc1ae756b93e336c3bc8614.png" alt="6.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="7"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/7acc36c6623ec8c57175c43df7337174.png" alt="7.png" loading="lazy"></figure>
+<p>可见，所有redis默认均为主库，并且没有从库连接</p>
+<h3 id="配置主从复制">配置主从复制</h3>
+<p>主从服务器的配置原则是：配从(库)不配主(库)，即在从库进行配置，主库不用配置</p>
+<p>注：无这里使用端口为6379的库作为主库，6380，6381库作为从库</p>
+<p>配置代码：</p>
+<pre><code>SLAVEOF 127.0.0.1 6379 #需要在两个从库中分别执行
+</code></pre>
+<p>再次查看三个库的状态：</p>
+<p><code>Info replication</code><br>
+主库</p>
+<figure data-type="image" tabindex="8"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/adec81fa42dfadb0e40042861b5efa02.png" alt="8.png" loading="lazy"></figure>
+<p>从库</p>
+<figure data-type="image" tabindex="9"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/7e583c8163247cbc78b81921a14411d1.png" alt="9.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="10"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/a4259fcb18c90eca1c0915de8a3dba41.png" alt="10.png" loading="lazy"></figure>
+<p>注：每次与master断开之后，都需要重新连接，除非你配置进redis.conf文件</p>
+<p>测试数据同步,在主库中执行：</p>
+<pre><code>set k1 v1 #从库是只读的，不能执行写操作
+</code></pre>
+<p>在两个从库中取出k1数据：</p>
+<pre><code>get k1
+</code></pre>
+<p>可见主从复制已经配置成功</p>
+<h3 id="知识点">知识点</h3>
+<p>1.上一个Slave可以是下一个slave的Master，Slave同样可以接收其他slaves的连接和同步请求，那么该slave作为了链条中下一个的master,可以有效减轻master的写压力</p>
+<p>2.中途变更转向:会清除之前的数据，重新建立拷贝最新的</p>
+<ol start="3">
+<li>主机shutdown或者挂掉后，从机不会自动上位成为主机，而是保持不变等待主机</li>
+</ol>
+<figure data-type="image" tabindex="11"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/3eccff218c84219e84bf5dcb3ca10d26.png" alt="11.png" loading="lazy"></figure>
+<p>当主机再次上线时会自动连接</p>
+<figure data-type="image" tabindex="12"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/7f1906dee03903145bb0810491252303.png" alt="12.png" loading="lazy"></figure>
+<p>4.反客为主，可以使用命令：SLAVEOF no one 使当前数据库停止与其他数据库的同步，转成主数据库，这种方式并不方便，因为需要手动操作</p>
+<h3 id="启动哨兵模式">启动哨兵模式</h3>
+<p>反客为主的自动版，能够后台监控主机是否故障，如果故障了根据投票数自动将从库转换为主库</p>
+<p>1.在你的配置文件目录下新建sentinel.conf文件，名字绝不能错,并填入如下内容</p>
+<pre><code>sentinel monitor 被监控库的名字(自定) 主库ip 端口 1  #示例，1 表示当票数大于1时即可成为主库
+sentinel monitor host6379 127.0.0.1 6379 1  #我的
+#一组sentinel能同时监控多个Master
+</code></pre>
+<p>2.开启哨兵</p>
+<pre><code>redis-sentinel /myredis/config/sentinel.conf  #配置文件路径请自行修改,启动成功如下图
+</code></pre>
+<figure data-type="image" tabindex="13"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/020c2e2a8a71d380a24e33c0055ec08e.png" alt="13.png" loading="lazy"></figure>
+<p>3.当主库发生故障</p>
+<figure data-type="image" tabindex="14"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/44a3da883658255212e93bf97afd97e2.png" alt="14.png" loading="lazy"></figure>
+<p>哨兵发现问题，开始进行投票，选出新主库</p>
+<figure data-type="image" tabindex="15"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/a46d4fe35b8a26a61e06064f1aabed05.png" alt="15.png" loading="lazy"></figure>
+<p>最终端口为6381的库成为主库，查看此时库的状态</p>
+<figure data-type="image" tabindex="16"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/8656628abc73d39c9fc0b2bf3e4b7107.png" alt="16.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="17"><img src="https://depth.team/wp-content/uploads/2018/09/Snipaste_2018-09-30_16-53-52.png" alt="img" loading="lazy"></figure>
+<p>4.如果此时库6379恢复上线，不会发生主库冲突，哨兵会将6379连接至新的主库</p>
+<figure data-type="image" tabindex="18"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/fba2b883ad0d4e55e5524f44cf89167f.png" alt="17.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="19"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/4a0167d623ad716bc20b03e81f374489.png" alt="18.png" loading="lazy"></figure>
+<p>5.如果需要让哨兵后台运行，可以使用screen命令</p>
+<h3 id="主从复制的缺点">主从复制的缺点</h3>
+<p>由于所有的写操作都是先在Master上操作，然后同步更新到Slave上，所以从Master同步到Slave机器有一定的延迟，当系统很繁忙的时候，延迟问题会更加严重，Slave机器数量的增加也会使这个问题更加严重。</p>
+
+        </div>
+        <!-- Share to Twitter, Weibo, Telegram -->
+        <div class="flex items-center">
+          <div class="mr-4 flex items-center">
+            <i class="ri-share-forward-line text-gray-500"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-blue-500 hover:bg-blue-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTwitter">
+            <i class="ri-twitter-line"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-red-500 hover:bg-red-100 dark:hover:bg-gray-600 inline-flex" @click="shareToWeibo">
+            <i class="ri-weibo-line"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-indigo-500 hover:bg-indigo-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTelegram">
+            <i class="ri-telegram-line"></i>
+          </div>
+        </div>
+      </div>
+
+      
+
+      
+        <div id="vlaine-comment"></div>
+      
+
+      <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  <a href="https://github.com/xhmily" target="_blank">呆呆木</a>
+</footer>
+    </div>
+
+    <!-- TOC Container -->
+    <div class="fixed right-0 bottom-0 mb-16 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white dark:bg-gray-500 dark:text-gray-200 hover:shadow-lg transition-all animated fadeInRight" @click="showToc = true">
+      <i class="ri-file-list-line"></i>
+    </div>
+
+    <div class="fixed right-0 top-0 bottom-0 overflow-y-auto w-64 bg-white dark:bg-gray-800 p-4 border-l border-gray-100 dark:border-gray-600 z-10 transition-fast" :class="{ '-mr-64': !showToc }">
+      <div class="flex mb-4 justify-end">
+        <div class="w-8 h-8 inline-flex justify-center items-center rounded-full cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 transition-fast" @click="showToc = false">
+          <i class="ri-close-line text-lg"></i>
+        </div>
+      </div>
+      <div class="post-toc-container">
+        <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E5%90%AF%E5%8A%A8%E4%B8%89%E5%8F%B0redis">启动三台redis</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6">配置主从复制</a></li>
+<li><a href="#%E7%9F%A5%E8%AF%86%E7%82%B9">知识点</a></li>
+<li><a href="#%E5%90%AF%E5%8A%A8%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F">启动哨兵模式</a></li>
+<li><a href="#%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E7%9A%84%E7%BC%BA%E7%82%B9">主从复制的缺点</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+    </div>
+
+    <!-- Back to top -->
+    <div class="fixed right-0 bottom-0 mb-4 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white hover:shadow-lg transition-all dark:bg-gray-500 dark:text-gray-200" @click="backToUp" v-show="scrolled">
+      <i class="ri-arrow-up-line"></i>
+    </div>
+  </div>
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+  <!-- Background of PhotoSwipe. 
+        It's a separate element as animating opacity is faster than rgba(). -->
+  <div class="pswp__bg">
+  </div>
+  <!-- Slides wrapper with overflow:hidden. -->
+  <div class="pswp__scroll-wrap">
+    <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+    <div class="pswp__container">
+      <div class="pswp__item">
+      </div>
+      <div class="pswp__item">
+      </div>
+      <div class="pswp__item">
+      </div>
+    </div>
+    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+    <div class="pswp__ui pswp__ui--hidden">
+      <div class="pswp__top-bar">
+        <!--  Controls are self-explanatory. Order can be changed. -->
+        <div class="pswp__counter">
+        </div>
+        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+        <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+        <!-- element will get class pswp__preloader--active when preloader is running -->
+        <div class="pswp__preloader">
+          <div class="pswp__preloader__icn">
+            <div class="pswp__preloader__cut">
+              <div class="pswp__preloader__donut">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+        <div class="pswp__share-tooltip">
+        </div>
+      </div>
+      <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+      </button>
+      <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+      </button>
+      <div class="pswp__caption">
+        <div class="pswp__caption__center">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="http://lucent.blog/media/scripts/main.js"></script>
+  
+  <!-- Code Highlight -->
+  
+    <script src="http://lucent.blog/media/prism.js"></script>
+    <script>
+      Prism.highlightAll()
+    </script>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+  <script>
+    //拿到预览框架，也就是上面的html代码
+    var pswpElement = document.querySelectorAll('.pswp')[0];
+    //定义图片数组变量
+    var imgitems;
+    /**
+    * 用于显示预览界面
+    * @param index 图片数组下标
+    */
+    function viewImg(index) {
+      //其它选项这里不做过多阐述，详情见官网
+      var pswpoptions = {
+        index: parseInt(index, 10), // 开始幻灯片索引。0是第一张幻灯片。必须是整数，而不是字符串。
+        bgOpacity: 0.7, // 背景透明度，0-1
+        maxSpreadZoom: 3, // 缩放级别，不要太大
+      };
+      //初始化并打开PhotoSwipe，pswpElement对应上面预览框架，PhotoSwipeUI_Default为皮肤，imgitems为图片数组，pswpoptions为选项
+      var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, imgitems, pswpoptions);
+      gallery.init()
+    }
+    /**
+    * 用于添加图片点击事件
+    * @param img 图片元素
+    * @param index 所属下标（在imgitems中的位置）
+    */
+    function addImgClick(img, index) {
+      img.onclick = function() {
+        viewImg(index)
+      }
+    }
+    /**
+    * 轮询所有图片，获取src、width、height等数据，加入imgitems，并给图片元素添加事件
+    * 最好在onload中执行该方法，本站因放在最底部，所以直接初始化
+    * 异步加载图片可在图片元素创建完成后调用此方法
+    */
+    function initImg() {
+      //重置图片数组
+      imgitems = [];
+      //查找class:markdown 下的所有img元素并遍历
+      var imgs = document.querySelectorAll('.markdown img');
+      for (var i = 0; i < imgs.length; i++) {
+        var img = imgs[i];
+        //本站相册初始为loading图片，真实图片放在data-src
+        var ds = img.getAttribute("data-src");
+        //创建image对象，用于获取图片宽高
+        var imgtemp = new Image();
+        //判断是否存在data-src
+        if (ds != null && ds.length > 0) {
+          imgtemp.src = ds
+        } else {
+          imgtemp.src = img.src
+        }
+        //判断是否存在缓存
+        if (imgtemp.complete) {
+          var imgobj = {
+            "src": imgtemp.src,
+            "w": imgtemp.width,
+            "h": imgtemp.height,
+          };
+          imgitems[i] = imgobj;
+          addImgClick(img, i);
+        } else {
+          console.log('进来了2')
+          imgtemp.index = i;
+          imgtemp.img = img;
+          imgtemp.onload = function() {
+            var imgobj = {
+              "src": this.src,
+              "w": this.width,
+              "h": this.height,
+            };
+            //不要使用push，因为onload前后顺序会不同
+            imgitems[this.index] = imgobj
+            //添加点击事件
+            addImgClick(this.img, this.index);
+          }
+        }
+      }
+    }
+    //初始化
+    initImg();
+  </script>
+  
+    <script type="application/javascript" src="https://unpkg.com/valine"></script>
+<script type="application/javascript">
+  new Valine({
+    el: '#vlaine-comment',
+    appId: 'iQWmg8JiBFvD7MzgWKzI4oTd-MdYXbMMI',
+    appKey: 'RhRbHAFcwJhYGNLxVgdtw8lj',
+    pageSize: 10,
+    notify: true,
+    avatar: 'mp',
+    verify: true,
+    placeholder: '来都来了，不妨评论一下',
+    visitor: false,
+    highlight: true,
+    recordIP: true,
+  })
+</script>
+  
+  
+</body>
+
+</html>

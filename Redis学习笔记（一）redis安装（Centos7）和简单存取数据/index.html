@@ -1,0 +1,382 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Redis学习笔记（一）redis安装（Centos7）和简单存取数据 - Lucent&#39;s Blog</title>
+<link rel="shortcut icon" href="http://lucent.blog/favicon.ico">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
+<link rel="stylesheet" href="http://lucent.blog/media/css/tailwind.css">
+<link rel="stylesheet" href="http://lucent.blog/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Redis学习笔记（一）redis安装（Centos7）和简单存取数据 - Lucent&#39;s Blog - Atom Feed" href="http://lucent.blog/atom.xml">
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145467362-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-145467362-1');
+  </script>
+    
+
+  <meta name="description" content="redis是非关系型数据库（NoSql），NoSQL(NoSQL = Not Only SQL )，意即“不仅仅是SQL”，泛指非关系型的数据库。随着互联网web2.0网站的兴起，传统的关系数据库在应付web2.0网站，特别是超大规模和高并..." />
+  <meta property="og:title" content="Redis学习笔记（一）redis安装（Centos7）和简单存取数据 - Lucent&#39;s Blog">
+  <meta property="og:description" content="redis是非关系型数据库（NoSql），NoSQL(NoSQL = Not Only SQL )，意即“不仅仅是SQL”，泛指非关系型的数据库。随着互联网web2.0网站的兴起，传统的关系数据库在应付web2.0网站，特别是超大规模和高并..." />
+  <meta property="og:type" content="articles">
+  <meta property="og:url" content="http://lucent.blog/Redis学习笔记（一）redis安装（Centos7）和简单存取数据/" />
+  <meta property="og:image" content="http://lucent.blog/images/avatar.png">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:width" content="1200">
+  <meta name="twitter:title" content="Redis学习笔记（一）redis安装（Centos7）和简单存取数据 - Lucent&#39;s Blog">
+  <meta name="twitter:description" content="redis是非关系型数据库（NoSql），NoSQL(NoSQL = Not Only SQL )，意即“不仅仅是SQL”，泛指非关系型的数据库。随着互联网web2.0网站的兴起，传统的关系数据库在应付web2.0网站，特别是超大规模和高并...">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="http://lucent.blog/Redis学习笔记（一）redis安装（Centos7）和简单存取数据/">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+ 
+  
+    <link rel="stylesheet" href="http://lucent.blog/media/css/prism-atom-dark.css">
+  
+
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+  
+</head>
+
+<body>
+  <div class="antialiased flex flex-col min-h-screen" id="app">
+    <a href="http://lucent.blog" class="fixed top-0 left-0 mt-4 bg-black text-white dark:text-gray-700 dark:bg-yellow-50 dark:hover:bg-black dark:hover:text-white inline-flex p-2 pl-8 hover:text-gray-700 hover:bg-yellow-50 font-bold z-10 transition-fast animated fadeInLeft">
+      Lucent&#39;s Blog
+    </a>
+    <div class="max-w-4xl w-full mx-auto">
+      <div class="shadow-box bg-white dark:bg-gray-600 rounded-lg pt-32 md:pt-64 px-4 md:px-8 pb-8 animated fadeIn mb-8">
+        <h1 class="text-5xl font-semibold leading-normal pb-8 mb-8 border-b-8 border-gray-700">
+          Redis学习笔记（一）redis安装（Centos7）和简单存取数据
+        </h1>
+        
+        <div class="mb-8 flex flex-wrap">
+          <div class="text-gray-400 text-sm mr-4">2019-07-08 · 3 min read</div>
+          
+            <a href="http://lucent.blog/redis/" class="text-gray-700 text-sm border-b-2 border-dotted border-gray-200 hover:border-gray-600 transition-all duration-100 inline-flex mr-2">
+              <i class="ri-hashtag"></i>
+              Redis
+            </a>
+          
+        </div>
+        <div class="markdown mb-8" v-pre>
+          <p>redis是非关系型数据库（NoSql），NoSQL(NoSQL = Not Only SQL )，意即“不仅仅是SQL”，泛指非关系型的数据库。随着互联网web2.0网站的兴起，传统的关系数据库在应付web2.0网站，特别是超大规模和高并发的SNS类型的web2.0纯动态网站已经显得力不从心，暴露了很多难以克服的问题，而非关系型的数据库则由于其本身的特点得到了非常迅速的发展。NoSQL数据库的产生就是为了解决大规模数据集合多重数据种类带来的挑战，尤其是大数据应用难题，包括超大规模数据的存储。</p>
+<h3 id="redis的安装">redis的安装</h3>
+<p>1.创建myredis文件夹</p>
+<pre><code>mkdir myredis
+</code></pre>
+<p>2.下载redis最新版https://redis.io/</p>
+<p>可以直接下载再传到Centos系统中，也可以在Centos中使用如下命令直接下载</p>
+<pre><code>cd myredis #进入文件夹
+wget http://download.redis.io/releases/redis-4.0.11.tar.gz  #官网获取的最新版下载地址
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/93208aaf8c9e9eda078781d97446e5df.png" alt="1.png" loading="lazy"></figure>
+<p>解压文件</p>
+<pre><code>tar -zxvf redis-4.0.11.tar.gz
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/25903b2c36c69056aef412f63c16ac69.png" alt="2.png" loading="lazy"></figure>
+<p>安装gcc（redis是用C语言开发的，需要gcc编译）</p>
+<pre><code>yum install gcc-c++
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/e650d043a789e8145a8fa2924b9c1ac0.png" alt="3.png" loading="lazy"></figure>
+<p>进入 redis-4.0.11 文件夹并安装</p>
+<pre><code>cd redis-4.0.11
+</code></pre>
+<figure data-type="image" tabindex="4"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/c4eaec43d4e699459ff52749c4883306.png" alt="4.png" loading="lazy"></figure>
+<pre><code>make  #编译
+</code></pre>
+<figure data-type="image" tabindex="5"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/aa08428fb3d6fe9e0db2974a95c46a74.png" alt="5.png" loading="lazy"></figure>
+<pre><code>make install  #安装
+</code></pre>
+<figure data-type="image" tabindex="6"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/28574d869b698bf640bc38e4fe298c47.png" alt="6.png" loading="lazy"></figure>
+<p>配置redis</p>
+<figure data-type="image" tabindex="7"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/71d669562446b3f742908e02ef00eb7f.png" alt="7.png" loading="lazy"></figure>
+<pre><code>vi redis.conf
+#将GENERAL中 daemonize 设置为yes
+</code></pre>
+<figure data-type="image" tabindex="8"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/ef49c702af0dcbbd1b8240e42c96095d.png" alt="8.png" loading="lazy"></figure>
+<h3 id="启动redis">启动redis</h3>
+<p>进入 /root/myredis/redis-4.0.11/src 目录</p>
+<pre><code>cd /root/myredis/redis-4.0.11/src
+</code></pre>
+<figure data-type="image" tabindex="9"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/4754f06480636416931deb80b67cebff.png" alt="9.png" loading="lazy"></figure>
+<p>启动redis</p>
+<pre><code>redis-server ../redis.conf
+</code></pre>
+<figure data-type="image" tabindex="10"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/176154826b9137d9058a207706a02c01.png" alt="10.png" loading="lazy"></figure>
+<p>查看进程是否启动</p>
+<pre><code>ps -ef|grep redis
+</code></pre>
+<figure data-type="image" tabindex="11"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/832ef01f844d7c0904152da427aa9464.png" alt="11.png" loading="lazy"></figure>
+<p>可见默认端口是 <strong>6379</strong> 服务端已经启动</p>
+<h3 id="简单的数据存取">简单的数据存取</h3>
+<p>在redis中数据是以键值对（Key-value）形式存储的</p>
+<p>启动客户端</p>
+<pre><code>redis-cli
+</code></pre>
+<figure data-type="image" tabindex="12"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/8a615f99da40dc273a8c72ed047ec621.png" alt="Snipaste_2018-09-19_23-18-04.png" loading="lazy"></figure>
+<p>存数据</p>
+<pre><code>set myFirstData hello-world
+</code></pre>
+<figure data-type="image" tabindex="13"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/9765d9e2bd31b990e98f7c693bbcdb55.png" alt="12.png" loading="lazy"></figure>
+<p>取数据</p>
+<pre><code>get myFirstData
+</code></pre>
+<p>到这里，如果redis存取正常，那么恭喜你，安装完成！</p>
+<h3 id="退出客户端">退出客户端</h3>
+<pre><code>exit
+</code></pre>
+<h3 id="关闭服务端">关闭服务端</h3>
+<pre><code>redis-cli -p 6379 shutdown
+# -p为可选项 默认6379，多个redis运行的情况下需要指明要关闭redis的端口
+</code></pre>
+<figure data-type="image" tabindex="14"><img src="https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/d6f31ecc534d517806fa020389a7454c.png" alt="13.png" loading="lazy"></figure>
+<p>可见redis已经被关闭</p>
+
+        </div>
+        <!-- Share to Twitter, Weibo, Telegram -->
+        <div class="flex items-center">
+          <div class="mr-4 flex items-center">
+            <i class="ri-share-forward-line text-gray-500"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-blue-500 hover:bg-blue-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTwitter">
+            <i class="ri-twitter-line"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-red-500 hover:bg-red-100 dark:hover:bg-gray-600 inline-flex" @click="shareToWeibo">
+            <i class="ri-weibo-line"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-indigo-500 hover:bg-indigo-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTelegram">
+            <i class="ri-telegram-line"></i>
+          </div>
+        </div>
+      </div>
+
+      
+
+      
+        <div id="vlaine-comment"></div>
+      
+
+      <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  <a href="https://github.com/xhmily" target="_blank">呆呆木</a>
+</footer>
+    </div>
+
+    <!-- TOC Container -->
+    <div class="fixed right-0 bottom-0 mb-16 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white dark:bg-gray-500 dark:text-gray-200 hover:shadow-lg transition-all animated fadeInRight" @click="showToc = true">
+      <i class="ri-file-list-line"></i>
+    </div>
+
+    <div class="fixed right-0 top-0 bottom-0 overflow-y-auto w-64 bg-white dark:bg-gray-800 p-4 border-l border-gray-100 dark:border-gray-600 z-10 transition-fast" :class="{ '-mr-64': !showToc }">
+      <div class="flex mb-4 justify-end">
+        <div class="w-8 h-8 inline-flex justify-center items-center rounded-full cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 transition-fast" @click="showToc = false">
+          <i class="ri-close-line text-lg"></i>
+        </div>
+      </div>
+      <div class="post-toc-container">
+        <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#redis%E7%9A%84%E5%AE%89%E8%A3%85">redis的安装</a></li>
+<li><a href="#%E5%90%AF%E5%8A%A8redis">启动redis</a></li>
+<li><a href="#%E7%AE%80%E5%8D%95%E7%9A%84%E6%95%B0%E6%8D%AE%E5%AD%98%E5%8F%96">简单的数据存取</a></li>
+<li><a href="#%E9%80%80%E5%87%BA%E5%AE%A2%E6%88%B7%E7%AB%AF">退出客户端</a></li>
+<li><a href="#%E5%85%B3%E9%97%AD%E6%9C%8D%E5%8A%A1%E7%AB%AF">关闭服务端</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+    </div>
+
+    <!-- Back to top -->
+    <div class="fixed right-0 bottom-0 mb-4 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white hover:shadow-lg transition-all dark:bg-gray-500 dark:text-gray-200" @click="backToUp" v-show="scrolled">
+      <i class="ri-arrow-up-line"></i>
+    </div>
+  </div>
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+  <!-- Background of PhotoSwipe. 
+        It's a separate element as animating opacity is faster than rgba(). -->
+  <div class="pswp__bg">
+  </div>
+  <!-- Slides wrapper with overflow:hidden. -->
+  <div class="pswp__scroll-wrap">
+    <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+    <div class="pswp__container">
+      <div class="pswp__item">
+      </div>
+      <div class="pswp__item">
+      </div>
+      <div class="pswp__item">
+      </div>
+    </div>
+    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+    <div class="pswp__ui pswp__ui--hidden">
+      <div class="pswp__top-bar">
+        <!--  Controls are self-explanatory. Order can be changed. -->
+        <div class="pswp__counter">
+        </div>
+        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+        <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+        <!-- element will get class pswp__preloader--active when preloader is running -->
+        <div class="pswp__preloader">
+          <div class="pswp__preloader__icn">
+            <div class="pswp__preloader__cut">
+              <div class="pswp__preloader__donut">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+        <div class="pswp__share-tooltip">
+        </div>
+      </div>
+      <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+      </button>
+      <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+      </button>
+      <div class="pswp__caption">
+        <div class="pswp__caption__center">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="http://lucent.blog/media/scripts/main.js"></script>
+  
+  <!-- Code Highlight -->
+  
+    <script src="http://lucent.blog/media/prism.js"></script>
+    <script>
+      Prism.highlightAll()
+    </script>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+  <script>
+    //拿到预览框架，也就是上面的html代码
+    var pswpElement = document.querySelectorAll('.pswp')[0];
+    //定义图片数组变量
+    var imgitems;
+    /**
+    * 用于显示预览界面
+    * @param index 图片数组下标
+    */
+    function viewImg(index) {
+      //其它选项这里不做过多阐述，详情见官网
+      var pswpoptions = {
+        index: parseInt(index, 10), // 开始幻灯片索引。0是第一张幻灯片。必须是整数，而不是字符串。
+        bgOpacity: 0.7, // 背景透明度，0-1
+        maxSpreadZoom: 3, // 缩放级别，不要太大
+      };
+      //初始化并打开PhotoSwipe，pswpElement对应上面预览框架，PhotoSwipeUI_Default为皮肤，imgitems为图片数组，pswpoptions为选项
+      var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, imgitems, pswpoptions);
+      gallery.init()
+    }
+    /**
+    * 用于添加图片点击事件
+    * @param img 图片元素
+    * @param index 所属下标（在imgitems中的位置）
+    */
+    function addImgClick(img, index) {
+      img.onclick = function() {
+        viewImg(index)
+      }
+    }
+    /**
+    * 轮询所有图片，获取src、width、height等数据，加入imgitems，并给图片元素添加事件
+    * 最好在onload中执行该方法，本站因放在最底部，所以直接初始化
+    * 异步加载图片可在图片元素创建完成后调用此方法
+    */
+    function initImg() {
+      //重置图片数组
+      imgitems = [];
+      //查找class:markdown 下的所有img元素并遍历
+      var imgs = document.querySelectorAll('.markdown img');
+      for (var i = 0; i < imgs.length; i++) {
+        var img = imgs[i];
+        //本站相册初始为loading图片，真实图片放在data-src
+        var ds = img.getAttribute("data-src");
+        //创建image对象，用于获取图片宽高
+        var imgtemp = new Image();
+        //判断是否存在data-src
+        if (ds != null && ds.length > 0) {
+          imgtemp.src = ds
+        } else {
+          imgtemp.src = img.src
+        }
+        //判断是否存在缓存
+        if (imgtemp.complete) {
+          var imgobj = {
+            "src": imgtemp.src,
+            "w": imgtemp.width,
+            "h": imgtemp.height,
+          };
+          imgitems[i] = imgobj;
+          addImgClick(img, i);
+        } else {
+          console.log('进来了2')
+          imgtemp.index = i;
+          imgtemp.img = img;
+          imgtemp.onload = function() {
+            var imgobj = {
+              "src": this.src,
+              "w": this.width,
+              "h": this.height,
+            };
+            //不要使用push，因为onload前后顺序会不同
+            imgitems[this.index] = imgobj
+            //添加点击事件
+            addImgClick(this.img, this.index);
+          }
+        }
+      }
+    }
+    //初始化
+    initImg();
+  </script>
+  
+    <script type="application/javascript" src="https://unpkg.com/valine"></script>
+<script type="application/javascript">
+  new Valine({
+    el: '#vlaine-comment',
+    appId: 'iQWmg8JiBFvD7MzgWKzI4oTd-MdYXbMMI',
+    appKey: 'RhRbHAFcwJhYGNLxVgdtw8lj',
+    pageSize: 10,
+    notify: true,
+    avatar: 'mp',
+    verify: true,
+    placeholder: '来都来了，不妨评论一下',
+    visitor: false,
+    highlight: true,
+    recordIP: true,
+  })
+</script>
+  
+  
+</body>
+
+</html>

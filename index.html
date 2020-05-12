@@ -1,192 +1,388 @@
-<html>
-
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-<meta name="description" content="" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>
-    Lucent
-</title>
-<link rel="shortcut icon" href="https://lucent.blog/favicon.ico?v=1589270099667">
-<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
-<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
-<link rel="stylesheet" href="https://lucent.blog/styles/main.css">
-<!-- js -->
-<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://lucent.blog/media/js/jquery.sticky-sidebar.min.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Lucent&#39;s Blog</title>
+<link rel="shortcut icon" href="http://lucent.blog/favicon.ico">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
+<link rel="stylesheet" href="http://lucent.blog/media/css/tailwind.css">
+<link rel="stylesheet" href="http://lucent.blog/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Lucent&#39;s Blog - Atom Feed" href="http://lucent.blog/atom.xml">
 
 
-</head>
-
-<body>
-    <div class="main">
-        <div class="header">
-    <div class="nav">
-        <div class="logo">
-            <a href="https://lucent.blog">
-                <img class="avatar" src="https://lucent.blog/images/avatar.png?v=1589270099667" alt="">
-            </a>
-            <div class="site-title">
-                <h1>
-                    Lucent
-                </h1>
-            </div>
-        </div>
-        <span class="menu-btn fa fa-align-justify"></span>
-        <div class="menu-container">
-            <ul>
-                
-                    
-                            <li>
-                                <a href="/" class="menu">
-                                    首页
-                                </a>
-                            </li>
-                            
-                                
-                    
-                            <li>
-                                <a href="/archives" class="menu">
-                                    归档
-                                </a>
-                            </li>
-                            
-                                
-                    
-                            <li>
-                                <a href="/tags" class="menu">
-                                    标签
-                                </a>
-                            </li>
-                            
-                                
-                    
-                            <li>
-                                <a href="/post/about" class="menu">
-                                    关于
-                                </a>
-                            </li>
-                            
-                                
-            </ul>
-        </div>
-    </div>
-</div>
-
-<script>
-    $(document).ready(function() {
-        $(".menu-btn").click(function() {
-            $(".menu-container").slideToggle();
-        });
-        $(window).resize(function() {
-
-            if (window.matchMedia('(min-width: 960px)').matches) {
-                $(".menu-container").css('display', 'block')
-            } else {
-                $(".menu-container").css('display', 'none')
-            }
-
-        });
-    });
-</script>
-
-            <div id="main-content" class="post-container main-container">
-                <div id="content" class="main-container-left">
-                    
-        
-            <article class="post i-card">
-                <h2 class="post-title">
-                    <a href="https://lucent.blog/post/hello-gridea/">
-                        Hello Gridea
-                    </a>
-                </h2>
-                <div class="post-info">
-                    <time class="post-time">2018-12-12</time>
-                    
-                        <a href="https://lucent.blog/tag/l-8QRtzHX/" class="post-tag i-tag
-                            i-tag-other_2">
-            #Gridea
-        </a>
-                        
-                </div>
-                <div class="post-article">
-                    
-                            <div class="post-content">
-                                
-                                        <div class="post-content-content">
-                                            
-👏  欢迎使用 Gridea ！
-1233
-
-✍️  Gridea 一个静态博客写作客户端。你可...
-                                        </div>
-                                        
-                                            <a class="btn btn-text" href="https://lucent.blog/post/hello-gridea/">阅读更多 ~</a>
-                            </div>
-                </div>
-            </article>
-            
-                <!-- 翻页 -->
-                
-                </div>
-                <!--  -->
-                <div class="main-container-middle"></div>
-                <!--  -->
-                <div id="sidebar" class="main-container-right">
-
-                    <!-- 个人信息 -->
-                    
-    <div class="id_card i-card">
-        <div class="id_card-avatar" style="background-image: url(https://lucent.blog/images/avatar.png?v=1589270099667)">
-        </div>
-        <h1 class="id_card-title">
-            Lucent
-        </h1>
-        <h2 class="id_card-description">
-            温故而知新
-        </h2>
-        <!--  -->
-        <div class="id_card-sns">
-            <!-- github -->
-            
-                    <!-- twitter -->
-                    
-                            <!-- weibo -->
-                            
-                                    <!-- facebook -->
-                                    
-
-        </div>
-    </div>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145467362-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-145467362-1');
+  </script>
     
 
-                        <!-- 公告栏 -->
-                        
+  <meta name="description" content="我是一个Java程序员，Bug开发者，这里是我的个人博客" />
+</head>
+<body>
+  <div class="antialiased flex flex-col min-h-screen" id="app">
 
-                </div>
-            </div>
-
-
-
-            <div class="site-footer">
-  Powered by <a href="https://github.com/xhmily" target="_blank">呆呆木</a> | 
-  <a class="rss" href="https://lucent.blog/atom.xml" target="_blank">RSS</a>
+    <div class="nav py-3 md:py-8 fixed w-full z-10 bg-gray-50 dark:bg-gray-700 transition-all duration-300" :class="{ 'scroll': scrolled }">
+  <div class="flex justify-end px-4">
+    <div class="w-8 h-8 flex justify-center items-center rounded-full md:hidden" @click="showMenu = !showMenu">
+      <i class="ri-close-line" v-show="showMenu"></i>
+      <i class="ri-menu-3-line" v-show="!showMenu"></i>
+    </div>
+  </div>
+  <nav class="max-w-4xl w-full mx-auto text-center flex flex-col md:flex-row justify-center md:block" :class="`${ showMenu ? 'block' : 'hidden' }`">
+    
+      <a href="/" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+        首页
+      </a>
+    
+      <a href="/archives" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+        归档
+      </a>
+    
+      <a href="/tags" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+        标签
+      </a>
+    
+      <a href="http://lucent.blog/about" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+        关于
+      </a>
+    
+    <a href="http://lucent.blog/atom.xml" target="_blank" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      RSS
+    </a>
+  </nav>
 </div>
 
-<script>
-  hljs.initHighlightingOnLoad()
-</script>
+    <div class="max-w-4xl w-full mx-auto ">
+      
+        <header class="flex py-16 md:py-32 mt-12 flex-col md:flex-row px-4 md:px-0 animated fadeIn">
+  <div class="flex-1 order-2 md:order-1 md:pr-16">
+    <div class="text-4xl font-bold text-center md:text-left">
+      Lucent&#39;s Blog
+    </div>
+    <div class="text-xl text-gray-500 mt-4 text-center md:text-left">
+      我是一个Java程序员，Bug开发者，这里是我的个人博客
+    </div>
+    
+      <div class="mt-8 text-center md:text-left">
+        <a
+          href="/about" 
+          arget="_blank"
+          class="text-sm bg-yellow-50 dark:bg-indigo-500 dark:text-gray-700 font-semibold px-4 py-2 inline-block yellow-btn transition-fast rounded"
+        >关于我</a>
+      </div>
+    
+    
+  </div>
+  <div class="md:mx-8 flex-shrink-0 self-start rounded-full border-4 border-dotted border-transparent hover:border-yellow-50 p-2 w-32 h-32 order-1 md:order-2 mx-auto s3-dotted">
+    <img class="rounded-full object-cover" src="http://lucent.blog/images/avatar.png?v=1589276685142" alt="Lucent&#39;s Blog" width="100%" height="100%">
+  </div>
+</header>
+      
+
+      <div class="shadow-box bg-white dark:bg-gray-600 border-gray-300 rounded-none md:rounded-lg -mx-1 md:mx-0 md:px-0">
+        
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="http://lucent.blog/关于奇游加速器需要验证码的解决方案/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          关于奇游加速器需要验证码的解决方案
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2020-01-07</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        如果您在登录奇游加速器时遇到需要手机验证码的情况，请参考如下操作：
+1.找到您的奇游加速器快捷方式
+
+2.鼠标右击，选择属性
+
+3.找到“目标”输入框
+
+4.在 QeeYou.exe&quot; 后加上  --disable-sms-ver...
+      </div>
+      <a href="http://lucent.blog/关于奇游加速器需要验证码的解决方案/" class="btn">
+        阅读更多
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="http://lucent.blog/提货系统预览/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          提货系统预览
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-10-17</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        激活管理员
+
+接单
+
+激活司机
+
+司机提货
+
+客户查询-已提货
+
+提交快递
+
+客户查询-已派送
+
+结单
+
+客户查询-已结单
+
+强制结单
+
+客户查询-强制结单
+
+测试账号
+
+
+
+角色
+名字
+电话
+
+
+
+
+管理员
+随意
+110
+
+
+司机
+随意
+...
+      </div>
+      <a href="http://lucent.blog/提货系统预览/" class="btn">
+        阅读更多
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="http://lucent.blog/vue实现内嵌二维码微信登录/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          vue实现内嵌二维码微信登录
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-09-23</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        前提
+使用微信登录必须在微信开放平台注册并完成开发者认证，创建应用完成后即可使用微信登录接口
+登录后按如下进行创建：
+
+应用审核通过后即可查看appid
+在vue页面中使用微信内嵌二维码登录
+首先在index.html中引入：
+&lt;sc...
+      </div>
+      <a href="http://lucent.blog/vue实现内嵌二维码微信登录/" class="btn">
+        阅读更多
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="http://lucent.blog/微信小程序获取用户UnionId/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          微信小程序获取用户UnionId
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-09-19</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        如果开发者拥有多个移动应用、网站应用、和公众帐号（包括小程序），可通过 UnionID 来区分用户的唯一性，因为只要是同一个微信开放平台帐号下的移动应用、网站应用和公众帐号（包括小程序），用户的 UnionID 是唯一的。换句话说，同一用户...
+      </div>
+      <a href="http://lucent.blog/微信小程序获取用户UnionId/" class="btn">
+        阅读更多
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="http://lucent.blog/element-ui-日期选择器默认时间少一天/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          解决element ui 日期选择器默认时间少一天的问题
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-09-05</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        今天在使用element-ui 的日期选择器的时候出现一个奇怪的问题，选中的日期在获取值之后会比选中的日期少一天：
+&lt;el-date-picker
+        class=&quot;mr10&quot;
+        v-mo...
+      </div>
+      <a href="http://lucent.blog/element-ui-日期选择器默认时间少一天/" class="btn">
+        阅读更多
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="http://lucent.blog/微信小程序头像样式/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          微信小程序头像样式
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-08-20</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        效果：
+
+代码:
+  &lt;view class=&quot;userinfo&quot;&gt;
+    &lt;view class=&quot;userinfo-avatar&quot;&gt;
+      &lt;open-dat...
+      </div>
+      <a href="http://lucent.blog/微信小程序头像样式/" class="btn">
+        阅读更多
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="http://lucent.blog/解决Flash被禁用的问题/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          解决Flash被禁用的问题
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-08-09</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        如果你在使用订单系统的过程中遇到类似如下的问题：
+
+
+请点击上图中的按钮，一般谷歌浏览器左上角都会弹出提示框询问是否启用flash，点击允许即可。
+如果未弹出任何提示，请按以下步骤设置：
+1.打开谷歌浏览器的设置
+
+2.拉到最下，点击高级
+...
+      </div>
+      <a href="http://lucent.blog/解决Flash被禁用的问题/" class="btn">
+        阅读更多
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="http://lucent.blog/可能会用到的cmd命令/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          可能会用到的cmd命令
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-08-07</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        查找对应的端口占用的进程，找到占用端口对应的程序的PID号：
+netstat  -aon|findstr  &quot;8080&quot; 
+
+根据PID号找到对应的程序 ，找到对应的程序名：
+tasklist|findstr &quot...
+      </div>
+      <a href="http://lucent.blog/可能会用到的cmd命令/" class="btn">
+        阅读更多
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="http://lucent.blog/java执行cmd命令工具类-windows/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          java执行cmd命令工具类(windows)
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-08-06</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        执行windows的cmd命令工具类
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+/**
+ * 执行windows的cmd命令工具类
+ *
+ */
+pu...
+      </div>
+      <a href="http://lucent.blog/java执行cmd命令工具类-windows/" class="btn">
+        阅读更多
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="http://lucent.blog/Jquery实现一键全选-反选-不选/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          Jquery实现一键全选/反选/不选
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-08-05</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        使用jQuery实现的一键全选/反选/不选
+页面代码：
+&lt;div id=&quot;box&quot;&gt;
+    &lt;input type=&quot;checkbox&quot; value=&quot;1&quot;&g...
+      </div>
+      <a href="http://lucent.blog/Jquery实现一键全选-反选-不选/" class="btn">
+        阅读更多
+      </a>
+    </div>
+    
+  </div>
+  
+      </div>
+
+      
+  <div class="my-4 flex justify-between px-4 md:px-0">
+    
+    
+      <a href="http://lucent.blog/page/2" class="btn btn-white">
+        下一页
+        <i class="ri-arrow-right-line ml-4"></i>
+      </a>
+    
+  </div>
+
+      <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  <a href="https://github.com/xhmily" target="_blank">呆呆木</a>
+</footer>
 
     </div>
-    <script>
-        $('#sidebar').stickySidebar({
-            topSpacing: 80,
-            // bottomSpacing: 60
-        });
-    </script>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="http://lucent.blog/media/scripts/main.js"></script>
 </body>
 
 </html>
