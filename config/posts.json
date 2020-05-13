@@ -1,0 +1,573 @@
+{
+  "posts": [
+    {
+      "content": "\n##### 如果您在登录奇游加速器时遇到需要手机验证码的情况，请参考如下操作：\n\n###### 1.找到您的奇游加速器快捷方式\n\n![image-20200107124712244](https://img-1251540275.cos.ap-shanghai.myqcloud.com/typora/20200107124723-784039.png)\n\n###### 2.鼠标右击，选择属性\n\n![]( https://img-1251540275.cos.ap-shanghai.myqcloud.com/typora/20200107133832-659310.png )\n\n###### 3.找到“目标”输入框\n\n![]( https://img-1251540275.cos.ap-shanghai.myqcloud.com/typora/20200107134029-295108.png )\n\n###### 4.在 QeeYou.exe\" 后加上  `--disable-sms-verify` （注意QeeYou.exe\" 后面要加一个空格）,如下:\n\n![image-20200107125630722](https://img-1251540275.cos.ap-shanghai.myqcloud.com/typora/20200107125632-910172.png)\n\n修改完成后，关闭奇游加速器重新打开，上号即可\n\n##### GIF过程演示\n\n![1](https://img-1251540275.cos.ap-shanghai.myqcloud.com/typora/20200107133018-225489.gif)",
+      "data": {
+        "title": "关于奇游加速器需要验证码的解决方案",
+        "date": "2020-01-07 12:40:58",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "关于奇游加速器需要验证码的解决方案"
+    },
+    {
+      "content": "\n##### 激活管理员\n\n![](https://raw.githubusercontent.com/xhmily/imgbed/master/images/%E6%BF%80%E6%B4%BB%E7%AE%A1%E7%90%86%E5%91%98.gif)\n\n##### 接单\n\n![](https://raw.githubusercontent.com/xhmily/imgbed/master/images/%E6%8E%A5%E5%8D%95.gif)\n\n##### 激活司机\n\n![](https://raw.githubusercontent.com/xhmily/imgbed/master/images/%E6%BF%80%E6%B4%BB%E5%8F%B8%E6%9C%BA.gif)\n\n##### 司机提货\n\n![](https://raw.githubusercontent.com/xhmily/imgbed/master/images/%E5%8F%B8%E6%9C%BA%E6%8F%90%E8%B4%A7.gif)\n\n##### 客户查询-已提货\n\n![](https://raw.githubusercontent.com/xhmily/imgbed/master/images/%E5%AE%A2%E6%88%B7%E6%9F%A5%E8%AF%A2-%E5%B7%B2%E6%8F%90%E8%B4%A7.gif)\n\n##### 提交快递\n\n![](https://raw.githubusercontent.com/xhmily/imgbed/master/images/%E6%8F%90%E4%BA%A4%E5%BF%AB%E9%80%92.gif)\n\n##### 客户查询-已派送\n\n![](https://raw.githubusercontent.com/xhmily/imgbed/master/images/%E5%AE%A2%E6%88%B7%E6%9F%A5%E8%AF%A2-%E5%B7%B2%E6%B4%BE%E9%80%81.gif)\n\n##### 结单\n\n![](https://raw.githubusercontent.com/xhmily/imgbed/master/images/%E7%BB%93%E5%8D%95.gif)\n\n##### 客户查询-已结单\n\n![](https://raw.githubusercontent.com/xhmily/imgbed/master/images/%E5%AE%A2%E6%88%B7%E6%9F%A5%E8%AF%A2-%E5%B7%B2%E7%BB%93%E5%8D%95.gif)\n\n##### 强制结单\n\n![客户](https://raw.githubusercontent.com/xhmily/imgbed/master/images/%E5%BC%BA%E5%88%B6%E7%BB%93%E5%8D%95.gif)\n\n##### 客户查询-强制结单\n\n![](https://raw.githubusercontent.com/xhmily/imgbed/master/images/%E5%AE%A2%E6%88%B7%E6%9F%A5%E8%AF%A2-%E5%BC%BA%E5%88%B6%E7%BB%93%E5%8D%95.gif)\n\n##### 测试账号\n\n| 角色   | 名字 | 电话 |\n| ------ | ---- | ---- |\n| 管理员 | 随意 | 110  |\n| 司机   | 随意 | 123  |\n\n###### 如果想测试完整流程，需要在结单后切换司机账号，进行提货，才能继续测试管理员功能",
+      "data": {
+        "title": "提货系统预览",
+        "date": "2019-10-17 11:08:31",
+        "tags": [
+          "小程序"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "提货系统预览"
+    },
+    {
+      "content": "\n#### 前提\n\n使用微信登录必须在[微信开放平台](https://open.weixin.qq.com/cgi-bin/index?t=home/index&lang=zh_CN)注册并完成开发者认证，创建应用完成后即可使用微信登录接口\n\n登录后按如下进行创建：\n\n![](https://raw.githubusercontent.com/xhmily/imgbed/master/images/20190923173336.png)\n\n应用审核通过后即可查看appid\n\n#### 在vue页面中使用微信内嵌二维码登录\n\n首先在index.html中引入：\n\n```javascript\n<script type='text/javascript' src=\"https://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js\"></script>\n```\n\n代码：\n\n```html\n<template>\n    <div class=\"login-wrap\">\n        <div class=\"ms-login\">\n            <div class=\"ms-title\">基石FBA管理系统</div>\n            <el-form label-width=\"0px\" class=\"ms-content\">\n                <div id=\"qrcode\"></div>\n            </el-form>\n        </div>\n    </div>\n</template>\n\n<script>\nexport default {\n    methods: {\n        wxlogin(){\n        //用于生成二维码的方法\n            var obj=new WxLogin({\n                self_redirect:false,\n                id:'qrcode',//显示二维码的容器id\n                appid:'wx551b22825a4bxxxx',//在开放平台申请到的appid\n                scope:'snsapi_login',\n                redirect_uri:encodeURIComponent('https://www.rock-fba.com/#/dashboard'),//扫码后跳转的链接，网址必须是在开放平台申请时填写的那个\n                state:'123456',\n                style:'black',\n                href:'',\n            })\n        },\n\n    },\n    mounted() {\n        this.wxlogin()//当页面加载成功后执行，生成微信二维码\n    },\n\n};\n</script>\n```\n\n微信扫码并确认后，网页会重定向到上面设置好的链接，但是我们不让它直接重定向到相关页面:\n\n```javascript\n//通过路由守卫对请求进行处理\nrouter.beforeEach((to, from, next) => {\n\t//如果地址中包含code(微信扫码后返回用于换取用户信息的临时票据)，则拦截并执行登录逻辑\n\t   if(window.location.href.indexOf('code')>=0){\n        //如果url中包含code,则保存到store中\n        let code = window.location.href.split(\"?\")[1];\n        code = code.substring(5,code.indexOf('&'));\n        if (code!=null&&\"\"!=code&&code!=undefined){\n            console.log(\"开始执行微信登录\")\n            //向后台登录接口发送数据\n            request.post('auth/login', {\n                'code':code\n            }).then((r)=>{\n            //后端成功返回token则视为登录成功\n                if (r.token){\n                    Message.success('登录成功!');\n                    localStorage.setItem('token', r.token);\n                    localStorage.setItem('user', JSON.stringify(r.admin));\n                    console.log(\"登录成功\")\n               \t\t//进入网站欢迎页\n                    next('/');\n                }else {\n                  Message.error('登录失败!');\n                }\n            })\n        }\n    }\n    \n    //更多逻辑...\n}\n```\n\n后端用于实现登录的相关代码(Java)示例：\n\n```java\n/**\n     * 用户登录\n     *\n     * @param Admin\n     * @return\n     */\n    public LoginUser login(LoginUser admin) {\n        String url=\"https://api.weixin.qq.com/sns/oauth2/access_token?appid=开放平台查看&secret=开放平台查看&code=\"+admin.getCode()+\"&grant_type=authorization_code\";\n        Admin admin1= null;\n        LoginUser loginUser=new LoginUser();\n        JSONObject json=null;\n        try {\n            String msg= HttpUtil.sendGet(url);//用临时票据code向微信服务器换取用户信息\n            json= (JSONObject) JSONObject.parse(msg);\n            Map<String, Object> map = new HashMap<>();\n            map.put(\"unionid\", json.getString(\"unionid\"));\n            admin1=adminDao.selectByMap(map).get(0);//查询该用户的unionID是否在数据库中\n        } catch (Exception e) {\n        //发生异常则说明不在数据库中，返回相关数据给前端，前端负责提示该用户进行注册\n            e.printStackTrace();\n            admin1=new Admin();\n            admin1.setRoleid(2);\n            admin1.setOpenid(json.getString(\"openid\"));\n            admin1.setUnionid(json.getString(\"unionid\"));\n            loginUser.setAdmin(admin1);\n            return loginUser;\n            //throw new MyException(\"登录失败!\");\n        }\n        if (admin1.getStatus()==0){\n            throw new MyException(\"您已被限制登录!\");\n        }\n        //以上检查全部通过则说明用户可以登录，用相关工具类生成token返回给前端\n        loginUser.setAdmin(admin1);\n        //根据管理员代码和openid加密生成token\n        String token = JwtUtil.sign(admin1.getAdminCode(), admin1.getUnionid(),\"web\");\n        loginUser.setToken(token);\n        return loginUser;\n    }\n```\n\n以上即为Vue项目中使用微信登录的示例.",
+      "data": {
+        "title": "vue实现内嵌二维码微信登录",
+        "date": "2019-09-23 17:13:08",
+        "tags": [
+          "vue"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "vue实现内嵌二维码微信登录"
+    },
+    {
+      "content": "\n###### \t\t如果开发者拥有多个移动应用、网站应用、和公众帐号（包括小程序），可通过 UnionID 来区分用户的唯一性，因为只要是同一个微信开放平台帐号下的移动应用、网站应用和公众帐号（包括小程序），用户的 UnionID 是唯一的。换句话说，同一用户，对同一个微信开放平台下的不同应用，unionid是相同的。\n\n能够获取UnionID的前提是**小程序已经绑定了开发者账号**\n\n##### 微信开发平台绑定流程：\n\n登录[微信开放平台](https://open.weixin.qq.com/)-->管理中心-->小程序-->绑定小程序\n\n![](https://raw.githubusercontent.com/xhmily/imgbed/master/images/%7BK%7D%25%5DQII01DP%7DJZAWJKJ%7E(V.png)\n\n#### 1.需要用到的工具\n\n[cryptojs](https://github.com/xhmily/imgbed/raw/master/images/cryptojs-master.zip)\n\n将文件复制到小程序项目中\n\n![](https://raw.githubusercontent.com/xhmily/imgbed/master/images/20190919173913.png)\n\n#### 2.代码\n\n```javascript\nconst util = require('../utils/utils.js')\nconst WXBizDataCrypt = require('../utils/RdWXBizDataCrypt.js')\nconst getData = util.getData\n\nlogin() {\n    const that = this\n    //在发起请求获取unionID之前必须先调用wx.login接口，因为需要用到session_key\n    wx.login({\n      success(res) {\n        if (res.code) {\n          //发起网络请求,调用后台的登录接口\n          getData(\"auth/login\",{\n            jsCode:res.code\n          },\"POST\").then(res=>{\n  \t //后台用临时票据向微信服务器换取了用户openid和session_key，把session_key传回前端用来解密\n            var pc = new WXBizDataCrypt('wxa1acc2c4af07a57b', res.data.sessionkey)\n            wx.getUserInfo({\n              success: function (res) {\n                //拿到getUserInfo（）取得的res.encryptedData, res.iv，调用decryptData（）解密\n                var data = pc.decryptData(res.encryptedData, res.iv)\n                // data中就包含了openid和unionID，\n                wx.setStorageSync('unionid', data.unionId)\n                wx.setStorageSync('userInfo', data)\n              }\n            })\n            if (res.msg =='success'){\n              app.globalData.openid = res.res\n              app.globalData.hasLogin = true\n              wx.redirectTo({\n                url: '/pages/start/start',\n              })\n            }else if(res.msg=='noAuth'){\n              app.globalData.openid = res.res\n              wx.redirectTo({\n                url: '/pages/reg/reg',\n              })\n            }else{\n              wx.showToast({\n                title: '登录失败！',\n                icon: 'none'\n              })\n            }\n          })\n```\n\n这样即可获得用户的unionID,当然，前提是用户在授权时点了允许",
+      "data": {
+        "title": "微信小程序获取用户UnionId",
+        "date": "2019-09-19 10:54:56",
+        "tags": [
+          "小程序"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "微信小程序获取用户UnionId"
+    },
+    {
+      "content": "\n今天在使用element-ui 的日期选择器的时候出现一个奇怪的问题，选中的日期在获取值之后会比选中的日期少一天：\n\n```html\n<el-date-picker\n        class=\"mr10\"\n        v-model=\"selectedDate\"\n        type=\"daterange\"\n        unlink-panels\n        range-separator=\"至\"\n        start-placeholder=\"开始日期\"\n        end-placeholder=\"结束日期\">\n</el-date-picker>\n```\n\n结果：\n\n![](https://raw.githubusercontent.com/xhmily/imgbed/master/images/20190905180454.png)\n\n在网上搜索之后发现很多人遇到这个，最终找到一个最简单好用的解决方法：\n\n就是加上这一段代码 **value-format=\"yyyy-MM-dd\"**如下\n\n```html\n<el-date-picker\n        class=\"mr10\"\n        v-model=\"selectedDate\"\n        type=\"daterange\"\n        unlink-panels\n        range-separator=\"至\"\n        start-placeholder=\"开始日期\"\n        end-placeholder=\"结束日期\"\n        value-format=\"yyyy-MM-dd\">\n</el-date-picker>\n```\n\n结果如下图：\n\n![](https://raw.githubusercontent.com/xhmily/imgbed/master/images/20190905180920.png)",
+      "data": {
+        "title": "解决element ui 日期选择器默认时间少一天的问题",
+        "date": "2019-09-05 18:00:44",
+        "tags": [
+          "element-ui"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "element-ui-日期选择器默认时间少一天"
+    },
+    {
+      "content": "\n#### 效果：\n\n![](https://raw.githubusercontent.com/xhmily/imgbed/master/images/20190820115102.png)\n\n#### 代码:\n\n```html\n  <view class=\"userinfo\">\n    <view class=\"userinfo-avatar\">\n      <open-data  type=\"userAvatarUrl\"></open-data>\n    </view>\n      <open-data type=\"userNickName\"></open-data>\n  </view>\n```\n\n```css\n.userinfo {  \n  position: relative;  \n  width: 750rpx;  \n  height: 320rpx;  \n  color: #fff;  \n  display: flex;  \n  flex-direction: column;  \n  align-items: center;  \n}  \n  \n.userinfo-avatar {  \n  overflow:hidden;  \n  display: block;  \n  width: 160rpx;  \n  height: 160rpx;  \n  margin: 20rpx;  \n  margin-top: 50rpx;  \n  border-radius: 50%;  \n  border: 2px solid #fff;  \n  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);  \n}  \n  \n.userinfo{  \n  /* color: #fff; */  \n  font-size: 14px;  \n  background-color: #c0c0c0;  \n  border-radius:40%;  \n}\n\n```\n\n",
+      "data": {
+        "title": "微信小程序头像样式",
+        "date": "2019-08-20 11:49:54",
+        "tags": [
+          "小程序"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "微信小程序头像样式"
+    },
+    {
+      "content": "\n#### 如果你在使用订单系统的过程中遇到类似如下的问题：\n\n![](https://raw.githubusercontent.com/xhmily/imgbed/master/images/09GD2POK%40%405E%24ZU%25%7DE7WUYH.png)\n\n![](https://raw.githubusercontent.com/xhmily/imgbed/master/images/QQ%E5%9B%BE%E7%89%8720190809151732.png)\n\n请点击上图中的按钮，一般谷歌浏览器左上角都会弹出提示框询问是否启用flash，点击允许即可。\n\n#### 如果未弹出任何提示，请按以下步骤设置：\n\n###### 1.打开谷歌浏览器的设置\n\n![](https://raw.githubusercontent.com/xhmily/imgbed/master/images/20190809152133.png)\n\n###### 2.拉到最下，点击高级\n\n![](https://raw.githubusercontent.com/xhmily/imgbed/master/images/20190809152235.png)\n\n###### 3.点击 网站设置\n\n![](https://raw.githubusercontent.com/xhmily/imgbed/master/images/20190809152732.png)\n\n###### 4.点击 Flash\n\n![](https://raw.githubusercontent.com/xhmily/imgbed/master/images/20190809152630.png)\n\n###### 5.将其修改为  <先询问>\n\n![](https://raw.githubusercontent.com/xhmily/imgbed/master/images/20190809152547.png)",
+      "data": {
+        "title": "解决Flash被禁用的问题",
+        "date": "2019-08-09 15:11:32",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "解决Flash被禁用的问题"
+    },
+    {
+      "content": "\n#### 查找对应的端口占用的进程，找到占用端口对应的程序的PID号：\n\n```bash\nnetstat  -aon|findstr  \"8080\" \n```\n\n#### 根据PID号找到对应的程序 ，找到对应的程序名：\n\n```bash\ntasklist|findstr \"6676\" \n```\n\n#### 结束进程：\n\n```bash\ntaskkill /f /t /im java.exe\n```\n\n#### BAT脚本通过端口号获取pid并结束进程：\n\n```bash\n@echo off\nsetlocal enabledelayedexpansion\nfor /f \"tokens=1-5\" %%a in ('netstat -ano ^| find \":%1\"') do (\n    if \"%%e%\" == \"\" (\n        set pid=%%d\n    ) else (\n        set pid=%%e\n    )\n    echo !pid!\n    taskkill /f /pid !pid!\n)\n```\n\n#### BAT脚本调用steamcmd安装服务器\n\n```bash\nc:\\steamcmd +login 账号 密码 +force_install_dir C:\\dayz\\ +app_update 223350\n```\n\n#### BAT调用steamcmd下载mod\n\n```bash\nsteamcmd +login 账号 密码 +force_install_dir c:\\mod +workshop_download_item 游戏id Modid\n::下载mod需要登录的账号拥有该游戏才可下载\n```\n\n",
+      "data": {
+        "title": "可能会用到的cmd命令",
+        "date": "2019-08-07 10:39:33",
+        "tags": [
+          "cmd"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "可能会用到的cmd命令"
+    },
+    {
+      "content": "\n### 执行windows的cmd命令工具类\n\n```java\nimport java.io.BufferedReader;\nimport java.io.InputStreamReader;\n\n/**\n * 执行windows的cmd命令工具类\n *\n */\npublic class CmdTools {\n    /**\n     *公共部分\n     */\n    public static String Commandexecuter(String cmdCommand){\n        StringBuilder stringBuilder = new StringBuilder();\n        Process process = null;\n        try {\n            process = Runtime.getRuntime().exec(cmdCommand);\n            BufferedReader bufferedReader = new BufferedReader(\n                    new InputStreamReader(process.getInputStream(), \"GBK\"));\n            String line = null;\n            while((line=bufferedReader.readLine()) != null)\n            {\n                stringBuilder.append(line+\"\\n\");\n            }\n            return stringBuilder.toString();\n        } catch (Exception e) {\n            e.printStackTrace();\n            return null;\n        }\n    }\n\n    /**\n     * 执行一个cmd命令\n     * @param cmdCommand cmd命令\n     * @return 命令执行结果字符串，如出现异常返回null\n     */\n    public static String excuteCMDCommand(String cmdCommand)\n    {\n      return CmdTools.Commandexecuter(cmdCommand);\n    }\n    /**\n     * 执行bat文件，\n     * @param file bat文件路径\n     * @param isCloseWindow 执行完毕后是否关闭cmd窗口\n     * @return bat文件输出log\n     */\n    public static String excuteBatFile(String file, boolean isCloseWindow)\n    {\n        String cmdCommand = null;\n        if(isCloseWindow)\n        {\n            cmdCommand = \"cmd.exe /c \"+file;\n        }else\n        {\n            cmdCommand = \"cmd.exe /k \"+file;\n        }\n        return CmdTools.Commandexecuter(cmdCommand);\n    }\n\n    /**\n     * 执行bat文件,新开窗口\n     * @param file bat文件路径\n     * @param isCloseWindow 执行完毕后是否关闭cmd窗口\n     * @return bat文件输出log\n     */\n    public static String excuteBatFileWithNewWindow(String file, boolean isCloseWindow)\n    {\n        String cmdCommand = null;\n        if(isCloseWindow)\n        {\n            cmdCommand = \"cmd.exe /c start\"+file;\n        }else\n        {\n            cmdCommand = \"cmd.exe /k start\"+file;\n        }\n        return Commandexecuter(cmdCommand);\n    }\n\n    public static void main(String[] args) {\n        String cmd = \"ping 127.0.0.1\";\n        String result = CmdTools.excuteCMDCommand(cmd);\n        System.out.println(result);\n    }\n}\n\n```\n\n#### 查找某进程pid(java)：\n\n```java\nString result = test.excuteBatFile(\"findPid.bat\",true);\nString[] str=result.split(\"\\n\");\n String[] str=result.split(\"\\n\");\n        String Pid=\"\";\n        for (int i = 0;i<str.length;i++){\n            if (str[i].indexOf(\"cmd.exe\")!=-1){\n                Pid=str[i].split(\",\")[1].replace(\"\\\"\",\"\");\n            }\n        }\n```\n\n##### findPid.bat:\n\n```bash\ntasklist /v /fo csv | findstr /i \"myprocess\"\n```\n\n",
+      "data": {
+        "title": "java执行cmd命令工具类(windows)",
+        "date": "2019-08-06 14:05:02",
+        "tags": [
+          "java",
+          "工具类"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "java执行cmd命令工具类-windows"
+    },
+    {
+      "content": "\n##### 使用jQuery实现的一键全选/反选/不选\n\n###### 页面代码：\n\n```html\n<div id=\"box\">\n    <input type=\"checkbox\" value=\"1\">小王\n    <input type=\"checkbox\" value=\"2\">小李\n    <input type=\"checkbox\" value=\"3\">小张\n    <input type=\"checkbox\" value=\"4\">老刘\n    <input type=\"checkbox\" value=\"5\">老瓜\n    <input type=\"checkbox\" value=\"6\">老毕\n</div>\n<div>\n    <input type=\"checkbox\" id=\"orChecked\">全选/反选/全不选\n</div>\n```\n\n###### js代码：\n\n```javascript\n$('#orChecked').change(function(){\n  if($(this).is(':checked')){\n     var box = $('#box').children(':checkbox');\n      // 复选框长度和没选中的个数一样 -> 全选\n     if(box.length==box.filter(':not(:checked)').length){    \n      $('#box').children(':checkbox').prop('checked',true);\n     }else{\n        // 如果有选中个数，-> 反选 \n        $('#box').children(':checkbox').each(function(){     \n           $(this).prop('checked',$(this).is(':checked')?false:true);\n        });\n      }\n  }else{\n      // 如控制键取消选中，剩余的checkbox也取消选中\n      $('#box').children(':checkbox').prop('checked',false);    \n  }\n});\n```\n\n",
+      "data": {
+        "title": "Jquery实现一键全选/反选/不选",
+        "date": "2019-08-05 15:37:32",
+        "tags": [
+          "Jquery",
+          "js"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "Jquery实现一键全选-反选-不选"
+    },
+    {
+      "content": "## 快速开始\n\n### 创建新文章\n\n``` bash\n$ hexo new \"My New Post\"\n```\n\n更多: [Writing](https://hexo.io/docs/writing.html)\n\n### 清理静态文件\n\n```bash\n$ hexo clean\n```\n\n\n\n### 生成静态文件\n\n``` bash\n$ hexo generate ## hexo g\n```\n\n更多: [Generating](https://hexo.io/docs/generating.html)\n\n### 部署到远程服务器\n\n``` bash\n$ hexo deploy ## hexo d\n```\n\n更多: [Deployment](https://hexo.io/docs/deployment.html)\n\n### 启动服务\n\n```bash\n$ hexo server ## hexo s\n```\n\n更多: [Server](https://hexo.io/docs/server.html)\n\n### 从远程服务器下载Hexo环境及文章原始文件(更换电脑时)\n\n```bash\n$ git clone -b hexo git@ip:/home/git/repos/blog.git\n```\n\n### 将本地Hexo环境及文章同步到远程服务器\n\n```bash\n$ git push\n```\n\n### 更新本地文件\n\n```bash\n$ git pull\n```\n\n",
+      "data": {
+        "title": "Hexo 命令",
+        "date": "2019-07-08 15:37:32",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "Hexo命令"
+    },
+    {
+      "content": "\n##### 打开[dayz.lucent.blog](http://dayz.lucent.blog/)\n\n![1 (1).png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/16098cc357cdf9b9696fb0806e23170a.png)\n\n##### 将types.xml文件(文件位于服务器目录/mpmissions/dayzOffline.chernarusplus/db中)拖入到浏览器中\n\n[![img](https://lucent.blog/wp-content/uploads/2019/05/2.png)](https://lucent.blog/wp-content/uploads/2019/05/2.png)\n\n##### 名词解释\n\n最大数量：服务器同时刷新出该物品的最大数量\n\n最小数量：服务器同时刷新出该物品的最小数量\n\n生成优先级：服务器刷新该物品的优先级，优先级越高，刷新队列越靠前\n\n生成速度：值为0 时，服务器会一次性刷新出该物品的最大数量的物资，而当值大于0 时，服务器每隔一段时间(值为1800就是每隔1800秒)就会刷新出一个该物品\n\n生命周期：该物品在周围没有玩家时，持续存在的最长时间(秒)，时间过去，物品消失，重新刷新\n\n类别：该物品所属分类\n\n \n\n在修改完之后点击保存，并下载即可！\n\n",
+      "data": {
+        "title": "Dayz独立版 服务器物资管理系统使用教程",
+        "date": "2019-07-08 00:42:49",
+        "tags": [
+          "Dayz"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "Dayz独立版-服务器物资管理系统使用教程"
+    },
+    {
+      "content": "\nRedis主从复制，主机数据更新后根据配置和策略，自动同步到备机的master/slaver机制，Master以写为主，Slave以读为主，优点是读写分离，容灾恢复。\n\n### 启动三台redis\n\n首先准备三个配置文件并分别配置三个不同端口，例如6379，6380，6381\n\n![1.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/27e80318e2d1c960c9e1b82cc5c31f6c.png)\n\n![2.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/f40441601ba0bdd9edc725fdd4073d80.png)\n\nPid文件名字，Log文件名字，Dump.rdb名字请根据需要自行设置\n\n然后分别启动三台redis\n\n![3.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/46393812ad848d9d6644013557fb7da0.png)\n\n下图可见三台redis均启动成功\n\n![4.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/e497a8c339625bdb2b2be15a178e2a53.png)\n\n下面分别连接三台redis并查看当前redis的状态\n\n![5.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/a4fa56a46d00b1757604a7874ff7bdc4.png)\n\n![6.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/3349d3274cc1ae756b93e336c3bc8614.png)\n\n![7.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/7acc36c6623ec8c57175c43df7337174.png)\n\n可见，所有redis默认均为主库，并且没有从库连接\n\n### 配置主从复制\n\n主从服务器的配置原则是：配从(库)不配主(库)，即在从库进行配置，主库不用配置\n\n注：无这里使用端口为6379的库作为主库，6380，6381库作为从库\n\n配置代码：\n\n```\nSLAVEOF 127.0.0.1 6379 #需要在两个从库中分别执行\n```\n\n再次查看三个库的状态：\n\n`Info replication`\n主库\n\n![8.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/adec81fa42dfadb0e40042861b5efa02.png)\n\n从库\n\n![9.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/7e583c8163247cbc78b81921a14411d1.png)\n\n![10.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/a4259fcb18c90eca1c0915de8a3dba41.png)\n\n注：每次与master断开之后，都需要重新连接，除非你配置进redis.conf文件\n\n测试数据同步,在主库中执行：\n\n```\nset k1 v1 #从库是只读的，不能执行写操作\n```\n\n在两个从库中取出k1数据：\n\n```\nget k1\n```\n\n可见主从复制已经配置成功\n\n### 知识点\n\n1.上一个Slave可以是下一个slave的Master，Slave同样可以接收其他slaves的连接和同步请求，那么该slave作为了链条中下一个的master,可以有效减轻master的写压力\n\n2.中途变更转向:会清除之前的数据，重新建立拷贝最新的\n\n3. 主机shutdown或者挂掉后，从机不会自动上位成为主机，而是保持不变等待主机\n\n![11.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/3eccff218c84219e84bf5dcb3ca10d26.png)\n\n当主机再次上线时会自动连接\n\n![12.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/7f1906dee03903145bb0810491252303.png)\n\n4.反客为主，可以使用命令：SLAVEOF no one 使当前数据库停止与其他数据库的同步，转成主数据库，这种方式并不方便，因为需要手动操作\n\n### 启动哨兵模式\n\n反客为主的自动版，能够后台监控主机是否故障，如果故障了根据投票数自动将从库转换为主库\n\n1.在你的配置文件目录下新建sentinel.conf文件，名字绝不能错,并填入如下内容\n\n```\nsentinel monitor 被监控库的名字(自定) 主库ip 端口 1  #示例，1 表示当票数大于1时即可成为主库\nsentinel monitor host6379 127.0.0.1 6379 1  #我的\n#一组sentinel能同时监控多个Master\n```\n\n2.开启哨兵\n\n```\nredis-sentinel /myredis/config/sentinel.conf  #配置文件路径请自行修改,启动成功如下图\n```\n\n![13.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/020c2e2a8a71d380a24e33c0055ec08e.png)\n\n3.当主库发生故障\n\n![14.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/44a3da883658255212e93bf97afd97e2.png)\n\n哨兵发现问题，开始进行投票，选出新主库\n\n![15.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/a46d4fe35b8a26a61e06064f1aabed05.png)\n\n最终端口为6381的库成为主库，查看此时库的状态\n\n![16.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/8656628abc73d39c9fc0b2bf3e4b7107.png)\n\n![img](https://depth.team/wp-content/uploads/2018/09/Snipaste_2018-09-30_16-53-52.png)\n\n4.如果此时库6379恢复上线，不会发生主库冲突，哨兵会将6379连接至新的主库\n\n![17.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/fba2b883ad0d4e55e5524f44cf89167f.png)\n\n![18.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/4a0167d623ad716bc20b03e81f374489.png)\n\n5.如果需要让哨兵后台运行，可以使用screen命令\n\n### 主从复制的缺点\n\n由于所有的写操作都是先在Master上操作，然后同步更新到Slave上，所以从Master同步到Slave机器有一定的延迟，当系统很繁忙的时候，延迟问题会更加严重，Slave机器数量的增加也会使这个问题更加严重。",
+      "data": {
+        "title": "Redis学习笔记（四）主从复制及启动哨兵模式",
+        "date": "2019-07-08 00:38:08",
+        "tags": [
+          "Redis"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "Redis学习笔记（四）主从复制及启动哨兵模式"
+    },
+    {
+      "content": "\nString（字符串）\nstring是redis最基本的类型，可以理解成与Memcached一模一样的类型，一个key对应一个value。\nstring类型是二进制安全的。意思是redis的string可以包含任何数据。比如jpg图片或者序列化的对象 。\nstring类型是Redis最基本的数据类型，一个redis中字符串value最多可以是512M。\n\n### 常用命令\n\n```\nset key value  #设置key的值为value\n\nget key        #获取key的值\n\nincr key       #将key中存储的数据(必须为数字)加1\n\nincrby key 值  #将key中存储的数据(必须为数字)加上指定的值\n\ndecr key       #将key中存储的数据(必须为数字)减1\n\ndecrby key 值  #将key中存储的数据(必须为数字)减去指定的值\n\ngetrange key start end  #返回key中字符串值的子字符(获取指定区间范围内的值,类似between...and)\n\nsetrange key offset value #设置指定区间范围内的值\n\n\nSETEX key seconds value #设置带过期时间的key\n\nSETNX key value  #只有在 key 不存在时设置 key 的值\n\nmset key1 value1 key2 value2 ...    #同时设置一个或多个 key-value 对\nmget value1 value2 ... #获取所有(一个或多个)给定 key 的值\n\n\nmsetnx key1 value1 key2 value2 #同时设置一个或多个key-value对，当且仅当所有给定 key 都不存在\n```",
+      "data": {
+        "title": "Redis学习笔记（三）Redis字符串(String)",
+        "date": "2019-07-08 00:27:22",
+        "tags": [
+          "Redis"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "Redis学习笔记（三）Redis字符串-String"
+    },
+    {
+      "content": "\n### 常用命令\n\n```\nselect db #选择数据库，redis默认16个库（0-15）\nkeys *  #列出当前库中所有key\nexists key的名字 #判断某个key是否存在\nexpire key seconds(秒)  #为给定的key设置过期时间\nttl key  #查看还有多少秒过期，-1表示永不过期，-2表示已过期\ntype key #查看key是什么类型\nmove key db #移动key到指定数据库，当前库就没有了，被移除了\nRENAME key newkey #修改key的名字为newkey\nRENAMENX key newkey #当newkey不存在时修改key为newkey\nDEl key  #当key存在时删除key\n```\n\n",
+      "data": {
+        "title": "Redis学习笔记（二）Redis 键(key)",
+        "date": "2019-07-08 00:23:58",
+        "tags": [
+          "Redis"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "Redis学习笔记（二）Redis-键-key"
+    },
+    {
+      "content": "\nredis是非关系型数据库（NoSql），NoSQL(NoSQL = Not Only SQL )，意即“不仅仅是SQL”，泛指非关系型的数据库。随着互联网web2.0网站的兴起，传统的关系数据库在应付web2.0网站，特别是超大规模和高并发的SNS类型的web2.0纯动态网站已经显得力不从心，暴露了很多难以克服的问题，而非关系型的数据库则由于其本身的特点得到了非常迅速的发展。NoSQL数据库的产生就是为了解决大规模数据集合多重数据种类带来的挑战，尤其是大数据应用难题，包括超大规模数据的存储。\n\n### redis的安装\n\n1.创建myredis文件夹\n\n```\nmkdir myredis\n```\n\n2.下载redis最新版https://redis.io/\n\n可以直接下载再传到Centos系统中，也可以在Centos中使用如下命令直接下载\n\n```\ncd myredis #进入文件夹\nwget http://download.redis.io/releases/redis-4.0.11.tar.gz  #官网获取的最新版下载地址\n```\n\n![1.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/93208aaf8c9e9eda078781d97446e5df.png)\n\n解压文件\n\n```\ntar -zxvf redis-4.0.11.tar.gz\n```\n\n![2.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/25903b2c36c69056aef412f63c16ac69.png)\n\n安装gcc（redis是用C语言开发的，需要gcc编译）\n\n```\nyum install gcc-c++\n```\n\n![3.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/e650d043a789e8145a8fa2924b9c1ac0.png)\n\n进入 redis-4.0.11 文件夹并安装\n\n```\ncd redis-4.0.11\n```\n\n![4.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/c4eaec43d4e699459ff52749c4883306.png)\n\n```\nmake  #编译\n```\n\n![5.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/aa08428fb3d6fe9e0db2974a95c46a74.png)\n\n```\nmake install  #安装\n```\n\n![6.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/28574d869b698bf640bc38e4fe298c47.png)\n\n配置redis\n\n![7.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/71d669562446b3f742908e02ef00eb7f.png)\n\n```\nvi redis.conf\n#将GENERAL中 daemonize 设置为yes\n```\n\n![8.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/ef49c702af0dcbbd1b8240e42c96095d.png)\n\n### 启动redis\n\n进入 /root/myredis/redis-4.0.11/src 目录\n\n```\ncd /root/myredis/redis-4.0.11/src\n```\n\n![9.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/4754f06480636416931deb80b67cebff.png)\n\n启动redis\n\n```\nredis-server ../redis.conf\n```\n\n![10.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/176154826b9137d9058a207706a02c01.png)\n\n查看进程是否启动\n\n```\nps -ef|grep redis\n```\n\n![11.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/832ef01f844d7c0904152da427aa9464.png)\n\n可见默认端口是 **6379** 服务端已经启动\n\n### 简单的数据存取\n\n在redis中数据是以键值对（Key-value）形式存储的\n\n启动客户端\n\n```\nredis-cli\n```\n\n![Snipaste_2018-09-19_23-18-04.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/8a615f99da40dc273a8c72ed047ec621.png)\n\n存数据\n\n```\nset myFirstData hello-world\n```\n\n![12.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/9765d9e2bd31b990e98f7c693bbcdb55.png)\n\n取数据\n\n```\nget myFirstData\n```\n\n到这里，如果redis存取正常，那么恭喜你，安装完成！\n\n### 退出客户端\n\n```\nexit\n```\n\n### 关闭服务端\n\n```\nredis-cli -p 6379 shutdown\n# -p为可选项 默认6379，多个redis运行的情况下需要指明要关闭redis的端口\n```\n\n![13.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/08/d6f31ecc534d517806fa020389a7454c.png)\n\n可见redis已经被关闭",
+      "data": {
+        "title": "Redis学习笔记（一）redis安装（Centos7）和简单存取数据",
+        "date": "2019-07-08 00:20:57",
+        "tags": [
+          "Redis"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "Redis学习笔记（一）redis安装（Centos7）和简单存取数据"
+    },
+    {
+      "content": "\n**安装：**\n\ncentos6.9安装方法\n\n`easy_install supervisor`\n\ncentos7安装方法\n\n`yum install supervisor`\n\n在/etc/目录下建立配置文件\n\n`echo_supervisord_conf > /etc/supervisord.conf`\n\n修改配置文件\n\n`vi /etc/supervisord.conf`\n\n在末尾加入配置信息\n\n一般配置信息都是[program:xxx]开头的\n\n**配置：**\n\n<span style=\"color: #ff0000;\">command为真实安装路径!</span>\n\n[][program:frp]\n\n```shell\nuser=root\ncommand=/root/frp/frpsa/frps -c /root/frp/frpsa/frps.ini\nstartsecs=1\nstartretries=100\nautorstart=true\nautorestart=true\nstderr_logfile=/tmp/err-frps.log\nstderr_logfile_maxbytes=50MB\nstderr_logfile_backups=10\nstdout_logfile=/tmp/out-frps.log\nstdout_logfile_maxbytes=50MB\nstdout_logfile_backups=10\n```\n\n**使用：**\n\n直接启动supervisor\n\n`supervisord`\n\n或指定配置文件启动\n\n`supervisord -c /etc/supervisord.conf`\n\n#配置开机自启\n`systemctl enable supervisord`\n\n#验证一下是否为开机启动\n\n`systemctl is-enabled supervisord`",
+      "data": {
+        "title": "CentOS安装Supervisor守护进程并开机启动",
+        "date": "2019-07-08 00:04:36",
+        "tags": [
+          "Centos",
+          "Linux"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "CentOS安装Supervisor守护进程并开机启动"
+    },
+    {
+      "content": "\n之前写过使用shell+crontab实现每天随机执行任务（[linux使用crontab命令指定时间段内随机执行任务](lucent.blog/passages/linux使用crontab命令指定时间段内随机执行任务/)，但是后来想想容易出bug，\n\n比如：第一天执行是生成的随机时间要留给下次使用，如果第一次生成时间为8：01，那么第二天就会8：01执行任务，第二天8：01执行任务时生成的随机时间是8：05，那么8：05也会执行一次任务，就会导致同一天执行两次甚至多次任务。\n\n那么下面加入php重写,实现每天早晨8：00-8：09之间随机时间访问www.baidu.com：\n\n**shell代码sign.sh：**\n\n```shell\n#!/bin/bash\nr=$(($RANDOM%10)) ##生成10以内的随机数字\nrm -f /www/wwwroot/time.txt ##删除以前的time.txt\necho “08:0″$[r] >> /www/wwwroot/time.txt ##创建并将随机数字作为时间的分钟插入time.txt\nchmod 777 sign.sh ##设置shell脚本的权限\n```\n\n**crontab命令文件sign.cron:**\n\n```shell\n59 07 * * * ./sign.sh   ##定时7：59执行shell脚本生成随机时间\n0-9 08 * * * curl http://服务器ip/sign/Sys.php    ##8：00-8：09没分钟执行一次http请求\n```\n\n**php文件Sys.php：**\n\n```php\n<?php\nheader(“Content-type: text/html; charset=utf-8”);\n\n//打开time.txt文件，方法为只读\n\n$myfile = fopen(“time.txt”, “r”) or die(“Unable to open file!”);\n\n//将打开文件中的内容（这里即是shell脚本生成的随机时间）赋值给time1\n\n$time1=fread($myfile,filesize(“time.txt”));\n\nfclose($myfile); //关闭time.txt\n\n$randomtime=strtotime(“$time1”);//将随机时间转换成时间戳格式\n\n$time=date(‘H:i’,time());//获取当前时间\n$now=strtotime(“$time”);//将当前时间转换成时间戳格式\n\n//比较当前时间是否等于随机时间，若是，则执行下面代码\n\nif($now == $randomtime){\n\n//执行访问www.baidu.com的任务，也可以做其他任务，需要自己写代码\n\nheader(“Location: http://www.baidu.com”);\n\n}\n\nelse{\n//代码\n//这里是如果当前时间不等于随机时间的时候要执行的代码，不写即什么都不做\n}\n```\n\n注意：如果不将时间通过strtotime()转换成时间戳格式，将无法比较两个时间！\n\n**原理：**\n\n通过设定crontab定时任务，在7：59分时生成随机时间并存储到time.txt中，第二个任务在8：00-8：09之间每分钟执行一次，\n\n**curl http://服务器ip/sign/Sys.php 命令即是向服务器发送请求，**服务器Sys.php每分钟收到一次请求，并每次判断当前时间是否与time.txt中的随机时间相等，若相等，执行预先设置好的任务，若不等，什么也不做，等待下一次请求。\n\n\n\n通过以上方式即可实现每天在特定的时间段中的随机时间执行任务。\n\n若你有更好的方式，欢迎留言，谢谢！",
+      "data": {
+        "title": "shell命令+crontab+php实现每天特定时间段内随机时间执行任务",
+        "date": "2019-07-08 00:02:47",
+        "tags": [
+          "Liunx",
+          "Crontab"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "shell命令-crontab-php实现每天特定时间段内随机时间执行任务"
+    },
+    {
+      "content": "\ncrontab命令常见于[Unix](https://baike.baidu.com/item/Unix)和[类Unix](https://baike.baidu.com/item/%E7%B1%BBUnix)的操作系统之中，用于设置周期性被执行的指令。该命令从标准输入设备读取指令，并将其存放于\"crontab\"文件中，以供之后读取和执行。\n\ncron是一个linux下 的定时执行工具，可以在无需人工干预的情况下运行作业。\n`service crond start    //启动服务`\n`service crond stop     //关闭服务`\n`service crond restart  //重启服务`\n`service crond reload   //重新载入配置`\n`service crond status   //查看服务状态`\n\n在crontab文件中如何输入需要执行的命令和时间。该文件中每行都包括六个域，其中前五个域是指定命令被执行的时间，最后一个域是要被执行的命令。\n每个域之间使用空格或者制表符分隔。格式如下：\n`minute hour day-of-month month-of-year day-of-week commands`\n合法值 00-59 00-23 01-31 01-12 0-6 (0代表周日)\n\n<span style=\"color: #ff0000;\">除了数字还有几个个特殊的符号就是\"*\"、\"/\"和\"-\"、\",\"，*代表所有的取值范围内的数字，\"/\"代表每的意思,\"/5\"表示每5个单位，\"-\"代表从某个数字到某个数字,\",\"分开几个离散的数字。</span>\n\ncrontab -l 在标准输出上显示当前的crontab。\n-r 删除当前的crontab文件。\n-e 使用VISUAL或者EDITOR环境变量所指的编辑器编辑当前的crontab文件。当结束编辑离开时，编辑后的文件将自动安装。\n\n<span style=\"color: #ff0000;\">需要注意的是同同一用户默认只有一个crontab任务，例如root用户每次新建一个crontab任务都会覆盖之前的任务。</span>\n\n例子：\n\n`vi test.cron ###创建一个cron文件`\n\n并向该文件中写入如下命令：\n\n```shell\n0 8 * * * echo \"good morning \">>test.txt ###表示每天早晨8点向test.txt中插入一条\"good morning\"\n\n0 8 1,3,5 * 1-5 echo\"good morning\" >> test.txt\n\n###表示每年的1月3月5月中每周一到周五的早晨8点向test.txt中插入一条\"good morning\"\n```\n\n使用`crontab test.cron`  即可启动该命令文件，到达指定时间系统将会自动执行文件中的命令。\n\n问题：\n\n综上所述，crontab 命令固然好用，但是执行任务的时间是死的，每天都是同一个时间执行任务，在做某些需要随机时间的特殊任务时，就显得没那么好用了。\n\n所以，如果需要随机时间，就要用的shell脚本了。\n\n首先创建一个shell脚本，test.sh\n\n```shell\n#!/bin/bash\n\necho \"good morning\" >> test.txt ###向test.txt中插入一条\"good morning\"\n\nr=$(($RANDOM%10)) ###随机生成一个10以内的随机数\nrm -f test.cron                ###删除以前的命令文件\necho $[r]\" 8 * * * ./test.sh\" >> test.cron #创建并将任务写入cron文件\nchmod 777 test.sh  ###给予shell脚本最高执行权限\ncrontab test.cron    ###启动cron任务文件，用于定时自动执行\n```\n\n<span style=\"color: #ff0000;\">当然，该脚本必须在写完后手动执行一次，以后才会按时自动执行</span>\n\n命令:\n\n`[code]chmod 777 test.sh`\n\n`./test.sh[/code]`\n\n<span style=\"color: #ff0000;\">原理：</span>\n\n将随机生成的数字作为时间（在这里是作为分钟）写入cron文件，并通过按时执行shell脚本来将\"good morning\"插入到test.txt中，\n\n由于该任务的时间即分钟是10以内的随机数，所以每次执行任务的时间是每天早晨8：00-8：09之间的随机时间，\n\n通过这种方式就可以设置随机时间执行任务了。\n\n&nbsp;\n\n如有错误，还请大佬多多包涵，谢谢！",
+      "data": {
+        "title": "linux使用crontab命令指定时间段内随机执行任务",
+        "date": "2019-07-07 23:53:49",
+        "tags": [
+          "Linux",
+          "Crontab"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "linux使用crontab命令指定时间段内随机执行任务"
+    },
+    {
+      "content": "\nscreen对于不支持SSH的虚拟主机没有作用，但是对于vps来说那可是用处大大的。\n不知道朋友们有没有在配置vps环境的时候出现突然中断或者要离开但是还没有配置完成的情况呢？\n\n我遇到很多回，往往已经快配置完成的时候出现短线等情况，那就要从头再安装配置，很是麻烦，有时要连续重新安装好几次系统才可以完成。\n现在有了screen命令就不用为此烦恼了。\n\n**screen命令是什么？**\nScreen是一个可以在多个进程之间多路复用一个物理终端的全屏窗口管理器。Screen中有会话的概念，用户可以在一个screen会话中创建多个screen窗口，在每一个screen窗口中就像操作一个真实的telnet/SSH连接窗口那样。\n**如何安装screen命令呢？**\nCentos执行:\nyum install screen\nDebian/Ubuntu执行:\napt-get install screen\n\n**怎么使用screen命令？**\n1、创建一个screen会话：\n`screen -S abc`\nabc为创建会话的名称\n\n2、创建好以后就可以正常安装和配置vps环境，如怕中途短线或者要离开，马上就可以使用\n快捷键**Ctrl+a d(即按住Ctrl，依次再按a,d)**来保存这个会话窗口\n当然程序还在自动进行不会关闭。\n\n3、需要恢复会话的时候就需要执行\n`screen -r abc`\n\n如果在恢复会话的时候忘记了或者没有设定会话名称我们就要执行：\n`screen -ls`\n\n他会列出你所有的会话列表，然后使用：\n`screen -r 会话名称`\n来恢复会话窗口。\n\n4、关闭screen的会话\n`exit`\n会提示：[screen is terminating]，表示已经成功退出screen会话。\n\n5、screen命令常用的一些快捷键：\n\n```shell\nCtrl+a c ：在当前screen会话中创建窗口\nCtrl+a w ：窗口列表\nCtrl+a n ：下一个窗口\nCtrl+a p ：上一个窗口\nCtrl+a 0-9 ：在第0个窗口和第9个窗口之间切换\n```\n\n在此记录以便查阅.",
+      "data": {
+        "title": "Linux安装screen命令",
+        "date": "2019-07-07 23:48:56",
+        "tags": [
+          "Linux"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "Linux安装screen命令"
+    },
+    {
+      "content": "\n```html\n<!doctype html>\n<html lang=\"en\">\n<head>\n<!-- Required meta tags -->\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n\n<title>Hello, world!</title>\n\n<script type=\"text/javascript\">\n\nfunction viewimg(file){\nif(file.files&&file.files[0])//当文件存在\n{\nvar img=document.getElementById(\"image1\");\nvar reader=new FileReader();//新建文件读写器\n//成功读取文件后，把结果赋予img\nreader.onload=function(evt){\nimg.src=evt.target.result;\n\n}\nreader.readAsDataURL(file.files[0]);\n}\n\n}\n\n</script>\n</head>\n<body>\n<h1>Hello, world!</h1>\n<div>\n<label for=\"advimg\">广告图片</label><br>\n<img id=\"image1\" src=\"#\" width=\"360\" height=\"150\">\n    <!-- 当选中文件，将文件传给viewimg方法-->\n<input type=\"file\" id=\"advimg\" name=\"advimg\" onchange=\"viewimg(this)\"> \n</div>\n\n</body>\n</html>\n```\n\n",
+      "data": {
+        "title": "javascript实现图片上传预览",
+        "date": "2019-07-07 23:37:20",
+        "tags": [
+          "js"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "javascript实现图片上传预览"
+    },
+    {
+      "content": "\n## docker常用命令：\n\n```shell\ndocker pull 镜像名:TAG   从仓库拉取某镜像\n\ndocker run 镜像名:TAG    运行某个镜像\n\nCtrl+p+q    在容器中使用此命令可退出容器（保留容器进程）\n\nexit   在容器中使用此命令可退出容器（留容也会停止运行）\n\ndocker kill 容器id   此命令可以停止指定容器的运行\n\ndocker ps 查看当前正在运行的容器\n\ndocker ps -a 查看所有容器的状态\n\ndocker start/stop id/name 启动/停止某个容器\n\ndocker attach 容器id 进入某个容器\n\ndocker exec -it id 启动一个伪终端以交互式的方式进入某个容器\n\ndocker images 查看本地镜像\ndocker rm id/name 删除某个容器\ndocker rmi id/name 删除某个镜像\n```\n\n\n\n### docker pull 镜像名:TAG   详解:\n\n```shell\ndocker pull tomcat:8.5\n#如果不指定:TAG则默认拉取最新版本\n```\n\n<span style=\"color: #ff6600;\">执行结果：</span>\n\n![1.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/07/136bfbcf6e143ca71a2c3ec52b266b0d.png)\n\n<span style=\"color: #ff6600;\">查看本地镜像：</span>\n\n![2.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/07/4e15c07d8717536a98a41367e6e4f3e7.png)\n\n#### docker run 镜像名:TAG    详解：\n\n```shell\ndocker run -it -p 1234:8080 -name MyTomcat tomcat\n##可选参数## \n#-it 代表以启动一个伪终端交互式的方式运行镜像\n#-p  端口映射，将宿主机的1234端口（可指定其他）映射到tomcat的8080端口\n#-d  以守护进程的方式运行，即后台运行，不启动交互界面\n#--name 为容器命名，如不指定该参数，系统将默认为其命名\n##<span style=\"color: #ff6600;\">注：</span>镜像只是一个模板，每运行一次镜像后将产生一个容器，即容器是镜像运行后的产物\n##例如Windows镜像安装之后成为系统，修改系统文件并不影响Windows镜像，并且Windows镜像可多次使用\n```\n\n<span style=\"color: #ff6600;\">以上代码运行结果：</span>\n\n![3.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/07/d289d0f25c97176091839e1a5c12de35.png)\n\n此时访问<span style=\"color: #ff6600;\">localhost:1234</span>便可以看到<span style=\"color: #ff6600;\">tomcat</span>欢迎页：\n\n![4.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/07/b3102d20fa30ede621a66551e734d05d.png)\n\n此时说明启动tomcat成功！\n\n<span style=\"color: #ff6600;\">查看正在运行中的容器（docker ps）：</span>\n\n![5.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/07/ba4971a08b21b50d7d1324c06bd303fb.png)\n\n### docker attach 容器id  详解：\n\n该命令可以再次进入为停止的容器，如使用<span style=\"color: #ff6600;\">Ctrl+p+q</span> 退出的容器\n\n![Snipaste_2018-09-12_22-13-54.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/07/335a2c84b57ff90565a80f3f13309cd0.png)\n\n<span style=\"color: #ff6600;\">注：因为进入的是tomcat，所以只会有一个光标不停闪动，或者只有tomcat日志输出，若进入的是docker版的centos系统中，</span><span style=\"color: #ff6600;\">将会进入到该centos系统的默认路径下。</span>\n\n### docker kill 容器id 详解：\n\n执行命令后，指定容器的进程将会被停止\n\n![7.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/07/9d2c674e099e08e303ed22fdb3537cf9.png)\n\n### <span style=\"color: #333333;\">docker ps -a 详解：</span>\n\n该命令可以查询出运行过的容器\n\n![8.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/07/f2d166a0f76be38d85fbb2d090069398.png)\n\n### docker start/stop id/name 详解：\n\n```shell\ndocker start MyTomcat #启动刚才停止的tomcat容器\n```\n\n![9.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/07/d2e086937ce1909ca564b11962b5592b.png)\n\n```shell\ndocker stop MyTomcat #停止刚才启动的tomcat容器\n```\n\n![10.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/07/cc66f716211f2cdc122f2fa15cc70175.png)\n\n### docker rm 容器id/name 详解：\n\n该命令可以删除指定容器\n\n```shell\ndocker rm MyTomcat #删除名字为MyTomcat的容器\n```\n\n!![11.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/07/da8cf517303152fa439e4025d3d217f2.png)\n\n### docker rmi id/name 删除某个镜像  详解：\n\n该命令可以删除指定镜像\n\n```shell\ndocker rmi hello-world:TAG #不加TAG表示删除最新版\n##可选参数##\n#-f 表示强制删除\n```\n\n![12.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/07/d229a9f3068e8ca887b7f9904458b293.png)\n\n",
+      "data": {
+        "title": "Docker学习笔记（三）Docker常用命令",
+        "date": "2019-07-06 18:15:18",
+        "tags": [
+          "Docker"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "Docker学习笔记（三）Docker常用命令"
+    },
+    {
+      "content": "\n### OS要求\n\n要安装Docker CE，您需要CentOS 7及以上版本。\n\n### 卸载旧版本\n\n较旧版本的Docker被称为`docker`或`docker-engine`。如果已安装这些，请卸载它们以及相关的依赖项。代码如下\n\n```shell\n$ sudo yum remove docker \\\n          docker-client \\\n          docker-client-latest \\\n          docker-common \\\n          docker-latest \\\n          docker-latest-logrotate \\\n          docker-logrotate \\\n          docker-selinux \\\n          docker-engine-selinux \\\n          docker-engine`\n注意 \"\\\"为shell脚本的连接符，同java的\"+\"\n```\n\n<span style=\"color: #ff6600;\">如果系统未安装过docker，则提示如下</span>：\n\n![1.jpg](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/07/a55ec63c0fc0581d66a717ca235d3cbf.jpg)\n\n## 安装Docker CE（社区版，免费）\n\n### 使用存储库安装\n\n在新主机上首次安装Docker CE之前，需要设置Docker存储库。之后，您可以从存储库安装和更新Docker。\n\n#### 设置存储库\n\n#### 1.安装所需的包。`yum-utils`提供了`yum-config-manager` ，并且`devicemapper`存储驱动程序依赖`device-mapper-persistent-data`和`lvm2`。\n\n```shell\n$ sudo yum install -y yum-utils \\\n  device-mapper-persistent-data \\\n  lvm2\n```\n\n<span style=\"color: #ff6600;\">执行结果</span>：\n\n![2.jpg](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/07/19cb985de4bdb509cfbfe52b1159ff3c.jpg)\n\n#### 2.使用以下命令设置**稳定**存储库。即使你还想从**edge**或**test**存储库安装构建，你仍然需要**稳定的**存储库。\n\n```shell\n$ sudo yum-config-manager --add -repo https://download.docker.com/linux/centos/docker-ce.repo\n```\n\n<span style=\"color: #ff6600;\">执行结果</span>：\n\n![3.jpg](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/07/6f0f4402511cb1b51db93496510c2783.jpg)\n\n#### 3.（可选）启用**edge**和**test**存储库。这些存储库包含在`docker.repo`上面的文件中，但默认情况下处于禁用状态。您可以将它们与稳定存储库一起启用。\n\n```shell\n$ sudo yum-config-manager --enable docker-ce-edge\n$ sudo yum-config-manager --enable docker-ce-test\n```\n\n#### 您可以通过运行带有标志的命令来禁用**edge**或**test**存储库 。要重新启用它，请使用该标志。以下命令禁用**edge**存储库。`yum-config-manager``--disable``--enable`\n\n```shell\n$ sudo yum-config-manager --disable docker-ce-edge\n```\n\n#### <span style=\"color: #ff6600;\">**注意**</span>：从Docker 17.06开始，稳定版本也会被推送到**边缘**并**测试**存储库。 安装DOCKER CE\n\n1. 安装_最新版本_的Docker CE，或转到下一步安装特定版本：\n\n   ```shell\n   $ sudo yum install docker-ce\n   ```\n\n##### <span style=\"color: #ff6600;\">如果提示接受GPG密钥，请验证指纹是否匹配</span>\n\n##### <span style=\"color: #ff6600;\">`060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35`，</span>\n\n##### <span style=\"color: #ff6600;\">如果匹配 ，则接受它。</span>\n\n<span style=\"color: #ff6600;\">此处确认无误，选择y确定</span>：\n\n![4.jpg](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/07/e9e728e4a309c8d9e6e67638a51636ac.jpg)     \n\n<span style=\"color: #ff6600;\">指纹比对正确，选择y继续</span>：\n\n![5.jpg](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/07/e3dca310a88f200ed072a9e50f764edc.jpg)\n\n<span style=\"color: #ff6600;\">最终结果</span>：\n\n![6.jpg](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/07/24cd06e2ed9927862d4231b155107d99.jpg)\n\n<span style=\"color: #333333;\"> 2.您还可以使用</span>`$ sudo yum install docker-ce-<版本号>`来安装指定版本的docker，例如安装17.06版本\n\n```shell\n$ sudo yum install docker-ce-<17.06>\n```\n\n3.启动Docker。\n\n```shell\n$ sudo systemctl start docker\n```\n\n<span style=\"color: #ff6600;\">注意：<span style=\"color: #333333;\">docker启动后不会有任何输出</span></span>\n\n4.`docker`通过运行`hello-world` 映像验证是否已正确安装。\n\n```shell\n$ sudo docker run hello-world\n```\n\n<span style=\"color: #ff6600;\">执行命令后如果你看到如下图所示，那么恭喜，docker安装成功！</span>\n\n![7.jpg](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/07/9e818831fbf2e690c7d5728a5d5c8431.jpg)\n\n",
+      "data": {
+        "title": "Docker学习笔记（二）Docker(V18.03)安装配置",
+        "date": "2019-07-06 18:00:29",
+        "tags": [
+          "Docker"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "Docker学习笔记（二）Docker-V18-03-安装配置"
+    },
+    {
+      "content": "\nDocker 是一个基于GO语言开发的开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的[Linux](http://baike.baidu.com/view/1634.htm)机器上，也可以实现虚拟化。\n\n容器是完全使用沙箱机制，相互之间不会有任何接口（类似 iPhone 的 app）。几乎没有性能开销,可以很容易地在机器和数据中心中运行。最重要的是,他们不依赖于任何语言、框架或包括系统。\n\nDocker 自开源后受到广泛的关注和讨论，以至于 dotCloud 公司后来都改名为 Docker Inc。Redhat 已经在其 RHEL6.5 中集中支持 Docker；Google 也在其 PaaS 产品中广泛应用。\n\nDocker 项目的目标是实现轻量级的操作系统虚拟化解决方案。 Docker 的基础是 Linux 容器（LXC）等技术。\n\n在 LXC 的基础上 Docker 进行了进一步的封装，让用户不需要去关心容器的管理，使得操作更为简便。用户操作 Docker 的容器就像操作一个快速轻量级的虚拟机一样简单。\n\n下面对比了Docker 和传统虚拟化（KVM、XEN等）方式的不同之处，容器是在操作系统层面上实现虚拟化，直接复用本地主机的操作系统，而传统方式则是在硬件的基础上，虚拟出自己的系统，再在系统上部署相关的APP应用。\n\n下图为传统虚拟化方案：\n\n![6-300x114.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/07/c7fc0967984cda16932284cb51c0edc5.png)\n\n如下为Docker虚拟化方案：\n\n![7-300x85.png](https://raw.githubusercontent.com/xhmily/imgbed/master/images/2019/07/07/e8d60258be6b5bfb5780e5cf22959ff2.png)\n\nDocker虚拟化有三个概念需要理解，分别镜像、容器、仓库。\n\n- 镜像：docker的镜像其实就是模板，跟我们常见的ISO镜像类似，是一个样板。\n- 容器：使用镜像常见的应用或者系统，我们称之为一个容器。\n- 仓库：仓库是存放镜像的地方，分为公开仓库（Public）和私有仓库（Private）两种形式。\n\n## Docker虚拟化特点\n\n跟传统VM比较具有如下优点：\n\n1)  操作启动快\n\n运行时的性能可以获取极大提升，管理操作（启动，停止，开始，重启等等） 都是以秒或毫秒为单位的。\n\n2)  轻量级虚拟化\n\n你会拥有足够的\"操作系统\"，仅需添加或减小镜像即可。在一台服务器上可以布署100~1000个Containers容器。但是传统虚拟化，你虚拟10-20个虚拟机就不错了。\n\n3)  开源免费\n\n开源的，免费的，低成本的。由现代Linux内核支持并驱动。注* 轻量的Container必定可以在一个物理机上开启更多\"容器\"，注定比VMs要便宜。\n\n4)  前景及云支持\n\n正在越来越受欢迎，包括各大主流公司都在推动docker的快速发展，性能有很大的优势。\n\n跟传统VM比较具有如下缺点：\n\n1)  目前知道的人比较少\n\n2)  相关的技术资料欠缺\n\n3)  Go语言还没完全成熟",
+      "data": {
+        "title": "Docker学习笔记（一）Docker入门简介",
+        "date": "2019-07-06 17:49:08",
+        "tags": [
+          "Docker"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "Docker学习笔记（一）Docker入门简介"
+    },
+    {
+      "content": "> 欢迎来到我的小站呀，很高兴遇见你！🤝\n> 我是一个Java程序员，Bug开发者\n\n## 👨‍💻 博主是谁\n呆呆木\n## 📬 联系我呀\nQQ: 975023381\n邮箱: 975023381@qq.com\nGithub: https://github.com/xhmily",
+      "data": {
+        "title": "关于",
+        "date": "2019-01-25 19:09:48",
+        "tags": [],
+        "published": true,
+        "hideInList": true,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "about"
+    },
+    {
+      "content": "\n<!-- more -->\n\n👏  欢迎使用 **Gridea** ！  \n```\n1233\n```\n✍️  **Gridea** 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ... \n\n<!-- more -->\n\n[Github](https://github.com/getgridea/gridea)  \n[Gridea 主页](https://gridea.dev/)  \n[示例网站](http://fehey.com/)\n\n## 特性👇\n📝  你可以使用最酷的 **Markdown** 语法，进行快速创作  \n\n🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片  \n\n🏷️  你可以对文章进行标签分组  \n\n📋  你可以自定义菜单，甚至可以创建外部链接菜单  \n\n💻  你可以在 **Windows**，**MacOS** 或 **Linux** 设备上使用此客户端  \n\n🌎  你可以使用 **𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌** 或 **Coding Pages** 向世界展示，未来将支持更多平台  \n\n💬  你可以进行简单的配置，接入 [Gitalk](https://github.com/gitalk/gitalk) 或 [DisqusJS](https://github.com/SukkaW/DisqusJS) 评论系统  \n\n🇬🇧  你可以使用**中文简体**或**英语**  \n\n🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力  \n\n🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步  \n\n🌱 当然 **Gridea** 还很年轻，有很多不足，但请相信，它会不停向前 🏃\n\n未来，它一定会成为你离不开的伙伴\n\n尽情发挥你的才华吧！\n\n😘 Enjoy~\n",
+      "data": {
+        "title": "Hello Gridea",
+        "date": "2018-12-12 00:00:00",
+        "tags": [
+          "Gridea"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "hello-gridea"
+    }
+  ],
+  "tags": [
+    {
+      "name": "小程序",
+      "slug": "xiao-cheng-xu",
+      "used": true
+    },
+    {
+      "name": "vue",
+      "slug": "vue",
+      "used": true
+    },
+    {
+      "name": "element-ui",
+      "slug": "element-ui",
+      "used": true
+    },
+    {
+      "name": "cmd",
+      "slug": "cmd",
+      "used": true
+    },
+    {
+      "name": "java",
+      "slug": "java",
+      "used": true
+    },
+    {
+      "name": "工具类",
+      "slug": "gong-ju-lei",
+      "used": true
+    },
+    {
+      "name": "Jquery",
+      "slug": "jquery",
+      "used": true
+    },
+    {
+      "name": "js",
+      "slug": "js",
+      "used": true
+    },
+    {
+      "name": "Dayz",
+      "slug": "dayz",
+      "used": true
+    },
+    {
+      "name": "Redis",
+      "slug": "redis",
+      "used": true
+    },
+    {
+      "name": "Centos",
+      "slug": "centos",
+      "used": true
+    },
+    {
+      "name": "Linux",
+      "slug": "linux",
+      "used": true
+    },
+    {
+      "name": "Liunx",
+      "slug": "liunx",
+      "used": true
+    },
+    {
+      "name": "Crontab",
+      "slug": "crontab",
+      "used": true
+    },
+    {
+      "name": "Docker",
+      "slug": "docker",
+      "used": true
+    },
+    {
+      "name": "Gridea",
+      "slug": "l-8QRtzHX",
+      "used": true
+    }
+  ],
+  "menus": [
+    {
+      "link": "/",
+      "name": "首页",
+      "openType": "Internal"
+    },
+    {
+      "link": "/archives",
+      "name": "归档",
+      "openType": "Internal"
+    },
+    {
+      "link": "/tags",
+      "name": "标签",
+      "openType": "Internal"
+    },
+    {
+      "link": "http://lucent.blog/about",
+      "name": "关于",
+      "openType": "Internal"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "config": {
+    "branch": "master",
+    "cname": "lucent.blog",
+    "domain": "http://lucent.blog",
+    "email": "975023381@qq.com",
+    "platform": "github",
+    "privateKey": "",
+    "repository": "blog",
+    "token": "346c98791fb05e9b01d7919ddc6cd00946f0c9bc",
+    "username": "xhmily"
+  },
+  "comment": {
+    "commentPlatform": "gitalk",
+    "disqusSetting": {
+      "api": "",
+      "apikey": "",
+      "shortname": ""
+    },
+    "gitalkSetting": {
+      "clientId": " f4967b7d0ab0356d6adf",
+      "clientSecret": "62264a86a26d73075043a3e31b1669a59faed152",
+      "owner": "xhmily",
+      "repository": "gitalk-commnet"
+    },
+    "showComment": false
+  }
+}
