@@ -1,0 +1,534 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>实现个人免签支付宝收款(官方回调通知)-代码开发 - Lucent&#39;s Blog</title>
+<link rel="shortcut icon" href="http://lucent.blog/favicon.ico">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
+<link rel="stylesheet" href="http://lucent.blog/media/css/tailwind.css">
+<link rel="stylesheet" href="http://lucent.blog/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="实现个人免签支付宝收款(官方回调通知)-代码开发 - Lucent&#39;s Blog - Atom Feed" href="http://lucent.blog/atom.xml">
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145467362-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-145467362-1');
+  </script>
+    
+
+  <meta name="description" content="开发之前需要先引入依赖
+
+ &amp;lt;dependency&amp;gt;
+     &amp;lt;groupId&amp;gt;com.alipay.sdk&amp;lt;/groupId&amp;gt;
+     &amp;lt;artifactId&amp;gt;alipay-sdk-ja..." />
+  <meta property="og:title" content="实现个人免签支付宝收款(官方回调通知)-代码开发 - Lucent&#39;s Blog">
+  <meta property="og:description" content="开发之前需要先引入依赖
+
+ &amp;lt;dependency&amp;gt;
+     &amp;lt;groupId&amp;gt;com.alipay.sdk&amp;lt;/groupId&amp;gt;
+     &amp;lt;artifactId&amp;gt;alipay-sdk-ja..." />
+  <meta property="og:type" content="articles">
+  <meta property="og:url" content="http://lucent.blog/Fs6PMUmzU/" />
+  <meta property="og:image" content="http://lucent.blog/images/avatar.png">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:width" content="1200">
+  <meta name="twitter:title" content="实现个人免签支付宝收款(官方回调通知)-代码开发 - Lucent&#39;s Blog">
+  <meta name="twitter:description" content="开发之前需要先引入依赖
+
+ &amp;lt;dependency&amp;gt;
+     &amp;lt;groupId&amp;gt;com.alipay.sdk&amp;lt;/groupId&amp;gt;
+     &amp;lt;artifactId&amp;gt;alipay-sdk-ja...">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="http://lucent.blog/Fs6PMUmzU/">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+ 
+  
+    <link rel="stylesheet" href="http://lucent.blog/media/css/prism-atom-dark.css">
+  
+
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+  
+</head>
+
+<body>
+  <div class="antialiased flex flex-col min-h-screen" id="app">
+    <a href="http://lucent.blog" class="fixed top-0 left-0 mt-4 bg-black text-white dark:text-gray-700 dark:bg-yellow-50 dark:hover:bg-black dark:hover:text-white inline-flex p-2 pl-8 hover:text-gray-700 hover:bg-yellow-50 font-bold z-10 transition-fast animated fadeInLeft">
+      Lucent&#39;s Blog
+    </a>
+    <div class="max-w-4xl w-full mx-auto">
+      <div class="shadow-box bg-white dark:bg-gray-600 rounded-lg pt-32 md:pt-64 px-4 md:px-8 pb-8 animated fadeIn mb-8">
+        <h1 class="text-5xl font-semibold leading-normal pb-8 mb-8 border-b-8 border-gray-700">
+          实现个人免签支付宝收款(官方回调通知)-代码开发
+        </h1>
+        
+        <div class="mb-8 flex flex-wrap">
+          <div class="text-gray-400 text-sm mr-4">2020-05-25 · 5 min read</div>
+          
+        </div>
+        <div class="markdown mb-8" v-pre>
+          <p><strong>开发之前需要先引入依赖</strong></p>
+<!-- more -->
+<pre><code> &lt;dependency&gt;
+     &lt;groupId&gt;com.alipay.sdk&lt;/groupId&gt;
+     &lt;artifactId&gt;alipay-sdk-java&lt;/artifactId&gt;
+     &lt;version&gt;3.7.26.ALL&lt;/version&gt;
+ &lt;/dependency&gt;
+</code></pre>
+<h2 id="代码">代码</h2>
+<h5 id="controller">Controller</h5>
+<pre><code>@RestController
+@RequestMapping(&quot;pay&quot;)
+public class PayController {
+
+    @Autowired
+    AliPayService aliPayService;
+
+    /**
+     * 生成二维码接口
+     * @param payLog
+     * @return 二维码链接
+     */
+    @PostMapping(&quot;alipay/qr&quot;)
+    public Map&lt;String, Object&gt; makeAliPayQrCode(@RequestBody PayLog payLog){
+        return aliPayService.getQrCode(payLog);
+    }
+
+    /**
+     * 查询支付状态接口
+     * 支付成功返回true
+     * @param orderId
+     * @return 
+     */
+    @GetMapping(&quot;alipay/status&quot;)
+    public Boolean queryAliPayStatus(String orderId){
+        return aliPayService.queryPaymentStatus(orderId);
+    }
+
+    /**
+     * 支付宝支付成功回调接口
+     * @param out_trade_no
+     * @param trade_status
+     */
+    @RequestMapping(&quot;alipay/notify&quot;)
+    public void notify(@RequestParam(required = false)String out_trade_no,@RequestParam(required = false)String trade_status){
+        aliPayService.callBack(out_trade_no,trade_status);
+    }
+}
+</code></pre>
+<h5 id="service">Service</h5>
+<pre><code>/**
+ * @author Lucent
+ */
+@Service
+public class AliPayService {
+
+    /**
+     * 私钥
+     */
+    private static final String PRIVATE_KEY = &quot;你生成的支付宝私钥&quot;;
+
+    /**
+     * 公钥
+     */
+    private static final String PUBLIC_KEY = &quot;你生成的支付宝公钥&quot;;
+
+    /**
+     * 应用ID
+     */
+    private static final String APP_ID = &quot;APPID&quot;;
+
+    /**
+     * 回调通知接口链接
+     */
+    private static final String NOTIFY_URL = &quot;http://url/alipay/notify&quot;;
+
+    /**
+     * 支付宝api
+     */
+    private static final String ALI_PAY_API = &quot;https://openapi.alipay.com/gateway.do&quot;;
+
+    /**
+     * 支付宝支付成功状态
+     */
+    private static final String ALI_PAY_SUCCESS = &quot;TRADE_SUCCESS&quot;;
+
+    @Autowired
+    IPayLogService payLogService;
+
+    /**
+     * 生成二维码链接
+     * @param payLog
+     * @return
+     */
+    public Map&lt;String, Object&gt; getQrCode(PayLog payLog){
+        payLog.setCreateTime(DateUtils.getTimeNow());
+        payLog.setId(DateUtils.getSystemNumber()+ RandomCodeUtil.getRandomString(5));
+        Boolean i = payLogService.save(payLog);
+        if (i){
+            AlipayClient alipayClient = new DefaultAlipayClient(ALI_PAY_API, APP_ID,PRIVATE_KEY,&quot;json&quot;,&quot;GBK&quot;,PUBLIC_KEY,&quot;RSA2&quot;);
+            AlipayTradePrecreateRequest r = new AlipayTradePrecreateRequest();
+            //设置请求参数
+            AliPayRequestEntity aliPayRequestEntity=new AliPayRequestEntity();
+            aliPayRequestEntity.setOut_trade_no(payLog.getId());
+            aliPayRequestEntity.setTotal_amount(payLog.getMoney().toString());
+            aliPayRequestEntity.setSubject(&quot;Depth游戏加速器&quot;);
+            r.setBizContent(JsonUtil.objToJson(aliPayRequestEntity));
+            // 设置通知回调链接
+            r.setNotifyUrl(NOTIFY_URL);
+            AlipayTradePrecreateResponse response=null;
+            try {
+                response = alipayClient.execute(r);
+            } catch (AlipayApiException e) {
+                e.printStackTrace();
+            }
+            if (!response.isSuccess()){
+                throw new CustomException(0,&quot;0&quot;,&quot;调用支付宝接口失败，请反馈!&quot;);
+            }
+            Map&lt;String, Object&gt; result = new HashMap&lt;&gt;(16);
+            result.put(&quot;id&quot;, payLog.getId());
+            result.put(&quot;qrCode&quot;, response.getQrCode());
+            return result;
+        }
+        return null;
+    }
+
+    /**
+     * 查询支付宝订单状态
+     * 支付成功返回true
+     * @param orderId
+     * @return
+     */
+    public Boolean queryPaymentStatus(String orderId){
+        AlipayClient alipayClient = new DefaultAlipayClient(ALI_PAY_API, APP_ID,PRIVATE_KEY,&quot;json&quot;,&quot;GBK&quot;,PUBLIC_KEY,&quot;RSA2&quot;);
+        AlipayTradeQueryRequest request = new AlipayTradeQueryRequest();
+        AliPayRequestEntity aliPayRequestEntity=new AliPayRequestEntity();
+        aliPayRequestEntity.setOut_trade_no(orderId);
+        request.setBizContent(JsonUtil.objToJson(aliPayRequestEntity));
+        AlipayTradeQueryResponse response = null;
+        try {
+            response = alipayClient.execute(request);
+        } catch (AlipayApiException e) {
+            e.printStackTrace();
+        }
+        if(response!=null&amp;&amp;response.isSuccess()&amp;&amp;ALI_PAY_SUCCESS.equals(response.getTradeStatus())){
+           return true;
+        }
+        return false;
+    }
+
+    /**
+     * 支付宝支付成功回调
+     * @param out_trade_no
+     * @param trade_status
+     */
+    public void callBack(String out_trade_no,String trade_status){
+        if (ALI_PAY_SUCCESS.equals(trade_status)){
+            QueryWrapper&lt;PayLog&gt; wrapper=new QueryWrapper&lt;&gt;();
+            wrapper.eq(&quot;id&quot;,out_trade_no);
+            PayLog payLog=payLogService.getOne(wrapper);
+            if (null!=payLog&amp;&amp;payLog.getState()==1){
+                return;
+            }
+            payLog.setState(1);
+            payLogService.updateById(payLog);
+        }
+    }
+
+    @Data
+    private class AliPayRequestEntity {
+        private String out_trade_no;
+        private String total_amount;
+        private String subject;
+    }
+}
+</code></pre>
+<h5 id="entity">Entity</h5>
+<pre><code>/**
+ * 订单
+ * @author Lucent
+ * @since 2020-05-15
+ */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+@TableName(&quot;payLog&quot;)
+public class PayLog implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @TableId(value = &quot;id&quot;)
+    private String id;
+
+    private String createTime;
+
+    private BigDecimal money;
+
+}
+</code></pre>
+<p><strong>以上这些代码即可实现免签支付收款</strong></p>
+<h2 id="测试">测试</h2>
+<h5 id="生成二维码">生成二维码</h5>
+<p><img src="https://test-1251540275.cos.ap-shanghai.myqcloud.com/img/20200525130105.png" alt="" loading="lazy"><br>
+<strong>链接即为二维码，在前端渲染出来给用户扫码即可</strong><br>
+<img src="https://test-1251540275.cos.ap-shanghai.myqcloud.com/img/20200525130317.png" alt="" loading="lazy"><br>
+<strong>渲染完成</strong><br>
+<img src="https://test-1251540275.cos.ap-shanghai.myqcloud.com/img/20200525130504.png" alt="" loading="lazy"><br>
+<strong>扫码效果</strong><br>
+<img src="https://test-1251540275.cos.ap-shanghai.myqcloud.com/img/20200525130707.PNG" alt="" loading="lazy"><br>
+<strong>支付完成</strong><br>
+<img src="https://test-1251540275.cos.ap-shanghai.myqcloud.com/img/20200525130736.PNG" alt="" loading="lazy"><br>
+<strong>查询支付状态</strong><br>
+返回true即为已支付<br>
+<code>支付完成之后支付宝官方也会对你填写的回调地址进行一次通知，通知你的服务器收款到账</code><br>
+<img src="https://test-1251540275.cos.ap-shanghai.myqcloud.com/img/20200525130939.png" alt="" loading="lazy"></p>
+<p>如果想要保证正常接收支付宝的通知，服务器一定要有公网ip，否则只能主动发起查询</p>
+
+        </div>
+        <!-- Share to Twitter, Weibo, Telegram -->
+        <div class="flex items-center">
+          <div class="mr-4 flex items-center">
+            <i class="ri-share-forward-line text-gray-500"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-blue-500 hover:bg-blue-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTwitter">
+            <i class="ri-twitter-line"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-red-500 hover:bg-red-100 dark:hover:bg-gray-600 inline-flex" @click="shareToWeibo">
+            <i class="ri-weibo-line"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-indigo-500 hover:bg-indigo-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTelegram">
+            <i class="ri-telegram-line"></i>
+          </div>
+        </div>
+      </div>
+
+      
+
+      
+        <div id="vlaine-comment"></div>
+      
+
+      <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  <a href="https://github.com/xhmily" target="_blank">呆呆木</a>
+</footer>
+    </div>
+
+    <!-- TOC Container -->
+    <div class="fixed right-0 bottom-0 mb-16 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white dark:bg-gray-500 dark:text-gray-200 hover:shadow-lg transition-all animated fadeInRight" @click="showToc = true">
+      <i class="ri-file-list-line"></i>
+    </div>
+
+    <div class="fixed right-0 top-0 bottom-0 overflow-y-auto w-64 bg-white dark:bg-gray-800 p-4 border-l border-gray-100 dark:border-gray-600 z-10 transition-fast" :class="{ '-mr-64': !showToc }">
+      <div class="flex mb-4 justify-end">
+        <div class="w-8 h-8 inline-flex justify-center items-center rounded-full cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 transition-fast" @click="showToc = false">
+          <i class="ri-close-line text-lg"></i>
+        </div>
+      </div>
+      <div class="post-toc-container">
+        <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E4%BB%A3%E7%A0%81">代码</a><br>
+*<br>
+*<br>
+* <a href="#controller">Controller</a><br>
+* <a href="#service">Service</a><br>
+* <a href="#entity">Entity</a></li>
+<li><a href="#%E6%B5%8B%E8%AF%95">测试</a><br>
+*<br>
+*<br>
+* <a href="#%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81">生成二维码</a></li>
+</ul>
+</li>
+</ul>
+
+      </div>
+    </div>
+
+    <!-- Back to top -->
+    <div class="fixed right-0 bottom-0 mb-4 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white hover:shadow-lg transition-all dark:bg-gray-500 dark:text-gray-200" @click="backToUp" v-show="scrolled">
+      <i class="ri-arrow-up-line"></i>
+    </div>
+  </div>
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+  <!-- Background of PhotoSwipe. 
+        It's a separate element as animating opacity is faster than rgba(). -->
+  <div class="pswp__bg">
+  </div>
+  <!-- Slides wrapper with overflow:hidden. -->
+  <div class="pswp__scroll-wrap">
+    <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+    <div class="pswp__container">
+      <div class="pswp__item">
+      </div>
+      <div class="pswp__item">
+      </div>
+      <div class="pswp__item">
+      </div>
+    </div>
+    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+    <div class="pswp__ui pswp__ui--hidden">
+      <div class="pswp__top-bar">
+        <!--  Controls are self-explanatory. Order can be changed. -->
+        <div class="pswp__counter">
+        </div>
+        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+        <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+        <!-- element will get class pswp__preloader--active when preloader is running -->
+        <div class="pswp__preloader">
+          <div class="pswp__preloader__icn">
+            <div class="pswp__preloader__cut">
+              <div class="pswp__preloader__donut">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+        <div class="pswp__share-tooltip">
+        </div>
+      </div>
+      <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+      </button>
+      <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+      </button>
+      <div class="pswp__caption">
+        <div class="pswp__caption__center">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="http://lucent.blog/media/scripts/main.js"></script>
+  
+  <!-- Code Highlight -->
+  
+    <script src="http://lucent.blog/media/prism.js"></script>
+    <script>
+      Prism.highlightAll()
+    </script>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+  <script>
+    //拿到预览框架，也就是上面的html代码
+    var pswpElement = document.querySelectorAll('.pswp')[0];
+    //定义图片数组变量
+    var imgitems;
+    /**
+    * 用于显示预览界面
+    * @param index 图片数组下标
+    */
+    function viewImg(index) {
+      //其它选项这里不做过多阐述，详情见官网
+      var pswpoptions = {
+        index: parseInt(index, 10), // 开始幻灯片索引。0是第一张幻灯片。必须是整数，而不是字符串。
+        bgOpacity: 0.7, // 背景透明度，0-1
+        maxSpreadZoom: 3, // 缩放级别，不要太大
+      };
+      //初始化并打开PhotoSwipe，pswpElement对应上面预览框架，PhotoSwipeUI_Default为皮肤，imgitems为图片数组，pswpoptions为选项
+      var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, imgitems, pswpoptions);
+      gallery.init()
+    }
+    /**
+    * 用于添加图片点击事件
+    * @param img 图片元素
+    * @param index 所属下标（在imgitems中的位置）
+    */
+    function addImgClick(img, index) {
+      img.onclick = function() {
+        viewImg(index)
+      }
+    }
+    /**
+    * 轮询所有图片，获取src、width、height等数据，加入imgitems，并给图片元素添加事件
+    * 最好在onload中执行该方法，本站因放在最底部，所以直接初始化
+    * 异步加载图片可在图片元素创建完成后调用此方法
+    */
+    function initImg() {
+      //重置图片数组
+      imgitems = [];
+      //查找class:markdown 下的所有img元素并遍历
+      var imgs = document.querySelectorAll('.markdown img');
+      for (var i = 0; i < imgs.length; i++) {
+        var img = imgs[i];
+        //本站相册初始为loading图片，真实图片放在data-src
+        var ds = img.getAttribute("data-src");
+        //创建image对象，用于获取图片宽高
+        var imgtemp = new Image();
+        //判断是否存在data-src
+        if (ds != null && ds.length > 0) {
+          imgtemp.src = ds
+        } else {
+          imgtemp.src = img.src
+        }
+        //判断是否存在缓存
+        if (imgtemp.complete) {
+          var imgobj = {
+            "src": imgtemp.src,
+            "w": imgtemp.width,
+            "h": imgtemp.height,
+          };
+          imgitems[i] = imgobj;
+          addImgClick(img, i);
+        } else {
+          console.log('进来了2')
+          imgtemp.index = i;
+          imgtemp.img = img;
+          imgtemp.onload = function() {
+            var imgobj = {
+              "src": this.src,
+              "w": this.width,
+              "h": this.height,
+            };
+            //不要使用push，因为onload前后顺序会不同
+            imgitems[this.index] = imgobj
+            //添加点击事件
+            addImgClick(this.img, this.index);
+          }
+        }
+      }
+    }
+    //初始化
+    initImg();
+  </script>
+  
+    <script type="application/javascript" src="https://unpkg.com/valine"></script>
+<script type="application/javascript">
+  new Valine({
+    el: '#vlaine-comment',
+    appId: 'iQWmg8JiBFvD7MzgWKzI4oTd-MdYXbMMI',
+    appKey: 'RhRbHAFcwJhYGNLxVgdtw8lj',
+    pageSize: 10,
+    notify: true,
+    avatar: 'mp',
+    verify: true,
+    placeholder: '来都来了，不妨评论一下',
+    visitor: false,
+    highlight: true,
+    recordIP: true,
+  })
+</script>
+  
+  
+</body>
+
+</html>

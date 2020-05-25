@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://lucent.blog</id>
     <title>Lucent&apos;s Blog</title>
-    <updated>2020-05-13T09:44:01.339Z</updated>
+    <updated>2020-05-25T05:15:09.411Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="http://lucent.blog"/>
     <link rel="self" href="http://lucent.blog/atom.xml"/>
@@ -14,6 +14,28 @@
     <logo>http://lucent.blog/images/avatar.png</logo>
     <icon>http://lucent.blog/favicon.ico</icon>
     <rights>All rights reserved 2020, Lucent&apos;s Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[实现个人免签支付宝收款(官方回调通知)-代码开发]]></title>
+        <id>http://lucent.blog/Fs6PMUmzU/</id>
+        <link href="http://lucent.blog/Fs6PMUmzU/">
+        </link>
+        <updated>2020-05-25T04:26:35.000Z</updated>
+        <summary type="html"><![CDATA[<p><strong>开发之前需要先引入依赖</strong></p>
+]]></summary>
+        <content type="html"><![CDATA[<p><strong>开发之前需要先引入依赖</strong></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[实现个人免签支付宝收款(官方回调通知)-前期准备]]></title>
+        <id>http://lucent.blog/InWP-K8Jk/</id>
+        <link href="http://lucent.blog/InWP-K8Jk/">
+        </link>
+        <updated>2020-05-25T02:32:13.000Z</updated>
+        <summary type="html"><![CDATA[<p><strong>在开发之前需要先开通支付宝当面付，个人可以直接在支付宝APP申请</strong></p>
+]]></summary>
+        <content type="html"><![CDATA[<p><strong>在开发之前需要先开通支付宝当面付，个人可以直接在支付宝APP申请</strong></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[关于奇游加速器需要验证码的解决方案]]></title>
         <id>http://lucent.blog/关于奇游加速器需要验证码的解决方案/</id>
@@ -69,19 +91,5 @@
         <link href="http://lucent.blog/可能会用到的cmd命令/">
         </link>
         <updated>2019-08-07T02:39:33.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[java执行cmd命令工具类(windows)]]></title>
-        <id>http://lucent.blog/java执行cmd命令工具类-windows/</id>
-        <link href="http://lucent.blog/java执行cmd命令工具类-windows/">
-        </link>
-        <updated>2019-08-06T06:05:02.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Jquery实现一键全选/反选/不选]]></title>
-        <id>http://lucent.blog/Jquery实现一键全选-反选-不选/</id>
-        <link href="http://lucent.blog/Jquery实现一键全选-反选-不选/">
-        </link>
-        <updated>2019-08-05T07:37:32.000Z</updated>
     </entry>
 </feed>
