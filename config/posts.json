@@ -1,6 +1,40 @@
 {
   "posts": [
     {
+      "content": "**开发之前需要先引入依赖**\r\n<!-- more -->\r\n```\r\n <dependency>\r\n     <groupId>com.alipay.sdk</groupId>\r\n     <artifactId>alipay-sdk-java</artifactId>\r\n     <version>3.7.26.ALL</version>\r\n </dependency>\r\n```\r\n## 代码\r\n\r\n##### Controller\r\n```\r\n@RestController\r\n@RequestMapping(\"pay\")\r\npublic class PayController {\r\n\r\n    @Autowired\r\n    AliPayService aliPayService;\r\n\r\n    /**\r\n     * 生成二维码接口\r\n     * @param payLog\r\n     * @return 二维码链接\r\n     */\r\n    @PostMapping(\"alipay/qr\")\r\n    public Map<String, Object> makeAliPayQrCode(@RequestBody PayLog payLog){\r\n        return aliPayService.getQrCode(payLog);\r\n    }\r\n\r\n    /**\r\n     * 查询支付状态接口\r\n     * 支付成功返回true\r\n     * @param orderId\r\n     * @return \r\n     */\r\n    @GetMapping(\"alipay/status\")\r\n    public Boolean queryAliPayStatus(String orderId){\r\n        return aliPayService.queryPaymentStatus(orderId);\r\n    }\r\n\r\n    /**\r\n     * 支付宝支付成功回调接口\r\n     * @param out_trade_no\r\n     * @param trade_status\r\n     */\r\n    @RequestMapping(\"alipay/notify\")\r\n    public void notify(@RequestParam(required = false)String out_trade_no,@RequestParam(required = false)String trade_status){\r\n        aliPayService.callBack(out_trade_no,trade_status);\r\n    }\r\n}\r\n```\r\n\r\n##### Service\r\n\r\n```\r\n/**\r\n * @author Lucent\r\n */\r\n@Service\r\npublic class AliPayService {\r\n\r\n    /**\r\n     * 私钥\r\n     */\r\n    private static final String PRIVATE_KEY = \"你生成的支付宝私钥\";\r\n\r\n    /**\r\n     * 公钥\r\n     */\r\n    private static final String PUBLIC_KEY = \"你生成的支付宝公钥\";\r\n\r\n    /**\r\n     * 应用ID\r\n     */\r\n    private static final String APP_ID = \"APPID\";\r\n\r\n    /**\r\n     * 回调通知接口链接\r\n     */\r\n    private static final String NOTIFY_URL = \"http://url/alipay/notify\";\r\n\r\n    /**\r\n     * 支付宝api\r\n     */\r\n    private static final String ALI_PAY_API = \"https://openapi.alipay.com/gateway.do\";\r\n\r\n    /**\r\n     * 支付宝支付成功状态\r\n     */\r\n    private static final String ALI_PAY_SUCCESS = \"TRADE_SUCCESS\";\r\n\r\n    @Autowired\r\n    IPayLogService payLogService;\r\n\r\n    /**\r\n     * 生成二维码链接\r\n     * @param payLog\r\n     * @return\r\n     */\r\n    public Map<String, Object> getQrCode(PayLog payLog){\r\n        payLog.setCreateTime(DateUtils.getTimeNow());\r\n        payLog.setId(DateUtils.getSystemNumber()+ RandomCodeUtil.getRandomString(5));\r\n        Boolean i = payLogService.save(payLog);\r\n        if (i){\r\n            AlipayClient alipayClient = new DefaultAlipayClient(ALI_PAY_API, APP_ID,PRIVATE_KEY,\"json\",\"GBK\",PUBLIC_KEY,\"RSA2\");\r\n            AlipayTradePrecreateRequest r = new AlipayTradePrecreateRequest();\r\n            //设置请求参数\r\n            AliPayRequestEntity aliPayRequestEntity=new AliPayRequestEntity();\r\n            aliPayRequestEntity.setOut_trade_no(payLog.getId());\r\n            aliPayRequestEntity.setTotal_amount(payLog.getMoney().toString());\r\n            aliPayRequestEntity.setSubject(\"Depth游戏加速器\");\r\n            r.setBizContent(JsonUtil.objToJson(aliPayRequestEntity));\r\n            // 设置通知回调链接\r\n            r.setNotifyUrl(NOTIFY_URL);\r\n            AlipayTradePrecreateResponse response=null;\r\n            try {\r\n                response = alipayClient.execute(r);\r\n            } catch (AlipayApiException e) {\r\n                e.printStackTrace();\r\n            }\r\n            if (!response.isSuccess()){\r\n                throw new CustomException(0,\"0\",\"调用支付宝接口失败，请反馈!\");\r\n            }\r\n            Map<String, Object> result = new HashMap<>(16);\r\n            result.put(\"id\", payLog.getId());\r\n            result.put(\"qrCode\", response.getQrCode());\r\n            return result;\r\n        }\r\n        return null;\r\n    }\r\n\r\n    /**\r\n     * 查询支付宝订单状态\r\n     * 支付成功返回true\r\n     * @param orderId\r\n     * @return\r\n     */\r\n    public Boolean queryPaymentStatus(String orderId){\r\n        AlipayClient alipayClient = new DefaultAlipayClient(ALI_PAY_API, APP_ID,PRIVATE_KEY,\"json\",\"GBK\",PUBLIC_KEY,\"RSA2\");\r\n        AlipayTradeQueryRequest request = new AlipayTradeQueryRequest();\r\n        AliPayRequestEntity aliPayRequestEntity=new AliPayRequestEntity();\r\n        aliPayRequestEntity.setOut_trade_no(orderId);\r\n        request.setBizContent(JsonUtil.objToJson(aliPayRequestEntity));\r\n        AlipayTradeQueryResponse response = null;\r\n        try {\r\n            response = alipayClient.execute(request);\r\n        } catch (AlipayApiException e) {\r\n            e.printStackTrace();\r\n        }\r\n        if(response!=null&&response.isSuccess()&&ALI_PAY_SUCCESS.equals(response.getTradeStatus())){\r\n           return true;\r\n        }\r\n        return false;\r\n    }\r\n\r\n    /**\r\n     * 支付宝支付成功回调\r\n     * @param out_trade_no\r\n     * @param trade_status\r\n     */\r\n    public void callBack(String out_trade_no,String trade_status){\r\n        if (ALI_PAY_SUCCESS.equals(trade_status)){\r\n            QueryWrapper<PayLog> wrapper=new QueryWrapper<>();\r\n            wrapper.eq(\"id\",out_trade_no);\r\n            PayLog payLog=payLogService.getOne(wrapper);\r\n            if (null!=payLog&&payLog.getState()==1){\r\n                return;\r\n            }\r\n            payLog.setState(1);\r\n            payLogService.updateById(payLog);\r\n        }\r\n    }\r\n\r\n    @Data\r\n    private class AliPayRequestEntity {\r\n        private String out_trade_no;\r\n        private String total_amount;\r\n        private String subject;\r\n    }\r\n}\r\n```\r\n\r\n##### Entity\r\n\r\n```\r\n/**\r\n * 订单\r\n * @author Lucent\r\n * @since 2020-05-15\r\n */\r\n@Data\r\n@EqualsAndHashCode(callSuper = false)\r\n@Accessors(chain = true)\r\n@TableName(\"payLog\")\r\npublic class PayLog implements Serializable {\r\n\r\n    private static final long serialVersionUID = 1L;\r\n\r\n    @TableId(value = \"id\")\r\n    private String id;\r\n\r\n    private String createTime;\r\n\r\n    private BigDecimal money;\r\n\r\n}\r\n```\r\n**以上这些代码即可实现免签支付收款**\r\n\r\n## 测试\r\n\r\n##### 生成二维码\r\n![](https://test-1251540275.cos.ap-shanghai.myqcloud.com/img/20200525130105.png)\r\n**链接即为二维码，在前端渲染出来给用户扫码即可**\r\n![](https://test-1251540275.cos.ap-shanghai.myqcloud.com/img/20200525130317.png)\r\n**渲染完成**\r\n![](https://test-1251540275.cos.ap-shanghai.myqcloud.com/img/20200525130504.png)\r\n**扫码效果**\r\n![](https://test-1251540275.cos.ap-shanghai.myqcloud.com/img/20200525130707.PNG)\r\n**支付完成**\r\n![](https://test-1251540275.cos.ap-shanghai.myqcloud.com/img/20200525130736.PNG)\r\n**查询支付状态**\r\n返回true即为已支付\r\n`支付完成之后支付宝官方也会对你填写的回调地址进行一次通知，通知你的服务器收款到账`\r\n![](https://test-1251540275.cos.ap-shanghai.myqcloud.com/img/20200525130939.png)\r\n\r\n如果想要保证正常接收支付宝的通知，服务器一定要有公网ip，否则只能主动发起查询\r\n",
+      "data": {
+        "title": "实现个人免签支付宝收款(官方回调通知)-代码开发",
+        "date": "2020-05-25 12:26:35",
+        "tags": [],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "**开发之前需要先引入依赖**\r",
+      "fileName": "Fs6PMUmzU"
+    },
+    {
+      "content": "\r\n**在开发之前需要先开通支付宝当面付，个人可以直接在支付宝APP申请**\r\n<!-- more -->\r\n\r\n### 注册商家\r\n- ##### 打开支付宝APP，搜索`蚂蚁金服商家平台`，关注并进入\r\n\r\n![](https://test-1251540275.cos.ap-shanghai.myqcloud.com/img/20200525105910.PNG)\r\n\r\n- ##### 点击右上角开通支付\r\n\r\n![](https://test-1251540275.cos.ap-shanghai.myqcloud.com/img/20200525105911.PNG)\r\n\r\n- ##### 点击立即签约\r\n\r\n![](https://test-1251540275.cos.ap-shanghai.myqcloud.com/img/20200525105909.PNG)\r\n\r\n- ##### 填写信息提交即可，门头照可以百度图片或者美团\r\n\r\n![](https://test-1251540275.cos.ap-shanghai.myqcloud.com/img/20200525105908.PNG)\r\n\r\n ### 开发准备\r\n- ##### 获取支付宝公钥和私钥\r\n\r\n签约成功之后登陆蚂蚁金服开放平台`https://open.alipay.com/platform/manageHome.htm`，点击右上角秘钥管理\r\n![](https://test-1251540275.cos.ap-shanghai.myqcloud.com/img/20200525114403.png)\r\n\r\n- ##### 根据提示配置公钥和私钥\r\n私钥根据提示下载支付宝RAS秘钥生成器即可`https://docs.open.alipay.com/291/105971 `,\r\n生成的私钥保存下来，代码中需要用到\r\n![](https://test-1251540275.cos.ap-shanghai.myqcloud.com/img/20200525115351.png)\r\n\r\n- ##### 保存APPID和公钥\r\n![](https://test-1251540275.cos.ap-shanghai.myqcloud.com/img/20200525120146.png)\r\n**注意公钥是保存支付宝公钥**\r\n![](https://test-1251540275.cos.ap-shanghai.myqcloud.com/img/20200525120254.png)\r\n\r\n到这里开发前需要准备的资料都已经齐全了。\r\n\r\n",
+      "data": {
+        "title": "实现个人免签支付宝收款(官方回调通知)-前期准备",
+        "date": "2020-05-25 10:32:13",
+        "tags": [
+          "支付宝"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "\r\n**在开发之前需要先开通支付宝当面付，个人可以直接在支付宝APP申请**\r",
+      "fileName": "InWP-K8Jk"
+    },
+    {
       "content": "\n##### 如果您在登录奇游加速器时遇到需要手机验证码的情况，请参考如下操作：\n\n###### 1.找到您的奇游加速器快捷方式\n\n![image-20200107124712244](https://img-1251540275.cos.ap-shanghai.myqcloud.com/typora/20200107124723-784039.png)\n\n###### 2.鼠标右击，选择属性\n\n![]( https://img-1251540275.cos.ap-shanghai.myqcloud.com/typora/20200107133832-659310.png )\n\n###### 3.找到“目标”输入框\n\n![]( https://img-1251540275.cos.ap-shanghai.myqcloud.com/typora/20200107134029-295108.png )\n\n###### 4.在 QeeYou.exe\" 后加上  `--disable-sms-verify` （注意QeeYou.exe\" 后面要加一个空格）,如下:\n\n![image-20200107125630722](https://img-1251540275.cos.ap-shanghai.myqcloud.com/typora/20200107125632-910172.png)\n\n修改完成后，关闭奇游加速器重新打开，上号即可\n\n##### GIF过程演示\n\n![1](https://img-1251540275.cos.ap-shanghai.myqcloud.com/typora/20200107133018-225489.gif)",
       "data": {
         "title": "关于奇游加速器需要验证码的解决方案",
@@ -467,6 +501,11 @@
     }
   ],
   "tags": [
+    {
+      "name": "支付宝",
+      "slug": "gI1v1Ovou",
+      "used": true
+    },
     {
       "name": "小程序",
       "slug": "xiao-cheng-xu",

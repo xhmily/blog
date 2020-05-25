@@ -10,7 +10,7 @@
     "postPath": "",
     "postUrlFormat": "SHORT_ID",
     "showFeatureImage": true,
-    "siteDescription": "我是一个Java程序员，Bug开发者，这里是我的个人博客",
+    "siteDescription": "<p>螃蟹在剥我的壳</p>\n<p>代码在写我</p>\n<p>Bug在De我</p>\n<p>漫天的我落在雪花上</p>\n<p>而你在想我...</p>",
     "siteName": "Lucent's Blog",
     "tagPath": "",
     "tagUrlFormat": "SHORT_ID",
